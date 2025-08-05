@@ -9,7 +9,7 @@ class MovableObject extends DrawableObject{
     applyGravity(){
         setInterval(() => {
             if(this.isAboveGround() || this.speedY > 0 ){ // fall down animation
-                this.position_y -= this.speedY;
+                this.y -= this.speedY;
                 this.speedY -= this.acceleration;
             }
         }, 1000 / 60);
@@ -19,16 +19,16 @@ class MovableObject extends DrawableObject{
         if (this instanceof ThrowableObject){ // Throwable Object should always fall
             return true;
         } else {
-        return this.position_y < 130
+        return this.y < 130
         }
     }
 
     // e.g. character.isColliding(chicken);
     isColliding(movableObj){
-        return this.position_x + this.width > movableObj.position_x &&
-            this.position_y + this.height > movableObj.position_y &&
-            this.position_x < movableObj.position_x &&
-            this.position_y < movableObj.position_y + movableObj.height;
+        return this.x + this.width > movableObj.x &&
+            this.y + this.height > movableObj.y &&
+            this.x < movableObj.x &&
+            this.y < movableObj.y + movableObj.height;
     }
 
     // subtracts amount of energy when getting hits
@@ -55,12 +55,12 @@ class MovableObject extends DrawableObject{
 
     moveRight(){
         //run right
-        this.position_x += this.speed;
+        this.x += this.speed;
     }
 
     moveLeft(){
         //run left
-        this.position_x -= this.speed;   
+        this.x -= this.speed;   
     }
 
     //walking animation

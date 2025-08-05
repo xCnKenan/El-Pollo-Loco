@@ -33,7 +33,7 @@ class World{
 
     checkThrowObjects(){
         if(this.keyboard.D){
-            let bottle = new ThrowableObject(this.character.position_x + 100, this.character.position_y + 100);
+            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
             this.throwableObjects.push(bottle);
         }
     }
@@ -111,11 +111,11 @@ class World{
         this.ctx.save();
         this.ctx.translate(moveObj.width, 0);
         this.ctx.scale(-1, 1);
-        moveObj.position_x = moveObj.position_x * -1;
+        moveObj.x = moveObj.x * -1;
     }
 
     flipImageBack(moveObj){
-        moveObj.position_x = moveObj.position_x * -1;
+        moveObj.x = moveObj.x * -1;
         this.ctx.restore();
     }
 }

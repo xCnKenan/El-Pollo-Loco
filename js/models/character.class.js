@@ -51,12 +51,12 @@ class Character extends MovableObject{
 
     animate(){
         setInterval(()=>{
-            if(this.world.keyboard.RIGHT && this.position_x < this.world.level.level_end_x){
+            if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x){
                 this.moveRight();
                 this.otherDirection = false;
             }
 
-            if(this.world.keyboard.LEFT && this.position_x > 0 ){
+            if(this.world.keyboard.LEFT && this.x > 0 ){
                 this.moveLeft();
                 this.otherDirection = true;
             }   
@@ -66,7 +66,7 @@ class Character extends MovableObject{
                 this.jump();
             }
 
-            this.world.camera_x = -this.position_x +100;
+            this.world.camera_x = -this.x +100;
         }, 1000 / 60);
 
         // IMG Animations here
