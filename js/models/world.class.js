@@ -44,6 +44,9 @@ class World{
                if(this.character.isColliding(enemy)){
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);
+               } else if(this.character.isCollidingBack(enemy)){
+                this.character.hit();
+                this.statusBar.setPercentage(this.character.energy);
                }
             });
     }

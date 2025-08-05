@@ -31,6 +31,12 @@ class MovableObject extends DrawableObject{
             this.y < movableObj.y + movableObj.height;
     }
 
+    // e.g. character.isColliding(chicken);
+    isCollidingBack(movableObj){
+        return this.x + this.width > movableObj.x &&
+        this.x < movableObj.x + movableObj.width;
+    }
+
     // subtracts amount of energy when getting hits
     hit(){
         this.energy -= 10;
