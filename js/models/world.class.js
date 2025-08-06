@@ -7,6 +7,11 @@ class World{
     camera_x = 0;
     statusBar = new StatusBar();
     throwableObjects = [];
+    bottlesOnGround = [
+        new BottleOnGround(),
+        new BottleOnGround(),
+        new BottleOnGround()
+    ];
 
 
     constructor(canvas, keyboard){
@@ -54,9 +59,11 @@ class World{
     draw(){
         //clear old Frames
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
         // ctx wird verschoben nach vorna
         this.ctx.translate(this.camera_x, 0);
+
+
+
 
         // render background img
         this.addObjectsToMap(this.level.backgroundObject);
@@ -69,7 +76,7 @@ class World{
         //render statusBar img
         // -------- Space for fixed objects ------//
         this.addToMap(this.statusBar);
-         // ctx wird verschoben nach vorna
+         // ctx wird verschoben nach vorne
         this.ctx.translate(this.camera_x, 0);
 
         // img source and positions in x and y
@@ -77,9 +84,16 @@ class World{
         // render chicken img
         this.addObjectsToMap(this.level.enemies);
 
-        // img of bottle
+        // img of bottle to throw
         this.addObjectsToMap(this.throwableObjects);
-        
+
+        // show img of bottle to pick up
+        this.addObjectsToMap(this.bottlesOnGround);        
+
+
+
+
+
         // ctx wird in gegenrichtung verschoben
         this.ctx.translate(-this.camera_x, 0);
         
