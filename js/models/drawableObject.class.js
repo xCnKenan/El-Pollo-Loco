@@ -30,10 +30,14 @@ class DrawableObject{
             ctx.lineWidth = '3';
             ctx.strokeStyle = 'blue';
             ctx.rect(
-                this.x - this.offset.right, // ask DA for help here 
-                this.y ,  
+                this.x, 
+                this.y,
                 this.width,
                 this.height
+                // this.x + this.offset.left, 
+                // this.y + this.offset.top,
+                // this.width - this.offset.right,
+                // this.height - this.offset.bottom
                 );
             ctx.stroke();
             //hitbox end here
