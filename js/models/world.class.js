@@ -7,6 +7,7 @@ class World{
     camera_x = 0;
     statusBar = new StatusBar();
     statusBarBottle = new StatusBarBottle();
+    statusBarCoins = new StatusBarCoins();
     throwableObjects = [];
 
     constructor(canvas, keyboard){
@@ -81,6 +82,14 @@ class World{
         //render statusBarBottle img
         // -------- Space for fixed objects ------//
         this.addToMap(this.statusBarBottle);
+         // ctx wird verschoben nach vorne
+        this.ctx.translate(this.camera_x, 0);
+
+        // ctx wird in gegenrichtung verschoben
+        this.ctx.translate(-this.camera_x, 0);
+        //render statusBarCoins img
+        // -------- Space for fixed objects ------//
+        this.addToMap(this.statusBarCoins);
          // ctx wird verschoben nach vorne
         this.ctx.translate(this.camera_x, 0);
 
