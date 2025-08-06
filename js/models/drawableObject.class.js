@@ -30,8 +30,8 @@ class DrawableObject{
             ctx.lineWidth = '3';
             ctx.strokeStyle = 'blue';
             ctx.rect(
-                this.x,
-                this.y,  
+                this.x - this.offset.right, // ask DA for help here 
+                this.y ,  
                 this.width,
                 this.height
                 );
