@@ -21,4 +21,5 @@ class Coins extends MovableObject{
             this.playAnimation(this.IMAGES_COINS);            
         }, 2000);
     }
-}
+
+} 

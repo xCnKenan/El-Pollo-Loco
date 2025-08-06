@@ -27,7 +27,7 @@ class DrawableObject{
         ){
             //hitbox here
             ctx.beginPath();
-            ctx.lineWidth = '5';
+            ctx.lineWidth = '3';
             ctx.strokeStyle = 'blue';
             ctx.rect(
                 this.x,

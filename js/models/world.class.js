@@ -50,6 +50,14 @@ class World{
                 this.statusBar.setPercentage(this.character.energy);
                }
             });
+        // here check if character colliding width bottles
+            this.level.bottles.forEach((bottle) => {
+                if(this.character.isColliding(bottle)){
+                    console.log('bottle hit');
+                } else if (this.character.isCollidingBack(bottle)){
+                    console.log('bottle hit back');
+                }
+            })
     }
 
     draw(){
