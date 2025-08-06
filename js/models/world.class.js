@@ -40,7 +40,7 @@ class World{
     }
 
     checkCollisions(){
-        // here check if character colliding width enemy
+        // here check if character colliding with enemy
             this.level.enemies.forEach((enemy) => {
                if(this.character.isColliding(enemy)){
                 this.character.hit();
@@ -50,14 +50,24 @@ class World{
                 this.statusBar.setPercentage(this.character.energy);
                }
             });
-        // here check if character colliding width bottles
+
+        // here check if character colliding with bottles
             this.level.bottles.forEach((bottle) => {
                 if(this.character.isColliding(bottle)){
                     console.log('bottle hit');
                 } else if (this.character.isCollidingBack(bottle)){
                     console.log('bottle hit back');
                 }
-            })
+            });
+
+        // here check if character colliding with bottles
+            this.level.coins.forEach((coin) => {
+                if(this.character.isColliding(coin)){
+                    console.log('coin hit');
+                } else if (this.character.isCollidingBack(coin)){
+                    console.log('coin hit back');
+                }
+            });
     }
 
     draw(){
