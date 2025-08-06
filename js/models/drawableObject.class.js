@@ -19,7 +19,12 @@ class DrawableObject{
 
      drawFrame(ctx){
         // because of instanceof frames are only shown for given classes
-        if(this instanceof Character || this instanceof Chicken || this instanceof Endboss || this instanceof BottleOnGround){
+        if( this instanceof Character ||
+            this instanceof Chicken || 
+            this instanceof Endboss || 
+            this instanceof BottleOnGround ||
+            this instanceof Coins
+        ){
             //hitbox here
             ctx.beginPath();
             ctx.lineWidth = '5';

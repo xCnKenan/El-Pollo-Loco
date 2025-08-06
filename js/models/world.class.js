@@ -7,12 +7,6 @@ class World{
     camera_x = 0;
     statusBar = new StatusBar();
     throwableObjects = [];
-    bottlesOnGround = [
-        new BottleOnGround(),
-        new BottleOnGround(),
-        new BottleOnGround()
-    ];
-
 
     constructor(canvas, keyboard){
         this.ctx= canvas.getContext('2d');
@@ -87,11 +81,11 @@ class World{
         // img of bottle to throw
         this.addObjectsToMap(this.throwableObjects);
 
-        // show img of bottle to pick up
-        this.addObjectsToMap(this.bottlesOnGround);        
+        // bottles to pick up on Ground                
+        this.addObjectsToMap(this.level.bottles);
 
-
-
+        //coins to pick up
+        this.addObjectsToMap(this.level.coins);
 
 
         // ctx wird in gegenrichtung verschoben
