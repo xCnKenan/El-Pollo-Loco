@@ -31,7 +31,7 @@ class DrawableObject{
             ctx.strokeStyle = 'blue';
             ctx.rect(
                 this.x,
-                this.y, 
+                this.y,  
                 this.width,
                 this.height
                 );

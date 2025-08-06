@@ -5,6 +5,16 @@ class MovableObject extends DrawableObject{
     acceleration = 1;
     energy = 100;
     lastHit = 0;
+    /**
+     * @type {object} - Numerical offsets for this instance´s coordinates and dimensions,
+     * used for collision check.
+     */
+    offset = {
+        top: 0, 
+        left: 0,
+        right: 0,
+        bottom: 0
+    };
     
     applyGravity(){
         setInterval(() => {
@@ -25,19 +35,16 @@ class MovableObject extends DrawableObject{
 
     // e.g. character.isColliding(chicken);
     isColliding(movableObj){
-        return this.x + this.width > movableObj.x &&
-            this.y + this.height > movableObj.y &&
-            this.x < movableObj.x &&
-            this.y < movableObj.y + movableObj.height;
-    }
 
-    // e.g. character.isColliding(chicken);
-    isCollidingBack(movableObj){
-        // return this.x + this.width > movableObj.x &&
-        // this.x < movableObj.x + movableObj.width;
-        return this.x + this.width > movableObj.x &&
-        this.x < movableObj.x + movableObj.width &&
-        this.y + this.height > movableObj.y + movableObj.height; // here ist not colliding when jumping
+        return this.x + this.width > movableObj.x && // R -> L
+            this.y + this.height > movableObj.y && // T -> B
+            this.x < movableObj.x + movableObj.width && // L -> R
+            this.y < movableObj.y + movableObj.height; // B -> T
+
+        // return this.x + this.width - this.offset.right > movableObj.x + movableObj.offset.left && // R -> L
+        //     this.y + this.height - this.offset.bottom > movableObj.y + movableObj.offset.top && // T -> B
+        //     this.x + this.offset.left < movableObj.x - movableObj.offset.right && // L -> R
+        //     this.y + this.offset.top < movableObj.y + movableObj.height - movableObj.offset.bottom; // B -> T
     }
 
     // subtracts amount of energy when getting hits
