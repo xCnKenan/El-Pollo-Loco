@@ -9,12 +9,6 @@ class World{
     statusBarBottle = new StatusBarBottle();
     statusBarCoins = new StatusBarCoins();
     throwableObjects = [];
-    offset = {
-        top: 0, 
-        left: 0,
-        right: 0,
-        bottom: 0
-    };
 
     constructor(canvas, keyboard){
         this.ctx= canvas.getContext('2d');
