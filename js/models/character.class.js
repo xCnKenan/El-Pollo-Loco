@@ -43,12 +43,12 @@ class Character extends MovableObject{
     //     right: 40,
     //     bottom: 30
     // };
-    // offset = {
-    //     top: 135,  // y
-    //     left: 25,   // x
-    //     right: 70,  // width
-    //     bottom: 150 //height
-    // };
+    offset = {
+        top: 135,  // y
+        left: 25,   // x
+        right: 70,  // width
+        bottom: 150 //height
+    };
 
     constructor(){
         super().loadImage('img/2_character_pepe/2_walk/W-21.png');

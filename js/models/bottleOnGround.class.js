@@ -1,6 +1,6 @@
 class BottleOnGround extends MovableObject{
 
-    y = 360;
+    y = 350;
     // x = 400;
     height = 70;
     width = 70;
@@ -8,12 +8,12 @@ class BottleOnGround extends MovableObject{
         'img/6_salsa_bottle/1_salsa_bottle_on_ground.png',
         'img/6_salsa_bottle/2_salsa_bottle_on_ground.png',
     ];
-    // offset = {
-    //     top: 0, 
-    //     left: 0,
-    //     right: 0,
-    //     bottom: 0
-    // };
+    offset = {
+        top: 10, 
+        left: 20,
+        right: 30,
+        bottom: 15
+    };
 
     constructor(){
         super().loadImage('img/6_salsa_bottle/1_salsa_bottle_on_ground.png');

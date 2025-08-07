@@ -39,10 +39,11 @@ class MovableObject extends DrawableObject{
         //     this.y + this.height > movableObj.y && // T -> B
         //     this.x < movableObj.x + movableObj.width && // L -> R
         //     this.y < movableObj.y + movableObj.height; // B -> T
-        return this.x + this.width - this.offset.right > movableObj.x + movableObj.offset.left && // R -> L
+
+        return this.x + (this.width - this.offset.right) > movableObj.x + movableObj.offset.left && // R -> L
             this.y + this.height - this.offset.bottom > movableObj.y + movableObj.offset.top && // T -> B
             this.x + this.offset.left < movableObj.x + movableObj.width - movableObj.offset.right && // L -> R
-            this.y + this.offset.top < movableObj.y + movableObj.height - movableObj.offset.bottom; // B -> T
+            this.y + this.offset.top < movableObj.y + (movableObj.height - movableObj.offset.bottom); // B -> T
     }
 
     // subtracts amount of energy when getting hits

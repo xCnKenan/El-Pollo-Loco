@@ -34,10 +34,21 @@ class DrawableObject{
                 this.y,
                 this.width,
                 this.height
-                // this.x + this.offset.left, 
-                // this.y + this.offset.top,
-                // this.width - this.offset.right,
-                // this.height - this.offset.bottom
+                );
+            ctx.stroke();
+            //hitbox end here
+
+
+            //hitbox here
+            ctx.beginPath();
+            ctx.lineWidth = '3';
+            ctx.strokeStyle = 'red';
+            ctx.rect(
+                //here fit hitbox to object
+                this.x + this.offset.left, 
+                this.y + this.offset.top,
+                this.width - this.offset.right,
+                this.height - this.offset.bottom
                 );
             ctx.stroke();
             //hitbox end here
