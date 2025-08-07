@@ -15,7 +15,6 @@ class MovableObject extends DrawableObject{
         right: 0,
         bottom: 0
     };
-    amountOfBottle = 0;
     
     applyGravity(){
         setInterval(() => {
@@ -91,9 +90,9 @@ class MovableObject extends DrawableObject{
     }
 
     bottleAdded(){
-        this.amountOfBottle += 20;
-        if(this.amountOfBottle > 100){
-            this.amountOfBottle = 100;
+        this.amountOfBottles += 1;
+        if(this.amountOfBottles > 5){
+            this.amountOfBottles= 5;
         } else{
             // this.lastHit = new Date().getTime();
             console.log('percentage of amount bottle is going high');

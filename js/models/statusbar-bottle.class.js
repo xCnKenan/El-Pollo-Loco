@@ -28,15 +28,15 @@ class StatusBarBottle extends DrawableObject{
     }
 
     resolveImageIndex(){
-         if(this.amountOfBottle == 100){
+         if(this.amountOfBottle == 5){
                 return 5; 
-            } else if(this.amountOfBottle == 80){
+            } else if(this.amountOfBottle == 4){
                 return 4; 
-            } else if(this.amountOfBottle == 60){
+            } else if(this.amountOfBottle == 3){
                 return 3; 
-            } else if(this.amountOfBottle == 40){
+            } else if(this.amountOfBottle == 2){
                 return 2; 
-            } else if(this.amountOfBottle == 20){
+            } else if(this.amountOfBottle == 1){
                 return 1; 
             } else {
                 return 0; 

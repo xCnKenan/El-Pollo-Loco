@@ -10,6 +10,7 @@ class World{
     statusBarCoins = new StatusBarCoins();
     throwableObjects = [];
 
+
     constructor(canvas, keyboard){
         this.ctx= canvas.getContext('2d');
         this.canvas = canvas;
@@ -53,7 +54,7 @@ class World{
                 if(this.character.isColliding(bottle)){
                     console.log('bottle hit');
                     this.character.bottleAdded();
-                    this.statusBarBottle.setPercentage(this.character.amountOfBottle);
+                    this.statusBarBottle.setPercentage(this.character.amountOfBottles);
                 }
             });
 
