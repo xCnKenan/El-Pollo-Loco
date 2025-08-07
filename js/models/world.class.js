@@ -60,7 +60,6 @@ class World{
         // here check if character colliding with coins
             this.level.coins.forEach((coin) => {
                 if(this.character.isColliding(coin)){
-                    console.log('coin hit');
                     this.character.coinsAdded();
                     this.statusBarCoins.setPercentage(this.character.amountOfCoins);
                 }
