@@ -27,7 +27,6 @@ class World{
     
     run(){
         setInterval(() => {
-
             this.checkCollisions();
             this.checkThrowObjects();
         }, 200);
@@ -35,7 +34,7 @@ class World{
 
     checkThrowObjects(){
         if(this.keyboard.D){
-            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
+            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);            
             this.throwableObjects.push(bottle);
         }
     }
@@ -96,7 +95,7 @@ class World{
         //render statusBarBottle img
         // -------- Space for fixed objects ------//
         this.addToMap(this.statusBarBottle);
-         // ctx wird verschoben nach vorne
+         // ctx wird verschoben nach vorned
         this.ctx.translate(this.camera_x, 0);
 
         // ctx wird in gegenrichtung verschoben
@@ -115,11 +114,16 @@ class World{
         // render chicken img
         this.addObjectsToMap(this.level.enemies);
 
+
+        
+
         // img of bottle to throw
         this.addObjectsToMap(this.throwableObjects);
 
         // bottles to pick up on Ground                
         this.addObjectsToMap(this.level.bottles);
+
+
 
         //coins to pick up
         this.addObjectsToMap(this.level.coins);
