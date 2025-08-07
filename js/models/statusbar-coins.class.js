@@ -19,23 +19,23 @@ class StatusBarCoins extends DrawableObject{
     }
 
     //setPercentage(50)
-    setPercentage(percentage){
-        this.percentage = percentage; // => 0...5
-        console.log('current status coins', this.percentage);
+    setPercentage(amountOfCoins){
+        this.amountOfCoins = amountOfCoins; // => 0...5
+        console.log('current status coins', this.amountOfCoins);
         let path = this.IMAGES_STATUSBAR_COINS[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     }
 
     resolveImageIndex(){
-         if(this.percentage == 100){
+         if(this.amountOfCoins == 5){
                 return 5; 
-            } else if(this.percentage == 80){
+            } else if(this.amountOfCoins == 4){
                 return 4; 
-            } else if(this.percentage == 60){
+            } else if(this.amountOfCoins == 3){
                 return 3; 
-            } else if(this.percentage == 40){
+            } else if(this.amountOfCoins == 2){
                 return 2; 
-            } else if(this.percentage == 20){
+            } else if(this.amountOfCoins == 1){
                 return 1; 
             } else {
                 return 0; 

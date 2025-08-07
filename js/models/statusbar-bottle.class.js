@@ -22,7 +22,7 @@ class StatusBarBottle extends DrawableObject{
     //setPercentage(50)
     setPercentage(amountOfBottle){
         this.amountOfBottle = amountOfBottle; // => 0...5
-        console.log('current status bottle', this.amountOfBottle);
+        // console.log('current status bottle', this.amountOfBottle);
         let path = this.IMAGES_STATUSBAR_BOTTLE[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     }

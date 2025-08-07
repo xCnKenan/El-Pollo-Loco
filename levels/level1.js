@@ -53,13 +53,13 @@ const level1 = new Level(
     ),
   ],
   [
-    new BottleOnGround(),
+    // new BottleOnGround(),
     // new BottleOnGround(),
     // new BottleOnGround()
   ], 
   [
-    // new Coins(),
-    // new Coins(),
+    new Coins(),
+    new Coins(),
     // new Coins()
   ]
 );

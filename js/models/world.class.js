@@ -52,7 +52,6 @@ class World{
         // here check if character colliding with bottles
             this.level.bottles.forEach((bottle) => {
                 if(this.character.isColliding(bottle)){
-                    console.log('bottle hit');
                     this.character.bottleAdded();
                     this.statusBarBottle.setPercentage(this.character.amountOfBottles);
                 }
@@ -62,6 +61,8 @@ class World{
             this.level.coins.forEach((coin) => {
                 if(this.character.isColliding(coin)){
                     console.log('coin hit');
+                    this.character.coinsAdded();
+                    this.statusBarCoins.setPercentage(this.character.amountOfCoins);
                 }
             });
     }
