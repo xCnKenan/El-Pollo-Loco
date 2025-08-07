@@ -19,6 +19,7 @@ class MovableObject extends DrawableObject{
     applyGravity(){
         setInterval(() => {
             if(this.isAboveGround() || this.speedY > 0 ){ // fall down animation
+                
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
             }
@@ -92,7 +93,7 @@ class MovableObject extends DrawableObject{
     bottleAdded(){
         this.amountOfBottles += 1;
         if(this.amountOfBottles > 5){
-            this.amountOfBottles = 5;
+            this.amountOfBottles  = 5;
         } 
         // else{
         //     // this.lastHit = new Date().getTime();
