@@ -124,7 +124,8 @@ class World{
 
         // img source and positions in x and y
         this.addToMap(this.character);
-        // render chicken img
+        
+        // render enemies img
         this.addObjectsToMap(this.level.enemies);
 
 

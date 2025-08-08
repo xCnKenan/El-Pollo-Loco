@@ -21,7 +21,8 @@ class DrawableObject{
         // because of instanceof frames are only shown for given classes
         if( this instanceof Character ||
             this instanceof ThrowableObject || 
-            this instanceof Chicken || 
+            this instanceof Chicken ||
+            this instanceof ChickenSmall || 
             this instanceof Endboss || 
             this instanceof BottleOnGround ||
             this instanceof Coins
