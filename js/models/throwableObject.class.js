@@ -6,6 +6,12 @@ class ThrowableObject extends MovableObject{
         'img/6_salsa_bottle/bottle_rotation/3_bottle_rotation.png',
         'img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png',
     ];
+    offset = {
+        top: 0, 
+        left: 0,
+        right: 0,
+        bottom: 0
+    };
 
     constructor(x, y){
         super().loadImage('img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png'); 
@@ -15,42 +21,24 @@ class ThrowableObject extends MovableObject{
         this.height = 60;
         this.width = 60;
         this.throw();
-        // this.playAnimation(this.IMAGES_THROW);
-        // this.animate();
     }
-
-    
-
-    // playAnimation(images){
-    //     let i = this.currentImage % images.length; // let i = 7 % 6 => 1, Rest 1
-    //     let path = images[i];
-    //     this.img = this.imageCache[path];
-    //     this.currentImage ++;
-    // }
 
     throw(){
         this.speedY = 15;
         this.applyGravity();
         this.checkDirection(world.character.otherDirection);
-  
     }
     
     checkDirection(leftSide){
          if(leftSide){
-
             setInterval(()=>{
                 this.x -= 10; // throw to left
             }, 25);    
-
         } else if (!leftSide) {
-
             setInterval(()=>{
                 this.x += 10; // throw to right
-                
             }, 25);
-
         }
-
         this.animate();
     }
 

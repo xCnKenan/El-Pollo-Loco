@@ -60,14 +60,20 @@ class World{
                 }
             });
 
-        // here check if character colliding with coins
-            this.level.coins.forEach((coin) => {
-                if(this.character.isColliding(coin)){
-                    this.character.coinsAdded();
-                    this.statusBarCoins.setPercentage(this.character.amountOfCoins);
-                    this.removeItem(coin, this.level.coins);
-                }
+        // here check if bottle colliding with enemy
+        if (world.throwableObjects != 0){
+            // go through array of bottles
+            this.throwableObjects.forEach((bottle) => {
+            // go through array of enemies
+            this.level.enemies.forEach((enemy) => {
+                //check if bottle is colliding with enemy
+                if(bottle.isColliding(enemy)){
+                    console.log('bottle hits enemy');
+                    }
+                });
             });
+        }
+            
     }
     
     // remove item on ground after picked up
@@ -124,21 +130,13 @@ class World{
 
         // img source and positions in x and y
         this.addToMap(this.character);
-        
         // render enemies img
         this.addObjectsToMap(this.level.enemies);
 
-
-
-
         // img of bottle to throw
         this.addObjectsToMap(this.throwableObjects);
-
         // bottles to pick up on Ground                
         this.addObjectsToMap(this.level.bottles);
-
-
-
         //coins to pick up
         this.addObjectsToMap(this.level.coins);
 
