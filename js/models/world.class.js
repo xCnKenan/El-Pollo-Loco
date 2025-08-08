@@ -56,7 +56,7 @@ class World{
                 if(this.character.isColliding(bottle)){
                     this.character.bottleAdded();
                     this.statusBarBottle.setPercentage(this.character.amountOfBottles);
-                    this.removeItem(bottle);
+                    this.removeItem(bottle, this.level.bottles);
                 }
             });
 
@@ -65,15 +65,16 @@ class World{
                 if(this.character.isColliding(coin)){
                     this.character.coinsAdded();
                     this.statusBarCoins.setPercentage(this.character.amountOfCoins);
+                    this.removeItem(coin, this.level.coins);
                 }
             });
     }
-
-    removeItem(bottle){
-        // try to remove bottle on ground after pick up
-        let itemToRemove = this.level.bottles.indexOf(bottle);
+    
+    // remove item on ground after picked up
+    removeItem(item, array){
+        let itemToRemove = array.indexOf(item);
         if (itemToRemove > -1){
-            this.level.bottles.splice(itemToRemove, 1);
+            array.splice(itemToRemove, 1);
         }
     }
 
