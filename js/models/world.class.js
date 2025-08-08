@@ -77,8 +77,12 @@ class World{
                     //remove Bottle when hit enemy
                     this.removeItem(bottle, this.throwableObjects);
                     enemy.energy = 0;
-                    // super.enemyIsDead(enemy.energy);
+                    // load dead img animation
                     enemy.enemyIsDead(enemy.energy);
+                    // remove dead enemy from canvas
+                    setInterval(()=>{
+                        this.removeItem(enemy, this.level.enemies)
+                    }, 250);                    
                     }
                 });
             });
