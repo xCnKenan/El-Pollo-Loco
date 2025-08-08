@@ -62,7 +62,12 @@ class World{
 
         // here check if bottle colliding with enemy
         if (world.throwableObjects != 0){
-            // go through array of bottles
+            this.checkCollisionWithEnemy()
+        }
+    }
+
+    checkCollisionWithEnemy(){
+        // go through array of bottles
             this.throwableObjects.forEach((bottle) => {
             // go through array of enemies
             this.level.enemies.forEach((enemy) => {
@@ -72,8 +77,6 @@ class World{
                     }
                 });
             });
-        }
-            
     }
     
     // remove item on ground after picked up
