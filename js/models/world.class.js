@@ -56,6 +56,7 @@ class World{
                 if(this.character.isColliding(bottle)){
                     this.character.bottleAdded();
                     this.statusBarBottle.setPercentage(this.character.amountOfBottles);
+                    this.removeItem(bottle);
                 }
             });
 
@@ -66,6 +67,14 @@ class World{
                     this.statusBarCoins.setPercentage(this.character.amountOfCoins);
                 }
             });
+    }
+
+    removeItem(bottle){
+        // try to remove bottle on ground after pick up
+        let itemToRemove = this.level.bottles.indexOf(bottle);
+        if (itemToRemove > -1){
+            this.level.bottles.splice(itemToRemove, 1);
+        }
     }
 
     draw(){
