@@ -9,6 +9,7 @@ class World{
     statusBarBottle = new StatusBarBottle();
     statusBarCoins = new StatusBarCoins();
     throwableObjects = [];
+    // throwableObjects = new ThrowableObject(this.character.x + 100, this.character.y + 100);
 
 
     constructor(canvas, keyboard){
@@ -32,10 +33,12 @@ class World{
         }, 200);
     }
 
+    //throw bottle with D
     checkThrowObjects(){
         if(this.keyboard.D){
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);            
             this.throwableObjects.push(bottle);
+            // this.throwableObjects.playAnimation(bottle);
         }
     }
 
@@ -115,7 +118,7 @@ class World{
         this.addObjectsToMap(this.level.enemies);
 
 
-        
+
 
         // img of bottle to throw
         this.addObjectsToMap(this.throwableObjects);

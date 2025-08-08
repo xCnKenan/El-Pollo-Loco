@@ -15,7 +15,18 @@ class ThrowableObject extends MovableObject{
         this.height = 60;
         this.width = 60;
         this.throw();
+        // this.playAnimation(this.IMAGES_THROW);
+        // this.animate();
     }
+
+    
+
+    // playAnimation(images){
+    //     let i = this.currentImage % images.length; // let i = 7 % 6 => 1, Rest 1
+    //     let path = images[i];
+    //     this.img = this.imageCache[path];
+    //     this.currentImage ++;
+    // }
 
     throw(){
         this.speedY = 15;
@@ -29,14 +40,22 @@ class ThrowableObject extends MovableObject{
 
             setInterval(()=>{
                 this.x -= 10; // throw to left
+                this.animate();
             }, 25);    
 
         } else {
 
             setInterval(()=>{
                 this.x += 10; // throw to right
+                this.animate();
             }, 25);
 
         }
+    }
+
+    animate(){
+        setInterval(() => {
+            this.playAnimation(this.IMAGES_THROW);
+        },100);
     }
 }
