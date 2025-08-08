@@ -8,10 +8,10 @@ class ChickenSmall extends MovableObject{
         'img/3_enemies_chicken/chicken_small/1_walk/3_w.png',
     ];
     offset = {
-        top: 4, 
-        left: 1,
-        right: 2,
-        bottom: 12
+        top: 5, 
+        left: 9,
+        right: 18,
+        bottom: 13
     };
     
 
