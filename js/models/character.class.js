@@ -1,5 +1,4 @@
 class Character extends MovableObject{
-
      // test position
     speed = 10;
     IMAGES_WALKING = [
@@ -28,14 +27,13 @@ class Character extends MovableObject{
         'img/2_character_pepe/5_dead/D-54.png',
         'img/2_character_pepe/5_dead/D-55.png',
         'img/2_character_pepe/5_dead/D-56.png',
-        'img/2_character_pepe/5_dead/D-57.png',
+        'img/2_character_pepe/5_dead/D-57.png'
     ];
     IMAGES_HURT = [
         'img/2_character_pepe/4_hurt/H-41.png',
         'img/2_character_pepe/4_hurt/H-42.png',
         'img/2_character_pepe/4_hurt/H-43.png',
     ];
-
     world;
     // offset = {
     //     top: 20, 
@@ -49,7 +47,6 @@ class Character extends MovableObject{
         right: 70,  // width
         bottom: 150 //height
     };
-
     amountOfBottles = 0;
     amountOfCoins = 0;
 
@@ -69,16 +66,12 @@ class Character extends MovableObject{
                 this.moveRight();
                 this.otherDirection = false;
             }
-
             if(this.world.keyboard.LEFT && this.x > 0 ){
                 this.moveLeft();
                 this.otherDirection = true;
             }   
-            
             // check if also not above Ground
-            if(this.world.keyboard.SPACE && !this.isAboveGround()){
-                this.jump();
-            }
+            if(this.world.keyboard.SPACE && !this.isAboveGround()) this.jump();
 
             this.world.camera_x = -this.x +100;
         }, 1000 / 60);

@@ -76,9 +76,18 @@ class World{
                     console.log('bottle hits enemy');
                     //remove Bottle when hit enemy
                     this.removeItem(bottle, this.throwableObjects);
+                    enemy.energy = 0;
+                    enemy.checkDeath(enemy.energy);
                     }
                 });
             });
+    }
+
+    checkDeath(energy){
+        if(energy == 0){
+            this.loadImage(this.IMAGES_DEAD);
+            console.log('enemy is dead');
+        }
     }
     
     // remove item on ground after picked up
