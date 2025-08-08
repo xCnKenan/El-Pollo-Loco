@@ -74,6 +74,8 @@ class World{
                 //check if bottle is colliding with enemy
                 if(bottle.isColliding(enemy)){
                     console.log('bottle hits enemy');
+                    //remove Bottle when hit enemy
+                    this.removeItem(bottle, this.throwableObjects);
                     }
                 });
             });
