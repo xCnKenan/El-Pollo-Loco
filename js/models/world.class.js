@@ -8,6 +8,7 @@ class World {
   statusBar = new StatusBar();
   statusBarBottle = new StatusBarBottle();
   statusBarCoins = new StatusBarCoins();
+  statusBarEndboss = new StatusBarEndboss();
   throwableObjects = [];
   // throwableObjects = new ThrowableObject(this.character.x + 100, this.character.y + 100);
 
@@ -146,6 +147,18 @@ class World {
     this.addToMap(this.statusBarCoins);
     // ctx wird verschoben nach vorne
     this.ctx.translate(this.camera_x, 0);
+
+
+
+    // ctx wird in gegenrichtung verschoben
+    this.ctx.translate(-this.camera_x, 0);
+    //render statusBarCoins img
+    // -------- Space for fixed objects ------//
+    this.addToMap(this.statusBarEndboss);
+    // ctx wird verschoben nach vorne
+    this.ctx.translate(this.camera_x, 0);
+
+
 
     // img source and positions in x and y
     this.addToMap(this.character);
