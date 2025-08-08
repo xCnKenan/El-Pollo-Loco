@@ -88,6 +88,7 @@ class World {
   againstFinalBoss(bottle, enemy) {
     enemy.hit();
     this.removeItem(bottle, this.throwableObjects);
+    this.statusBarEndboss.setPercentage(enemy.energy);
     console.log("Endboss energy is", enemy.energy);
   }
 
@@ -152,7 +153,7 @@ class World {
 
     // ctx wird in gegenrichtung verschoben
     this.ctx.translate(-this.camera_x, 0);
-    //render statusBarCoins img
+    //render statusBarEndboss img
     // -------- Space for fixed objects ------//
     this.addToMap(this.statusBarEndboss);
     // ctx wird verschoben nach vorne

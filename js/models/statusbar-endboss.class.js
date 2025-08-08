@@ -1,12 +1,12 @@
 class StatusBarEndboss extends DrawableObject{
 
     IMAGES_STATUSBAR_ENDBOSS = [
-        'img/7_statusbars/2_statusbar_endboss/orange/orange0.png',
-        'img/7_statusbars/2_statusbar_endboss/orange/orange20.png',
-        'img/7_statusbars/2_statusbar_endboss/orange/orange40.png',
-        'img/7_statusbars/2_statusbar_endboss/orange/orange60.png',
-        'img/7_statusbars/2_statusbar_endboss/orange/orange80.png',
-        'img/7_statusbars/2_statusbar_endboss/orange/orange100.png',
+       'img/7_statusbars/2_statusbar_endboss/orange/orange0.png',
+       'img/7_statusbars/2_statusbar_endboss/orange/orange20.png',
+       'img/7_statusbars/2_statusbar_endboss/orange/orange40.png',
+       'img/7_statusbars/2_statusbar_endboss/orange/orange60.png',
+       'img/7_statusbars/2_statusbar_endboss/orange/orange80.png',
+       'img/7_statusbars/2_statusbar_endboss/orange/orange100.png',
     ];
     percentage = 100;
 
@@ -20,9 +20,9 @@ class StatusBarEndboss extends DrawableObject{
     }
 
     //setPercentage(50)
-    setPercentage(amountOfBottle){
-        this.amountOfBottle = amountOfBottle; // => 0...5
-        // console.log('current status bottle', this.amountOfBottle);
+   setPercentage(percentage){
+        this.percentage = percentage; // => 0...5
+        // console.log('current status health', this.percentage);
         let path = this.IMAGES_STATUSBAR_ENDBOSS[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     }
