@@ -43,6 +43,8 @@ class ChickenSmall extends MovableObject{
      enemyIsDead(energy){
         if(energy == 0){
             this.loadImage(this.IMAGES_DEAD);
+            console.log('enemy is dead');
+            
         }
     }
 }
