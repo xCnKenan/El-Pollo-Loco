@@ -40,22 +40,23 @@ class ThrowableObject extends MovableObject{
 
             setInterval(()=>{
                 this.x -= 10; // throw to left
-                this.animate();
             }, 25);    
 
-        } else {
+        } else if (!leftSide) {
 
             setInterval(()=>{
                 this.x += 10; // throw to right
-                this.animate();
+                
             }, 25);
 
         }
+
+        this.animate();
     }
 
     animate(){
         setInterval(() => {
             this.playAnimation(this.IMAGES_THROW);
-        },100);
+        }, 80);
     }
 }
