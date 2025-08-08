@@ -32,6 +32,8 @@ class Endboss extends MovableObject{
     constructor(){
         super().loadImage(this.IMAGES_WALKING[0]);
         this.loadImages(this.IMAGES_WALKING);
+        this.loadImages(this.IMAGES_HURT);
+        this.loadImages(this.IMAGES_DEAD);
         // this.x = 700*2;
         this.x = 300; // test x 
         this.animate();     
@@ -40,8 +42,13 @@ class Endboss extends MovableObject{
 
     animate(){
         setInterval(() => {
+            if(this.isDead()){
+                this.playAnimation(this.IMAGES_DEAD);
+            } else if(this.isHurt()){
+                this.playAnimation(this.IMAGES_HURT);
+            } else {
             this.playAnimation(this.IMAGES_WALKING);
-            
+            }
         }, 150);
     }
 }

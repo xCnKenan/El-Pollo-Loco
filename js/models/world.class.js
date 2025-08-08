@@ -85,7 +85,7 @@ class World {
   }
 
   againstFinalBoss(bottle, enemy) {
-    enemy.energy -= 25;
+    enemy.hit();
     this.removeItem(bottle, this.throwableObjects);
     console.log("Endboss energy is", enemy.energy);
   }
