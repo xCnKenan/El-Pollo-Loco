@@ -88,16 +88,20 @@ class World {
         }
         //check if bottle is colliding with enemy
         else if (bottle.isColliding(enemy)) {
-          enemy.energy = 0;
-          this.removeItem(bottle, this.throwableObjects);
-          enemy.speed = 0;
-          enemy.isDead();
-          setInterval(()=>{
-            this.removeItem(enemy, this.level.enemies);
-          },250);
+          this.againstNormalEnemy(bottle, enemy);
         }
       });
     });
+  }
+
+  againstNormalEnemy(bottle, enemy) {
+    enemy.energy = 0;
+    this.removeItem(bottle, this.throwableObjects);
+    enemy.speed = 0;
+    enemy.isDead();
+    setInterval(() => {
+      this.removeItem(enemy, this.level.enemies);
+    }, 250);
   }
 
   againstFinalBoss(bottle, enemy) {
@@ -150,8 +154,6 @@ class World {
     // ctx wird verschoben nach vorne
     this.ctx.translate(this.camera_x, 0);
 
-
-
     // ctx wird in gegenrichtung verschoben
     this.ctx.translate(-this.camera_x, 0);
     //render statusBarEndboss img
@@ -159,8 +161,6 @@ class World {
     this.addToMap(this.statusBarEndboss);
     // ctx wird verschoben nach vorne
     this.ctx.translate(this.camera_x, 0);
-
-
 
     // img source and positions in x and y
     this.addToMap(this.character);
