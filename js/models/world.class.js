@@ -62,6 +62,15 @@ class World {
       }
     });
 
+    // here check if character colliding with coin
+    this.level.coins.forEach((coin) => {
+      if (this.character.isColliding(coin)) {
+        this.character.coinsAdded();
+        this.statusBarCoins.setPercentage(this.character.amountOfCoins);
+        this.removeItem(coin, this.level.coins);
+      }
+    });
+
     // here check if bottle colliding with enemy
     if (world.throwableObjects != 0) {
       this.checkCollisionWithEnemy();
