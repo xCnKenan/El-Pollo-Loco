@@ -88,7 +88,13 @@ class World {
         }
         //check if bottle is colliding with enemy
         else if (bottle.isColliding(enemy)) {
-          this.againstNormalEnemy(bottle, enemy);
+          enemy.energy = 0;
+          this.removeItem(bottle, this.throwableObjects);
+          enemy.speed = 0;
+          enemy.isDead();
+          setInterval(()=>{
+            this.removeItem(enemy, this.level.enemies);
+          },250);
         }
       });
     });
@@ -99,20 +105,6 @@ class World {
     this.removeItem(bottle, this.throwableObjects);
     this.statusBarEndboss.setPercentage(enemy.energy);
     console.log("Endboss energy is", enemy.energy);
-  }
-
-  againstNormalEnemy(bottle, enemy) {
-    console.log("bottle hits enemy");
-    //remove Bottle when hit enemy
-    this.removeItem(bottle, this.throwableObjects);
-    //set energy to 0
-    enemy.energy = 0;
-    // load dead img animation
-    enemy.enemyIsDead(enemy.energy);
-    // remove dead enemy from canvas
-    setInterval(() => {
-      this.removeItem(enemy, this.level.enemies);
-    }, 250);
   }
 
   // remove item on ground after picked up
