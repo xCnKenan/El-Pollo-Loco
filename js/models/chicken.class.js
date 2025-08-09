@@ -15,15 +15,13 @@ class Chicken extends MovableObject {
     right: 2,
     bottom: 12,
   };
-  //   energy = 100;
 
   constructor() {
     super().loadImage("img/3_enemies_chicken/chicken_normal/1_walk/1_w.png");
     this.loadImages(this.IMAGES_WALKING);
     this.x = 250 + Math.random() * 1500;
-    this.speed = 0.5 + Math.random() * 0.5;
+   this.speed = 0.25 + Math.random() * 0.5;
     this.animate();
-    // this.enemyIsDead();
   }
 
   animate() {
@@ -37,11 +35,4 @@ class Chicken extends MovableObject {
     }, 60);
   }
 
-  // enemyIsDead(energy){
-  //     if(energy == 0){
-  //         // this.loadImage(this.IMAGES_DEAD);
-  //         this.playAnimation(this.IMAGES_DEAD);
-  //         console.log('enemy is dead');
-  //     }
-  // }
 }
