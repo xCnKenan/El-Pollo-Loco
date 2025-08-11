@@ -42,10 +42,10 @@ class Character extends MovableObject{
     //     bottom: 30
     // };
     offset = {
-        top: 90,  // y
-        left: 15,   // x
-        right: 42,  // width
-        bottom: 100 //height
+        top: 135,  // y
+        left: 25,   // x
+        right: 70,  // width
+        bottom: 150 //height
     };
     amountOfBottles = 0;
     amountOfCoins = 0;
