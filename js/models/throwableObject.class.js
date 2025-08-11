@@ -8,8 +8,8 @@ class ThrowableObject extends MovableObject{
     ];
     offset = {
         top: 7, 
-        left: 22,
-        right: 44,
+        left: 5,
+        right: 10,
         bottom: 12
     };
 
@@ -24,7 +24,7 @@ class ThrowableObject extends MovableObject{
     }
 
     throw(){
-        this.speedY = 15;
+        this.speedY = 10;
         this.applyGravity();
         this.checkDirection(world.character.otherDirection);
     }
