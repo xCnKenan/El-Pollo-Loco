@@ -7,10 +7,10 @@ class ThrowableObject extends MovableObject{
         'img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png',
     ];
     offset = {
-        top: 7, 
-        left: 22,
-        right: 44,
-        bottom: 12
+        top: 5, 
+        left: 15,
+        right: 30,
+        bottom: 8
     };
 
     constructor(x, y){
@@ -18,8 +18,8 @@ class ThrowableObject extends MovableObject{
         this.loadImages(this.IMAGES_THROW); 
         this.x = x;
         this.y = y;
-        this.height = 60;
-        this.width = 60;
+        this.height = 45;
+        this.width = 45;
         this.throw();
     }
 
