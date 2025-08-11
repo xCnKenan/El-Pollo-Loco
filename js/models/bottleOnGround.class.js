@@ -1,9 +1,12 @@
 class BottleOnGround extends MovableObject{
 
-    y = 350;
+    // y = 350;
+    y = 365;
     // x = 400;
-    height = 70;
-    width = 70;
+    // height = 70;
+    // width = 70;
+    height = 50;
+    width = 50;
     IMAGES_BOTTLE_ON_GROUND = [
         'img/6_salsa_bottle/1_salsa_bottle_on_ground.png',
         'img/6_salsa_bottle/2_salsa_bottle_on_ground.png',

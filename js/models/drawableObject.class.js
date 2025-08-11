@@ -1,8 +1,11 @@
 class DrawableObject{
     x = 130;
-    y = 135;
-    height = 300;
-    width = 150;
+    // y = 135;
+    y = 220;
+    // height = 300;
+    // width = 150;
+    height = 200;
+    width = 100;
     img;
     imageCache = [];
     currentImage = 0;
@@ -14,7 +17,6 @@ class DrawableObject{
             console.warn('Error loading image', error);
             console.log('Could not load img:', this.img.src);
         }
-        
     }
 
      drawFrame(ctx){
