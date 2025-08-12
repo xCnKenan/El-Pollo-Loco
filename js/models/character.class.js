@@ -1,6 +1,12 @@
 class Character extends MovableObject{
      // test position
     speed = 10;
+
+    IMAGES_STANDING = [
+        'img/2_character_pepe/2_walk/W-21.png',
+        'img/2_character_pepe/2_walk/W-26.png'
+    ];
+
     IMAGES_WALKING = [
         'img/2_character_pepe/2_walk/W-21.png',
         'img/2_character_pepe/2_walk/W-22.png',
@@ -46,6 +52,7 @@ class Character extends MovableObject{
 
     constructor(){
         super().loadImage('img/2_character_pepe/2_walk/W-21.png');
+        this.loadImages(this.IMAGES_STANDING);
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_WALKING);
@@ -63,7 +70,8 @@ class Character extends MovableObject{
             if(this.world.keyboard.LEFT && this.x > 0 ){
                 this.moveLeft();
                 this.otherDirection = true;
-            }   
+            }
+            
             // check if also not above Ground
             if(this.world.keyboard.SPACE && !this.isAboveGround()) this.jump();
 
@@ -72,7 +80,6 @@ class Character extends MovableObject{
 
         // IMG Animations here
         setInterval(() => {
-
             if(this.isDead()){
                 this.playAnimation(this.IMAGES_DEAD);
             } else if(this.isHurt()){
@@ -88,4 +95,6 @@ class Character extends MovableObject{
                     }
                 }, 40);
             }
+
+            
 }
