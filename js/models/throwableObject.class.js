@@ -6,10 +6,17 @@ class ThrowableObject extends MovableObject{
         'img/6_salsa_bottle/bottle_rotation/3_bottle_rotation.png',
         'img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png',
     ];
+    // offset = {
+    //     top: 7, 
+    //     left: 5,
+    //     right: 10,
+    //     bottom: 12
+    // };
+
     offset = {
         top: 7, 
-        left: 5,
-        right: 10,
+        left: 10,
+        right: 20,
         bottom: 12
     };
 
@@ -24,7 +31,7 @@ class ThrowableObject extends MovableObject{
     }
 
     throw(){
-        this.speedY = 10;
+        this.speedY = 7;
         this.applyGravity();
         this.checkDirection(world.character.otherDirection);
     }

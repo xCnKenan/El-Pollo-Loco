@@ -47,7 +47,8 @@ class Character extends MovableObject{
         right: 70,  // width
         bottom: 150 //height
     };
-    amountOfBottles = 0;
+    // amountOfBottles = 0;
+    amountOfBottles = 100;
     amountOfCoins = 0;
 
     constructor(){
