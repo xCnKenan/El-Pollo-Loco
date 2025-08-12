@@ -92,9 +92,9 @@ class MovableObject extends DrawableObject{
 
     bottleAdded(){
         this.amountOfBottles += 1;
-        if(this.amountOfBottles > 5){
-            this.amountOfBottles  = 5;
-        } 
+        // if(this.amountOfBottles > 5){
+        //     this.amountOfBottles  = 5;
+        // } 
         // else{
         //     // this.lastHit = new Date().getTime();
         //     console.log('percentage of amount bottle is going high');

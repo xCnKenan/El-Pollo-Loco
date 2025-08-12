@@ -28,7 +28,7 @@ class StatusBarBottle extends DrawableObject{
     }
 
     resolveImageIndex(){
-         if(this.amountOfBottle == 5){
+         if(this.amountOfBottle >= 5){
                 return 5; 
             } else if(this.amountOfBottle == 4){
                 return 4; 
