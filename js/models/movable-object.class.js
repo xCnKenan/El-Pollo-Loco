@@ -102,6 +102,10 @@ class MovableObject extends DrawableObject{
         // }
     }
 
+    bottleSubtracted(){
+        this.amountOfBottles -= 1;
+    }
+
     coinsAdded(){
         this.amountOfCoins += 1;
         if(this.amountOfCoins > 5){
