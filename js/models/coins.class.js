@@ -27,7 +27,7 @@ class Coins extends MovableObject{
     constructor(){
         super().loadImage('img/8_coin/coin_1.png');
         this.loadImages(this.IMAGES_COINS);
-        this.x = 500 + Math.random() * 1000;
+        this.x = 500 + Math.random() * 1500;
         // this.x = 250 
         this.animate();
     }
@@ -35,7 +35,7 @@ class Coins extends MovableObject{
     animate(){
         setInterval(() => {
             this.playAnimation(this.IMAGES_COINS);            
-        }, 2000);
+        }, 500);
     }
 
 } 

@@ -35,10 +35,19 @@ class World {
   //throw bottle with D
   checkThrowObjects() {
     if (this.keyboard.D && this.character.amountOfBottles) {
-      let bottle = new ThrowableObject(
-        this.character.x + 100,
+      let bottle;
+      if(!world.character.otherDirection){
+        bottle = new ThrowableObject(
+        this.character.x + 80,
         this.character.y + 100
       );
+      }
+      if(world.character.otherDirection){
+        bottle = new ThrowableObject(
+        this.character.x + 10,
+        this.character.y + 100
+      );
+      }
       this.throwableObjects.push(bottle);
       // render statusbar and subtract from array
       this.character.bottleSubtracted();
