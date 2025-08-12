@@ -28,7 +28,7 @@ class Endboss extends MovableObject {
     "img/4_enemie_boss_chicken/2_alert/G11.png",
     "img/4_enemie_boss_chicken/2_alert/G12.png",
   ];
-   IMAGES_ATTACK = [
+  IMAGES_ATTACK = [
     "img/4_enemie_boss_chicken/3_attack/G13.png",
     "img/4_enemie_boss_chicken/3_attack/G14.png",
     "img/4_enemie_boss_chicken/3_attack/G15.png",
@@ -58,6 +58,7 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_HURT);
     this.loadImages(this.IMAGES_DEAD);
     this.loadImages(this.IMAGES_ALERT);
+    this.loadImages(this.IMAGES_ATTACK);
     this.x = 3300;
 
     this.animate();
@@ -67,6 +68,9 @@ class Endboss extends MovableObject {
     setInterval(() => {
       if (this.inAlertMode) {
         this.playAnimation(this.IMAGES_ALERT);
+      } else if (this.inAttackMode) {
+        console.log('in attackMode');
+        this.playAnimation(this.IMAGES_ATTACK);
       } else if (this.isDead()) {
         this.playAnimation(this.IMAGES_DEAD);
       } else if (this.isHurt()) {
@@ -79,8 +83,14 @@ class Endboss extends MovableObject {
         this.hadFirstContact = true;
         this.startAlertMode();
       }
-
     }, 150);
+
+    setInterval(() => {
+        if(this.hadFirstContact) this.inAttackMode = true;
+      setTimeout(() => {
+            this.inAttackMode = false;
+      }, 1000);
+    }, 5000);
   }
 
   startAlertMode() {
