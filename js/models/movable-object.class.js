@@ -71,7 +71,6 @@ class MovableObject extends DrawableObject{
     moveRight(){
         //run right
         this.x += this.speed;
-        console.log(this.x);
     }
 
     moveLeft(){
