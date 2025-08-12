@@ -120,7 +120,6 @@ class World {
     enemy.hit();
     this.removeItem(bottle, this.throwableObjects);
     this.statusBarEndboss.setPercentage(enemy.energy);
-    console.log("Endboss energy is", enemy.energy);
   }
 
   // remove item on ground after picked up

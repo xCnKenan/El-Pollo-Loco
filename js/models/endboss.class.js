@@ -45,7 +45,7 @@ class Endboss extends MovableObject {
     right: 45,
     bottom: 85,
   };
-
+  speed = 2;
   hadFirstContact = false;
   inAlertMode = false;
   inAttackMode = false;
@@ -70,13 +70,16 @@ class Endboss extends MovableObject {
         this.playAnimation(this.IMAGES_ALERT);
       } else if (this.inAttackMode) {
         console.log('in attackMode');
+        this.stopMoving();
         this.playAnimation(this.IMAGES_ATTACK);
       } else if (this.isDead()) {
         this.playAnimation(this.IMAGES_DEAD);
       } else if (this.isHurt()) {
         this.playAnimation(this.IMAGES_HURT);
-      } else {
+      } else if (this.hadFirstContact){
         this.playAnimation(this.IMAGES_WALKING);
+        this.moveLeft();
+        
       }
 
       if (world.character.x >= 3000 && !this.hadFirstContact) {
@@ -86,17 +89,30 @@ class Endboss extends MovableObject {
     }, 150);
 
     setInterval(() => {
-        if(this.hadFirstContact) this.inAttackMode = true;
+        if(this.hadFirstContact) {
+          this.inAttackMode = true;
+        }
       setTimeout(() => {
             this.inAttackMode = false;
-      }, 1000);
+      }, 1200);
     }, 5000);
   }
 
   startAlertMode() {
     this.inAlertMode = true;
+    console.log('alertmode', this.inAlertMode);
+    
     setTimeout(() => {
       this.inAlertMode = false;
     }, 1500);
+  }
+
+  moveLeft(){
+    this.speed = 2;
+    this.x -= this.speed; 
+  }
+
+  stopMoving(){
+    this.speed = 0; 
   }
 }
