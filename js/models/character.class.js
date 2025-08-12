@@ -35,20 +35,13 @@ class Character extends MovableObject{
         'img/2_character_pepe/4_hurt/H-43.png',
     ];
     world;
-    // offset = {
-    //     top: 20, 
-    //     left: 30,
-    //     right: 40,
-    //     bottom: 30
-    // };
     offset = {
         top: 135,  // y
         left: 25,   // x
         right: 70,  // width
         bottom: 150 //height
     };
-    // amountOfBottles = 0;
-    amountOfBottles = 100;
+    amountOfBottles = 0;
     amountOfCoins = 0;
 
     constructor(){

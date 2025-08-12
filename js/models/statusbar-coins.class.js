@@ -27,7 +27,7 @@ class StatusBarCoins extends DrawableObject{
     }
 
     resolveImageIndex(){
-         if(this.amountOfCoins == 5){
+         if(this.amountOfCoins >= 5){
                 return 5; 
             } else if(this.amountOfCoins == 4){
                 return 4; 
