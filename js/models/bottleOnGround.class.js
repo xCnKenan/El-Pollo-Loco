@@ -21,7 +21,7 @@ class BottleOnGround extends MovableObject{
     constructor(){
         super().loadImage('img/6_salsa_bottle/1_salsa_bottle_on_ground.png');
         this.loadImages(this.IMAGES_BOTTLE_ON_GROUND);
-        this.x = 300 + Math.random() * 2500;
+        this.x = 300 + Math.random() * 2900;
         this.animate(); 
     }
 

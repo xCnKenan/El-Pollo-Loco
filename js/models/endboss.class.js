@@ -18,7 +18,16 @@ class Endboss extends MovableObject{
         'img/4_enemie_boss_chicken/4_hurt/G22.png',
         'img/4_enemie_boss_chicken/4_hurt/G23.png',
     ];
-
+    IMAGES_ALERT = [
+        'img/4_enemie_boss_chicken/2_alert/G5.png',
+        'img/4_enemie_boss_chicken/2_alert/G6.png',
+        'img/4_enemie_boss_chicken/2_alert/G7.png',
+        'img/4_enemie_boss_chicken/2_alert/G8.png',
+        'img/4_enemie_boss_chicken/2_alert/G9.png',
+        'img/4_enemie_boss_chicken/2_alert/G10.png',
+        'img/4_enemie_boss_chicken/2_alert/G11.png',
+        'img/4_enemie_boss_chicken/2_alert/G12.png',
+    ];
 
     offset = {
         top: 70, 
@@ -27,6 +36,8 @@ class Endboss extends MovableObject{
         bottom: 85
     };
 
+    hadFirstContact = false;
+
     // energy = 100;
 
     constructor(){
@@ -34,7 +45,7 @@ class Endboss extends MovableObject{
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
-        this.x = 500 + 700*2;
+        this.x = 3300;
         
         this.animate();     
         

@@ -71,6 +71,7 @@ class MovableObject extends DrawableObject{
     moveRight(){
         //run right
         this.x += this.speed;
+        console.log(this.x);
     }
 
     moveLeft(){
@@ -108,13 +109,14 @@ class MovableObject extends DrawableObject{
 
     coinsAdded(){
         this.amountOfCoins += 1;
-        if(this.amountOfCoins > 5){
-            this.amountOfCoins = 5;
-        } 
+        // if(this.amountOfCoins > 5){
+        //     this.amountOfCoins = 5;
+        // } 
         // else{
         //     // this.lastHit = new Date().getTime();
         //     console.log('percentage of amount bottle is going high');
             
         // }
     }
+
 }
