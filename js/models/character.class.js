@@ -40,6 +40,18 @@ class Character extends MovableObject {
         'img/2_character_pepe/4_hurt/H-42.png',
         'img/2_character_pepe/4_hurt/H-43.png',
     ];
+    IMAGES_IDLE = [
+        'img/2_character_pepe/1_idle/idle/I-1.png',
+        'img/2_character_pepe/1_idle/idle/I-2.png',
+        'img/2_character_pepe/1_idle/idle/I-3.png',
+        'img/2_character_pepe/1_idle/idle/I-4.png',
+        'img/2_character_pepe/1_idle/idle/I-5.png',
+        'img/2_character_pepe/1_idle/idle/I-6.png',
+        'img/2_character_pepe/1_idle/idle/I-7.png',
+        'img/2_character_pepe/1_idle/idle/I-8.png',
+        'img/2_character_pepe/1_idle/idle/I-9.png',
+        'img/2_character_pepe/1_idle/idle/I-10.png',
+    ];
     world;
     offset = {
         top: 135,  // y
@@ -49,6 +61,7 @@ class Character extends MovableObject {
     };
     amountOfBottles = 0;
     amountOfCoins = 0;
+    lastTimeWalking = new Date().getTime();
 
     constructor() {
         super().loadImage('img/2_character_pepe/2_walk/W-21.png');
@@ -57,6 +70,7 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_JUMPING);
+        this.loadImages(this.IMAGES_IDLE);
         this.applyGravity(); // test gravity
         this.animate();
     }
@@ -90,13 +104,28 @@ class Character extends MovableObject {
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 // Walk animation
                 this.playAnimation(this.IMAGES_WALKING);
-            } 
+                this.lastTimeWalking = new Date().getTime();
+            }
         }, 40);
 
-        setInterval(()=>{
-            if (!this.world.keyboard.RIGHT && !this.world.keyboard.LEFT) {
+        setInterval(() => {
+            if (!this.world.keyboard.RIGHT && !this.world.keyboard.LEFT ) {
                 this.playAnimation(this.IMAGES_STANDING);
+
             }
-        },250);
+        }, 250);
+
+        setInterval(() => {
+            if (this.getTired()) {
+                this.playAnimation(this.IMAGES_IDLE);
+                console.log('character gets tired');
+            }
+        }, 250);
+    }
+
+    getTired() {
+        let timePassed = new Date().getTime() - this.lastTimeWalking; // Difference in ms
+        timePassed = timePassed / 1000; //Difference in s
+        return timePassed >= 5;
     }
 }
