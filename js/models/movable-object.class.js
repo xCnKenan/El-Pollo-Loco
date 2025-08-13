@@ -5,6 +5,7 @@ class MovableObject extends DrawableObject{
     acceleration = 1;
     energy = 100;
     lastHit = 0;
+    lastTimeWalking = new Date().getTime();
     /**
      * @type {object} - Numerical offsets for this instance´s coordinates and dimensions,
      * used for collision check.
