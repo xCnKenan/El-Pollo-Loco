@@ -51,7 +51,7 @@ canvas {
 .controllsOverlay{
     background: rgba(0, 0, 0, 0.7);
     height: 300px;
-    width: 640px;
+    width: 320px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -67,6 +67,16 @@ canvas {
     height: 64px;
     width: 64px;
     object-fit: contain;
+}
+
+.infoKeybind{
+    color: white;
+}
+
+.sectionButtons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Smartphones---- */
