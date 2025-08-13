@@ -1,5 +1,4 @@
 function removeButtons(){
-
     let canvasRef = document.getElementById('canvas');
     canvasRef.style.backgroundImage = 'none';
 

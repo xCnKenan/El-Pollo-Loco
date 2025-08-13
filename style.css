@@ -55,11 +55,18 @@ canvas {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 5px;
+}
+
+.keybindsButton{
+    height: 64px;
+    width: 64px;
+    object-fit: contain;
 }
 
 /* Smartphones---- */
