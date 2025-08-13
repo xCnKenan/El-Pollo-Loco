@@ -34,12 +34,13 @@
 </head>
 <!-- <body onload="initLevel1(); init()"> -->
 
-<body onload="">
+<body onclick="closeOverlay()">
 
     <h1>El pollo loco</h1>
 
     <div id="relativeDiv" class="relativeDiv">
-        <div id="controllsOverlay" class="controllsOverlay d-none">
+        <!-- overlay for keybinds -->
+        <div id="controllsOverlay" class="controllsOverlay d-none" onclick="stopPropagation(event)">
             <div class="sectionButtons">
                 <img class="keybindsButton" src="/img/keybinds/left-arrow.png" alt="left-arrow">
                 <span class="infoKeybind">Move Left</span>
@@ -60,10 +61,12 @@
                 <span class="infoKeybind">Throw Bottle</span>
             </div>
         </div>
+        <!-- game -->
         <canvas id="canvas" width="720" height="480"></canvas>
+            <!-- startscreen buttons -->
             <div id="buttonsFromStart">
                 <button id="startButton" class="startButton" onclick="removeButtons();initLevel1(); init()">Start</button>
-                <button id="controllsButton" class="startButton" onclick="toggleOverlay()">Controlls</button>
+                <button id="controllsButton" class="startButton" onclick="toggleOverlay(event)">Controlls</button>
             </div>
     </div>
 

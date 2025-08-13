@@ -7,12 +7,22 @@ function removeButtons(){
     remove('controllsButton');
 }
 
-function toggleOverlay(){
+function remove(id){
+    let idRef = document.getElementById(id);
+    idRef.remove();
+}
+
+function toggleOverlay(event){
+    event.stopPropagation(event);
     let controllsOverlayRef = document.getElementById('controllsOverlay');
     controllsOverlayRef.classList.toggle('d-none');
 }
 
-function remove(id){
-    let idRef = document.getElementById(id);
-    idRef.remove();
+function stopPropagation(event){
+    event.stopPropagation(event);   
+}
+
+function closeOverlay(){
+    let controllsOverlayRef = document.getElementById('controllsOverlay');
+    controllsOverlayRef.classList.add('d-none');
 }
