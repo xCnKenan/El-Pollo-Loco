@@ -75,7 +75,6 @@ class Character extends MovableObject {
     amountOfBottles = 0;
     amountOfCoins = 0;
 
-
     constructor() {
         super().loadImage('img/2_character_pepe/2_walk/W-21.png');
         this.loadImages(this.IMAGES_STANDING);
@@ -99,10 +98,8 @@ class Character extends MovableObject {
                 this.moveLeft();
                 this.otherDirection = true;
             }
-
             // check if also not above Ground
             if (this.world.keyboard.SPACE && !this.isAboveGround()) this.jump();
-
             this.world.camera_x = -this.x + 150;
         }, 1000 / 60);
 
@@ -137,7 +134,7 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_IDLE);
                 console.log('character gets tired');
             }
-            
+
         }, 250);
     }
 
