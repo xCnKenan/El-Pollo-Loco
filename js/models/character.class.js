@@ -74,7 +74,7 @@ class Character extends MovableObject {
     };
     amountOfBottles = 0;
     amountOfCoins = 0;
-    
+
 
     constructor() {
         super().loadImage('img/2_character_pepe/2_walk/W-21.png');
@@ -130,16 +130,26 @@ class Character extends MovableObject {
         }, 250);
 
         setInterval(() => {
-            if (this.getTired()) {
+            if (this.getSleep()) {
+                this.playAnimation(this.IMAGES_LONG_IDLE);
+                console.log('character sleeps');
+            } else if (this.getTired()) {
                 this.playAnimation(this.IMAGES_IDLE);
                 console.log('character gets tired');
             }
+            
         }, 250);
     }
 
     getTired() {
         let timePassed = new Date().getTime() - this.lastTimeWalking; // Difference in ms
         timePassed = timePassed / 1000; //Difference in s
-        return timePassed >= 5;
+        return timePassed >= 4;
+    }
+
+    getSleep() {
+        let timePassed = new Date().getTime() - this.lastTimeWalking; // Difference in ms
+        timePassed = timePassed / 1000; //Difference in s
+        return timePassed >= 8;
     }
 }
