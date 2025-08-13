@@ -1,5 +1,5 @@
-class Character extends MovableObject{
-     // test position
+class Character extends MovableObject {
+    // test position
     speed = 10;
 
     IMAGES_STANDING = [
@@ -50,7 +50,7 @@ class Character extends MovableObject{
     amountOfBottles = 0;
     amountOfCoins = 0;
 
-    constructor(){
+    constructor() {
         super().loadImage('img/2_character_pepe/2_walk/W-21.png');
         this.loadImages(this.IMAGES_STANDING);
         this.loadImages(this.IMAGES_DEAD);
@@ -61,40 +61,42 @@ class Character extends MovableObject{
         this.animate();
     }
 
-    animate(){
-        setInterval(()=>{
-            if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x){
+    animate() {
+        setInterval(() => {
+            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.otherDirection = false;
             }
-            if(this.world.keyboard.LEFT && this.x > 0 ){
+            if (this.world.keyboard.LEFT && this.x > 0) {
                 this.moveLeft();
                 this.otherDirection = true;
             }
-            
+
             // check if also not above Ground
-            if(this.world.keyboard.SPACE && !this.isAboveGround()) this.jump();
+            if (this.world.keyboard.SPACE && !this.isAboveGround()) this.jump();
 
             this.world.camera_x = -this.x + 150;
         }, 1000 / 60);
 
         // IMG Animations here
         setInterval(() => {
-            if(this.isDead()){
+            if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
-            } else if(this.isHurt()){
+            } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
-            } else if (this.isAboveGround()){
+            } else if (this.isAboveGround()) {
                 // above Ground img animation
                 this.playAnimation(this.IMAGES_JUMPING);
-            } else {
-                if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT){
-                    // Walk animation
-                    this.playAnimation(this.IMAGES_WALKING);
-                        }
-                    }
-                }, 40);
-            }
+            } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+                // Walk animation
+                this.playAnimation(this.IMAGES_WALKING);
+            } 
+        }, 40);
 
-            
+        setInterval(()=>{
+            if (!this.world.keyboard.RIGHT && !this.world.keyboard.LEFT) {
+                this.playAnimation(this.IMAGES_STANDING);
+            }
+        },250);
+    }
 }
