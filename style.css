@@ -19,6 +19,10 @@ canvas {
     background-size: cover;
 }
 
+.d-none{
+    display: none !important;
+}
+
 .startButton {
     height: 40px;
     width: fit-content;
@@ -61,6 +65,7 @@ canvas {
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 5px;
+    transition: all 250ms ease;
 }
 
 .keybindsButton{
@@ -77,6 +82,7 @@ canvas {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 8px;
 }
 
 /* Smartphones---- */

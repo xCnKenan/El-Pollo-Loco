@@ -39,7 +39,7 @@
     <h1>El pollo loco</h1>
 
     <div id="relativeDiv" class="relativeDiv">
-        <div id="controllsOverlay" class="controllsOverlay">
+        <div id="controllsOverlay" class="controllsOverlay d-none">
             <div class="sectionButtons">
                 <img class="keybindsButton" src="/img/keybinds/left-arrow.png" alt="left-arrow">
                 <span class="infoKeybind">Move Left</span>
@@ -63,7 +63,7 @@
         <canvas id="canvas" width="720" height="480"></canvas>
             <div id="buttonsFromStart">
                 <button id="startButton" class="startButton" onclick="removeButtons();initLevel1(); init()">Start</button>
-                <button id="controllsButton" class="startButton">Controlls</button>
+                <button id="controllsButton" class="startButton" onclick="toggleOverlay()">Controlls</button>
             </div>
     </div>
 
