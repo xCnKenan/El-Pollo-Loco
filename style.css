@@ -48,6 +48,20 @@ canvas {
     justify-content: space-around;
 }
 
+.controllsOverlay{
+    background: rgba(0, 0, 0, 0.7);
+    height: 300px;
+    width: 640px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 5px;
+}
+
 /* Smartphones---- */
 @media only screen and (max-width: 720px) {
     canvas {
