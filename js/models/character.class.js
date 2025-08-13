@@ -119,13 +119,14 @@ class Character extends MovableObject {
             }
         }, 40);
 
+        // if character not moves he gets standing animation
         setInterval(() => {
             if (!this.world.keyboard.RIGHT && !this.world.keyboard.LEFT) {
                 this.playAnimation(this.IMAGES_STANDING);
-
             }
         }, 250);
 
+        // check to sleep or tired
         setInterval(() => {
             if (this.getSleep()) {
                 this.playAnimation(this.IMAGES_LONG_IDLE);
@@ -134,16 +135,17 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_IDLE);
                 console.log('character gets tired');
             }
-
         }, 250);
     }
 
+    // time passed when tired should be active
     getTired() {
         let timePassed = new Date().getTime() - this.lastTimeWalking; // Difference in ms
         timePassed = timePassed / 1000; //Difference in s
         return timePassed >= 4;
     }
 
+    // time passed when sleep should be active
     getSleep() {
         let timePassed = new Date().getTime() - this.lastTimeWalking; // Difference in ms
         timePassed = timePassed / 1000; //Difference in s
