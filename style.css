@@ -1,123 +1,140 @@
 * {
-    margin: 0;
+  margin: 0;
 }
 
 @font-face {
-    font-family: 'zabars';
-    src: url('fonts/zabars.ttf') format('truetype');
-}  
-
-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-image: url('img/htmlBackground/background.jpg');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    font-family: 'zabars', Arial, Helvetica, sans-serif;
+  font-family: "zabars";
+  src: url("fonts/zabars.ttf") format("truetype");
 }
 
-h1{
-    font-size: 54px;
-    margin-bottom: 8px;
-    letter-spacing: 4px;
-    color: #e2474d;
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-image: url("img/htmlBackground/background.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  font-family: "zabars", Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  font-size: 54px;
+  margin-bottom: 8px;
+  letter-spacing: 4px;
+  color: #e2474d;
 }
 
 canvas {
-    background-color: black;
-    display: block;
-    background-image: url('img/9_intro_outro_screens/start/startscreen_1.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  background-color: black;
+  display: block;
+  background-image: url("img/9_intro_outro_screens/start/startscreen_1.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-.d-none{
-    display: none !important;
+.d-none {
+  display: none !important;
 }
 
 .startButton {
-    height: 40px;
-    width: fit-content;
-    border-radius: 5px;
-    border: 2px solid #a43d18;
-    background-color: #ffa400;
-    color: #ffde01;
-    font-size: 20px;
-    transition: all 250ms ease;
+  height: 40px;
+  width: fit-content;
+  border-radius: 5px;
+  border: 2px solid #a43d18;
+  background-color: #ffa400;
+  color: #ffde01;
+  font-size: 20px;
+  transition: all 250ms ease;
 }
 
-.startButton:hover{
-    transform: scale(1.05);
-    transition: all 250ms ease;
-    cursor: pointer;
+.startButton:hover {
+  transform: scale(1.05);
+  transition: all 250ms ease;
+  cursor: pointer;
 }
 
 .relativeDiv {
-    position: relative;
+  position: relative;
 }
 
-#buttonsFromStart{
-    width: 100%;
-    position: absolute;
-    top: 24px;
-    display: flex;
-    justify-content: space-around;
+#buttonsFromStart {
+  width: 100%;
+  position: absolute;
+  top: 24px;
+  display: flex;
+  justify-content: space-around;
 }
 
-.controllsOverlay{
-    background: rgba(0, 0, 0, 0.7);
-    height: 300px;
-    width: 320px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 5px;
-    transition: all 250ms ease;
+.controllsOverlay {
+  background: rgba(0, 0, 0, 0.7);
+  height: 300px;
+  width: 320px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  transition: all 250ms ease;
 }
 
-.keybindsButton{
-    height: 64px;
-    width: 64px;
-    object-fit: contain;
+.keybindsButton {
+  height: 64px;
+  width: 64px;
+  object-fit: contain;
 }
 
-.infoKeybind{
-    color: white;
-    font-size: 24px;
-    letter-spacing: 2px;
+.infoKeybind {
+  color: white;
+  font-size: 24px;
+  letter-spacing: 2px;
 }
 
-.sectionButtons{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
+.sectionButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.closeOverlay {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.closeIcon {
+  height: 32px;
+  width: 32px;
+  object-fit: contain;
+  margin-right: 8px;
+  margin-top: 8px;
+  filter: invert(1);
+  cursor: pointer;
 }
 
 /* Smartphones---- */
 @media only screen and (max-width: 720px) {
-    canvas {
-        width: 100%;
-    }
+  canvas {
+    width: 100%;
+  }
 }
 
 /* Smartphones---- */
 @media only screen and (max-height: 480px) {
-    canvas {
-        height: 100%;
-    }
+  canvas {
+    height: 100%;
+  }
 
-    h1 {
-        display: none;
-    }
+  h1 {
+    display: none;
+  }
 }
