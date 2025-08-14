@@ -2,12 +2,29 @@
     margin: 0;
 }
 
+@font-face {
+    font-family: 'zabars';
+    src: url('fonts/zabars.ttf') format('truetype');
+}  
+
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
+    background-image: url('img/htmlBackground/background.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    font-family: 'zabars', Arial, Helvetica, sans-serif;
+}
+
+h1{
+    font-size: 54px;
+    margin-bottom: 8px;
+    letter-spacing: 4px;
+    color: #e2474d;
 }
 
 canvas {
@@ -76,6 +93,8 @@ canvas {
 
 .infoKeybind{
     color: white;
+    font-size: 24px;
+    letter-spacing: 2px;
 }
 
 .sectionButtons{
