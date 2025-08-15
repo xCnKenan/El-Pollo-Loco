@@ -1,3 +1,13 @@
+
+let screen;
+let play;
+
+function loadStartScreen(){
+    screen = document.getElementById('canvas');
+    play = new StartScreen(screen);
+}
+
+
 function removeButtons(){
     let canvasRef = document.getElementById('canvas');
     canvasRef.style.backgroundImage = 'none';
