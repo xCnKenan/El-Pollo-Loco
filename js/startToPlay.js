@@ -12,17 +12,17 @@ function remove(id){
     idRef.remove();
 }
 
-function toggleOverlay(event){
-    event.stopPropagation(event);
-    let controllsOverlayRef = document.getElementById('controllsOverlay');
-    controllsOverlayRef.classList.toggle('d-none');
-}
+// function toggleOverlay(event){
+//     event.stopPropagation(event);
+//     let controllsOverlayRef = document.getElementById('controllsOverlay');
+//     controllsOverlayRef.classList.toggle('d-none');
+// }
 
 function stopPropagation(event){
     event.stopPropagation(event);   
 }
 
-function closeOverlay(){
-    let controllsOverlayRef = document.getElementById('controllsOverlay');
-    controllsOverlayRef.classList.add('d-none');
-}
+// function closeOverlay(){
+//     let controllsOverlayRef = document.getElementById('controllsOverlay');
+//     controllsOverlayRef.classList.add('d-none');
+// }

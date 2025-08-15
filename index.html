@@ -34,13 +34,14 @@
 </head>
 <!-- <body onload="initLevel1(); init()"> -->
 
-<body onclick="closeOverlay()">
+<!-- <body onclick="closeOverlay()"> -->
+    <body>
 
     <h1>El Pollo Loco</h1>
 
     <div id="relativeDiv" class="relativeDiv">
         <!-- overlay for keybinds -->
-        <div id="controllsOverlay" class="controllsOverlay d-none" onclick="stopPropagation(event)">
+        <!-- <div id="controllsOverlay" class="controllsOverlay d-none" onclick="stopPropagation(event)">
 
             <div class="closeOverlay">
                 <img onclick="toggleOverlay(event)" class="closeIcon" src="icons/close.png" alt="">
@@ -67,14 +68,14 @@
                 <span class="infoKeybind">Throw Bottle</span>
             </div>
             </section>
-        </div>
+        </div> -->
         <!-- game -->
         <canvas id="canvas" width="720" height="480"></canvas>
             <!-- startscreen buttons -->
-            <div id="buttonsFromStart">
+            <!-- <div id="buttonsFromStart">
                 <button id="startButton" class="startButton" onclick="removeButtons();initLevel1(); init()">Start</button>
                 <button id="controllsButton" class="startButton" onclick="toggleOverlay(event)">Controlls</button>
-            </div>
+            </div> -->
 
             <div class="settingsSection">
                 <img class="fullscreenMode" src="icons/fullscreen.png" alt="">

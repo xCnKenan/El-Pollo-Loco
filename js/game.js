@@ -3,9 +3,9 @@ let world;
 
 let keyboard = new Keyboard();
 
-async function init(){
+function init(){
     canvas = document.getElementById('canvas');
-    world = await new World(canvas, keyboard);
+    world = new World(canvas, keyboard);
     console.log('My Character is', world.character);
     console.log('All Data', world);
 }
