@@ -1,11 +1,63 @@
 
-let screen;
-let play;
+let screenCanvas; 
+let mainScreen; // wie world
 
 function loadStartScreen(){
-    screen = document.getElementById('canvas');
-    play = new StartScreen(screen);
+    screenCanvas = document.getElementById('canvas');
+    mainScreen = new Mainscreen(screenCanvas);
+
+    console.log(mainScreen);
+    
+
+    
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 function removeButtons(){

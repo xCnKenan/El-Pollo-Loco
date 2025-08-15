@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="de" translate="no">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>El Pollo Loco</title>
 
-    <link rel="stylesheet" href="style.css">
-    <script src="js/start/startScreen.class.js"></script>
+    <link rel="stylesheet" href="style.css" />
+
+    
+    
+    
+
     <script src="js/models/drawableObject.class.js"></script>
     <script src="js/models/movable-object.class.js"></script>
     <script src="js/models/character.class.js"></script>
@@ -29,19 +32,28 @@
     <script src="levels/level1.js"></script>
     <!-- <script src="levels/level2.js"></script> -->
     <script src="js/game.js"></script>
-    <script src="js/startToPlay.js"></script>
 
-</head>
-<!-- <body onload="initLevel1(); init()"> -->
+    <!-- für den startbildschirm -->
+     <script src="js/start/mainScreen.class.js"></script>
+     <script src="js/start/buttons.class.js"></script>
+     <script src="js/start/startGame.class.js"></script>
+     <script src="js/start/controlls.class.js"></script>
+     <script src="js/start/backgroundImage.class.js"></script>
+    <script src="js/start/startToPlay.js"></script>
 
-<!-- <body onclick="closeOverlay()"> -->
-    <body>
 
+
+
+  </head>
+  <!-- <body onload="initLevel1(); init()"> -->
+
+  <!-- <body onclick="closeOverlay()"> -->
+  <body onload="loadStartScreen()">
     <h1>El Pollo Loco</h1>
 
     <div id="relativeDiv" class="relativeDiv">
-        <!-- overlay for keybinds -->
-        <!-- <div id="controllsOverlay" class="controllsOverlay d-none" onclick="stopPropagation(event)">
+      <!-- overlay for keybinds -->
+      <!-- <div id="controllsOverlay" class="controllsOverlay d-none" onclick="stopPropagation(event)">
 
             <div class="closeOverlay">
                 <img onclick="toggleOverlay(event)" class="closeIcon" src="icons/close.png" alt="">
@@ -69,21 +81,19 @@
             </div>
             </section>
         </div> -->
-        <!-- game -->
-        <canvas id="canvas" width="720" height="480"></canvas>
-            <!-- startscreen buttons -->
-            <!-- <div id="buttonsFromStart">
+      <!-- game -->
+      <canvas id="canvas" width="720" height="480"></canvas>
+      <!-- startscreen buttons -->
+      <!-- <div id="buttonsFromStart">
                 <button id="startButton" class="startButton" onclick="removeButtons();initLevel1(); init()">Start</button>
                 <button id="controllsButton" class="startButton" onclick="toggleOverlay(event)">Controlls</button>
             </div> -->
 
-            <div class="settingsSection">
-                <img class="fullscreenMode" src="icons/fullscreen.png" alt="">
+      <div class="settingsSection">
+        <img class="fullscreenMode" src="icons/fullscreen.png" alt="" />
 
-                <img class="speakerSettings" src="icons/speaker.png" alt="">
-            </div>
+        <img class="speakerSettings" src="icons/speaker.png" alt="" />
+      </div>
     </div>
-
-</body>
-
+  </body>
 </html>
