@@ -2,6 +2,7 @@ let pepeHit = new Audio('audio/pepe_hit.wav');
 let pepeJump = new Audio('audio/pepe_jump.wav');
 let coinCollect = new Audio('audio/collect-coin.wav');
 let bottleCollect = new Audio('audio/collect-bottle.wav');
+let throwing = new Audio('audio/throwing.wav');
 
 coinCollect.volume = 0.1;
 bottleCollect.volume = 0.5;
@@ -58,6 +59,7 @@ class World {
         this.character.y + 100
       );
       }
+      throwing.play();
       this.throwableObjects.push(bottle);
       // render statusbar and subtract from array
       this.character.bottleSubtracted();
