@@ -3,9 +3,11 @@ let pepeJump = new Audio('audio/pepe_jump.wav');
 let coinCollect = new Audio('audio/collect-coin.wav');
 let bottleCollect = new Audio('audio/collect-bottle.wav');
 let throwing = new Audio('audio/throwing.wav');
+let enemy_dead = new Audio('audio/enemy-dead.wav');
 
 coinCollect.volume = 0.1;
 bottleCollect.volume = 0.5;
+enemy_dead.volume = 0.2;
 
 
 class World {
@@ -115,6 +117,7 @@ class World {
         //check if bottle is colliding with enemy
         else if (bottle.isColliding(enemy) && enemy instanceof Chicken || bottle.isColliding(enemy) && enemy instanceof ChickenSmall ) {
           this.againstNormalEnemy(bottle, enemy);
+          enemy_dead.play();
         }
       });
     });

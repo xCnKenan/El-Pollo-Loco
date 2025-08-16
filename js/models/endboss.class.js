@@ -108,7 +108,7 @@ class Endboss extends MovableObject {
   }
 
   moveLeft(){
-    this.speed = 2;
+    this.speed = 5;
     this.x -= this.speed; 
   }
 
