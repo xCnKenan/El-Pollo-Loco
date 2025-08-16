@@ -3,11 +3,9 @@ let mainScreen; // wie world
 let boundingRect;
 let ctxStart;
 
-
 function getFullScreen(){
     let divRef = document.getElementById('relativeDiv');
     openFullscreen(divRef);
-    
 }
 
 function openFullscreen(elem) {
@@ -24,48 +22,46 @@ function loadStartScreen() {
   screenCanvas = document.getElementById("canvas");
   ctxStart = screenCanvas.getContext("2d");
   mainScreen = new Mainscreen(screenCanvas);
-
   console.log(mainScreen);
-
-  boundingRect = screenCanvas.getBoundingClientRect();
+//   boundingRect = screenCanvas.getBoundingClientRect();
 }
 
 // check hier collision with btn image when click
-let tip = {};
-window.addEventListener("mousedown", (event) => {
+// let tip = {};
+// window.addEventListener("mousedown", (event) => {
 
-  boundingRect = screenCanvas.getBoundingClientRect();
-  tip.x = event.clientX - boundingRect.left;
-  tip.y = event.clientY - boundingRect.top;
+//   boundingRect = screenCanvas.getBoundingClientRect();
+//   tip.x = event.clientX - boundingRect.left;
+//   tip.y = event.clientY - boundingRect.top;
 
-  console.log(tip);
-  let btn = mainScreen.startButton;
-  let ctrl = mainScreen.controllsButton;
+//   console.log(tip);
+//   let btn = mainScreen.startButton;
+//   let ctrl = mainScreen.controllsButton;
 
-  if (collisionWithStartButton(btn)) {
-    console.log("clicked start game");
-    initLevel1();
-    init();
-  } else if(collisionWithControllsButton(ctrl)){
-    console.log('clicked ctrl');
-    toggleOverlay(event);
-  }
+//   if (collisionWithStartButton(btn)) {
+//     console.log("clicked start game");
+//     initLevel1();
+//     init();
+//   } else if(collisionWithControllsButton(ctrl)){
+//     console.log('clicked ctrl');
+//     toggleOverlay(event);
+//   }
     
-});
+// });
 
-function collisionWithStartButton(ctrl){
-    return tip.x >= ctrl.x &&
-    tip.x <= ctrl.x + ctrl.width &&
-    tip.y >= ctrl.y &&
-    tip.y <= ctrl.y + ctrl.height
-}
+// function collisionWithStartButton(ctrl){
+//     return tip.x >= ctrl.x &&
+//     tip.x <= ctrl.x + ctrl.width &&
+//     tip.y >= ctrl.y &&
+//     tip.y <= ctrl.y + ctrl.height
+// }
 
-function collisionWithControllsButton(btn){
-    return tip.x >= btn.x &&
-    tip.x <= btn.x + btn.width &&
-    tip.y >= btn.y &&
-    tip.y <= btn.y + btn.height
-}
+// function collisionWithControllsButton(btn){
+//     return tip.x >= btn.x &&
+//     tip.x <= btn.x + btn.width &&
+//     tip.y >= btn.y &&
+//     tip.y <= btn.y + btn.height
+// }
 
 function removeButtons() {
   let canvasRef = document.getElementById("canvas");

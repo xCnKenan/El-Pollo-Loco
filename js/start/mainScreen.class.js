@@ -1,7 +1,7 @@
 // ist wie world
 class Mainscreen {
-  startButton = new Startgame();
-  controllsButton = new Controlls();
+  // startButton = new Startgame();
+  // controllsButton = new Controlls();
   screenCanvas;
   ctxStartScreen;
   background = new Backgroundimage(
@@ -19,8 +19,8 @@ class Mainscreen {
   draw() {
     this.ctxStartScreen.clearRect(0,0,this.screenCanvas.width,this.screenCanvas.height);
     this.showOnScreen(this.background);
-    this.showOnScreen(this.startButton);
-    this.showOnScreen(this.controllsButton);
+    // this.showOnScreen(this.startButton);
+    // this.showOnScreen(this.controllsButton);
     let self = this;
     requestAnimationFrame(function () {
       self.draw();
