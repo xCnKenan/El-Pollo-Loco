@@ -45,40 +45,44 @@
 
     <div id="relativeDiv" class="relativeDiv">
       <!-- overlay for keybinds -->
-      <div id="controllsOverlay" class="controllsOverlay d-none" onclick="stopPropagation(event)">
+      <div id="controllsOverlay" class="controllsOverlay " onclick="stopPropagation(event)">
 
             <div class="closeOverlay">
+
+                <h2>Controls</h2>
+
                 <img onclick="toggleOverlay(event)" class="closeIcon" src="icons/close.png" alt="">
             </div>
 
-            <section class="keyControlls">
-            <div class="sectionButtons">
-                <img class="keybindsButton" src="/img/keybinds/left-arrow.png" alt="left-arrow">
-                <span class="infoKeybind">Move Left</span>
-            </div>
+              <section class="keyControlls">
+                <div class="sectionButtons">
+                    <img class="keybindsButton" src="/img/keybinds/left-arrow.png" alt="left-arrow">
+                    <span class="infoKeybind">Move Left</span>
+                </div>
 
-            <div class="sectionButtons"> 
-                <img class="keybindsButton" src="/img/keybinds/right-arrow.png" alt="right-arrow">
-                <span class="infoKeybind">Move Right</span>
-            </div>
+                <div class="sectionButtons"> 
+                    <img class="keybindsButton" src="/img/keybinds/right-arrow.png" alt="right-arrow">
+                    <span class="infoKeybind">Move Right</span>
+                </div>
 
-            <div class="sectionButtons">
-                <img class="keybindsButton" src="/img/keybinds/space.png" alt="space">
-                <span class="infoKeybind">Jump</span>
-            </div>
+                <div class="sectionButtons">
+                    <img class="keybindsButton" src="/img/keybinds/space.png" alt="space">
+                    <span class="infoKeybind">Jump</span>
+                </div>
 
-            <div class="sectionButtons">
-                <img class="keybindsButton" src="/img/keybinds/letter-d.png" alt="letter-d">
-                <span class="infoKeybind">Throw Bottle</span>
-            </div>
-            </section>
+                <div class="sectionButtons">
+                    <img class="keybindsButton" src="/img/keybinds/letter-d.png" alt="letter-d">
+                    <span class="infoKeybind">Throw Bottle</span>
+                </div>
+              </section>
+
         </div>
       <!-- game -->
       <canvas id="canvas" width="720" height="480"></canvas>
       <!-- startscreen buttons -->
       <div id="buttonsFromStart">
                 <button id="startButton" class="startButton" onclick="removeButtons();initLevel1(); init()">Start</button>
-                <button id="controllsButton" class="startButton" onclick="toggleOverlay(event)">Controlls</button>
+                <button id="controllsButton" class="startButton" onclick="toggleOverlay(event)">Controls</button>
             </div>
 
       <div class="settingsSection">

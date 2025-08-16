@@ -71,7 +71,9 @@ canvas {
 }
 
 .controllsOverlay {
-  background: rgba(0, 0, 0, 0.7);
+  /* background: rgba(0, 0, 0, 0.7); */
+  background-color: #19a3cb;
+  border: 4px solid #0b0f33;
   height: 300px;
   width: 320px;
   display: flex;
@@ -96,6 +98,7 @@ canvas {
   color: white;
   font-size: 24px;
   letter-spacing: 2px;
+  width: 160px;
 }
 
 .sectionButtons {
@@ -108,16 +111,26 @@ canvas {
 .closeOverlay {
   width: 100%;
   display: flex;
-  justify-content: end;
+  justify-content: center;
   align-items: center;
+  position: relative;
+}
+
+h2{
+  font-size: 32px;
+  letter-spacing: 2px;
+  text-shadow: 1px 1px 1px black;
+  color: white;
 }
 
 .closeIcon {
+  position: absolute;
+  right: 0;
   height: 32px;
   width: 32px;
   object-fit: contain;
   margin-right: 8px;
-  margin-top: 8px;
+  /* margin-top: 8px; */
   filter: invert(1);
   cursor: pointer;
 }
