@@ -142,13 +142,13 @@ class Character extends MovableObject {
     getTired() {
         let timePassed = new Date().getTime() - this.lastTimeWalking; // Difference in ms
         timePassed = timePassed / 1000; //Difference in s
-        return timePassed >= 4;
+        return timePassed >= 5;
     }
 
     // time passed when sleep should be active
     getSleep() {
         let timePassed = new Date().getTime() - this.lastTimeWalking; // Difference in ms
         timePassed = timePassed / 1000; //Difference in s
-        return timePassed >= 8;
+        return timePassed >= 15;
     }
 }
