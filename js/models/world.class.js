@@ -1,3 +1,12 @@
+let pepeHit = new Audio('audio/pepe_hit.wav');
+let pepeJump = new Audio('audio/pepe_jump.wav');
+let coinCollect = new Audio('audio/collect-coin.wav');
+let bottleCollect = new Audio('audio/collect-bottle.wav');
+
+coinCollect.volume = 0.1;
+bottleCollect.volume = 0.5;
+
+
 class World {
   character = new Character();
   // level = level1;
@@ -60,6 +69,7 @@ class World {
     // here check if character colliding with enemy
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
+        pepeHit.play();
         this.character.hit();
         this.statusBar.setPercentage(this.character.energy);
       }
@@ -68,6 +78,7 @@ class World {
     // here check if character colliding with bottles
     this.level.bottles.forEach((bottle) => {
       if (this.character.isColliding(bottle)) {
+        bottleCollect.play();
         this.character.bottleAdded();
         this.statusBarBottle.setPercentage(this.character.amountOfBottles);
         this.removeItem(bottle, this.level.bottles);
@@ -77,6 +88,7 @@ class World {
     // here check if character colliding with coin
     this.level.coins.forEach((coin) => {
       if (this.character.isColliding(coin)) {
+        coinCollect.play();
         this.character.coinsAdded();
         this.statusBarCoins.setPercentage(this.character.amountOfCoins);
         this.removeItem(coin, this.level.coins);
