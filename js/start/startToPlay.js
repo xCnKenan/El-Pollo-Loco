@@ -3,6 +3,23 @@ let mainScreen; // wie world
 let boundingRect;
 let ctxStart;
 
+
+function getFullScreen(){
+    let divRef = document.getElementById('relativeDiv');
+    openFullscreen(divRef);
+    
+}
+
+function openFullscreen(elem) {
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.webkitRequestFullscreen) { /* Safari */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { /* IE11 */
+    elem.msRequestFullscreen();
+  }
+}
+
 function loadStartScreen() {
   screenCanvas = document.getElementById("canvas");
   ctxStart = screenCanvas.getContext("2d");
@@ -27,8 +44,8 @@ window.addEventListener("mousedown", (event) => {
 
   if (collisionWithStartButton(btn)) {
     console.log("clicked start game");
-    // initLevel1();
-    // init();
+    initLevel1();
+    init();
   } else if(collisionWithControllsButton(ctrl)){
     console.log('clicked ctrl');
     toggleOverlay(event);
