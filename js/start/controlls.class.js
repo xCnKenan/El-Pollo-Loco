@@ -1,7 +1,7 @@
 // ist wie chicken
 class Controlls extends Buttons {
-  x = 500;
-  y = 100;
+  x = 590;
+  y = 10;
   height = 100;
   width = 100;
   

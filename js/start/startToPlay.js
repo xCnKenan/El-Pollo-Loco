@@ -16,25 +16,39 @@ function loadStartScreen() {
 // check hier collision with btn image when click
 let tip = {};
 window.addEventListener("mousedown", (event) => {
+
   boundingRect = screenCanvas.getBoundingClientRect();
   tip.x = event.clientX - boundingRect.left;
   tip.y = event.clientY - boundingRect.top;
 
   console.log(tip);
-
   let btn = mainScreen.startButton;
+  let ctrl = mainScreen.controllsButton;
 
-  if (
-    tip.x >= btn.x &&
+  if (collisionWithStartButton(btn)) {
+    console.log("clicked start game");
+    // initLevel1();
+    // init();
+  } else if(collisionWithControllsButton(ctrl)){
+    console.log('clicked ctrl');
+    toggleOverlay(event);
+  }
+    
+});
+
+function collisionWithStartButton(ctrl){
+    return tip.x >= ctrl.x &&
+    tip.x <= ctrl.x + ctrl.width &&
+    tip.y >= ctrl.y &&
+    tip.y <= ctrl.y + ctrl.height
+}
+
+function collisionWithControllsButton(btn){
+    return tip.x >= btn.x &&
     tip.x <= btn.x + btn.width &&
     tip.y >= btn.y &&
     tip.y <= btn.y + btn.height
-  ) {
-    console.log("clicked");
-    initLevel1();
-    init();
-  }
-});
+}
 
 function removeButtons() {
   let canvasRef = document.getElementById("canvas");
@@ -50,17 +64,17 @@ function remove(id) {
   idRef.remove();
 }
 
-// function toggleOverlay(event){
-//     event.stopPropagation(event);
-//     let controllsOverlayRef = document.getElementById('controllsOverlay');
-//     controllsOverlayRef.classList.toggle('d-none');
-// }
+function toggleOverlay(event){
+    event.stopPropagation(event);
+    let controllsOverlayRef = document.getElementById('controllsOverlay');
+    controllsOverlayRef.classList.toggle('d-none');
+}
 
 function stopPropagation(event) {
   event.stopPropagation(event);
 }
 
-// function closeOverlay(){
-//     let controllsOverlayRef = document.getElementById('controllsOverlay');
-//     controllsOverlayRef.classList.add('d-none');
-// }
+function closeOverlay(){
+    let controllsOverlayRef = document.getElementById('controllsOverlay');
+    controllsOverlayRef.classList.add('d-none');
+}

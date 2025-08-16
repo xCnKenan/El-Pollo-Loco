@@ -11,7 +11,6 @@ class Mainscreen {
   );
 
   constructor(screenCanvas) {
-    
     this.ctxStartScreen = screenCanvas.getContext("2d");
     this.screenCanvas = screenCanvas;
     this.draw();
