@@ -205,6 +205,11 @@ class World {
     // ctx wird in gegenrichtung verschoben
     this.ctx.translate(-this.camera_x, 0);
 
+    // try to render game over img 
+    if(this.character.isDead()){
+      this.addObjectsToMap(this.level.youLost);
+    }
+
     // draw wird immer wieder aufgerufen
     let self = this;
     requestAnimationFrame(function () {

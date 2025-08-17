@@ -126,6 +126,8 @@ function initLevel1() {
       new Coins(),
       new Coins(),
       new Coins(),
+    ],[
+      new YouLost()
     ]
   );
 }
