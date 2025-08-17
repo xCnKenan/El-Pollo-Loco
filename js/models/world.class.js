@@ -208,6 +208,7 @@ class World {
     // try to render game over img 
     if(this.character.isDead()){
       this.addObjectsToMap(this.level.youLost);
+      this.stopGame();
     }
 
     // draw wird immer wieder aufgerufen
@@ -215,6 +216,12 @@ class World {
     requestAnimationFrame(function () {
       self.draw();
     });
+  }
+
+  stopGame(){
+    // Intervalle beenden
+    //quick and dirty version
+    for (let i = 1; i < 9999; i++) window.clearInterval(i); 
   }
 
   addObjectsToMap(objects) {
