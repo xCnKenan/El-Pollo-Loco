@@ -49,17 +49,17 @@ class World {
   checkThrowObjects() {
     if (this.keyboard.D && this.character.amountOfBottles) {
       let bottle;
-      if(!world.character.otherDirection){
+      if (!world.character.otherDirection) {
         bottle = new ThrowableObject(
-        this.character.x + 80,
-        this.character.y + 100
-      );
+          this.character.x + 80,
+          this.character.y + 100
+        );
       }
-      if(world.character.otherDirection){
+      if (world.character.otherDirection) {
         bottle = new ThrowableObject(
-        this.character.x + 10,
-        this.character.y + 100
-      );
+          this.character.x + 10,
+          this.character.y + 100
+        );
       }
       throwing.play();
       this.throwableObjects.push(bottle);
@@ -115,7 +115,7 @@ class World {
           this.againstFinalBoss(bottle, enemy);
         }
         //check if bottle is colliding with enemy
-        else if (bottle.isColliding(enemy) && enemy instanceof Chicken || bottle.isColliding(enemy) && enemy instanceof ChickenSmall ) {
+        else if (bottle.isColliding(enemy) && enemy instanceof Chicken || bottle.isColliding(enemy) && enemy instanceof ChickenSmall) {
           this.againstNormalEnemy(bottle, enemy);
           enemy_dead.play();
         }
@@ -206,10 +206,21 @@ class World {
     this.ctx.translate(-this.camera_x, 0);
 
     // try to render game over img 
-    if(this.character.isDead()){
+    if (this.character.isDead()) {
       this.addObjectsToMap(this.level.youLost);
       this.stopGame();
     }
+
+    this.level.enemies.forEach((enemy) => {
+      if (enemy.isDead() && enemy instanceof Endboss) {
+        setInterval(() => {
+          this.stopGame();
+          console.log('stopGame');
+        }, 1000);
+        this.addObjectsToMap(this.level.youWon);
+        console.log('Endboss dead, You Won');
+      }
+    })
 
     // draw wird immer wieder aufgerufen
     let self = this;
@@ -218,10 +229,10 @@ class World {
     });
   }
 
-  stopGame(){
+  stopGame() {
     // Intervalle beenden
     //quick and dirty version
-    for (let i = 1; i < 9999; i++) window.clearInterval(i); 
+    for (let i = 1; i < 9999; i++) window.clearInterval(i);
   }
 
   addObjectsToMap(objects) {
