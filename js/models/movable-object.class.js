@@ -1,4 +1,4 @@
-class MovableObject extends DrawableObject{
+class MovableObject extends DrawableObject {
     speed = 0.15;
     otherDirection = false;
     speedY = 0;
@@ -11,87 +11,95 @@ class MovableObject extends DrawableObject{
      * used for collision check.
      */
     offset = {
-        top: 0, 
+        top: 0,
         left: 0,
         right: 0,
         bottom: 0
     };
-    
-    applyGravity(){
+
+    applyGravity() {
         setInterval(() => {
-            if(this.isAboveGround() || this.speedY > 0 ){ // fall down animation
+            if (this.isAboveGround() || this.speedY > 0) { // fall down animation
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
             }
         }, 1000 / 60);
     }
 
-    isAboveGround(){
-        if (this instanceof ThrowableObject){ // Throwable Object should always fall
+    isAboveGround() {
+        if (this instanceof ThrowableObject) { // Throwable Object should always fall
             return true;
         } else {
-        return this.y < 130;
-        
+            return this.y < 130;
+
         }
     }
 
     // e.g. character.isColliding(chicken);
-    isColliding(movableObj){
-        // return this.x + this.width > movableObj.x && // R -> L
-        //     this.y + this.height > movableObj.y && // T -> B
-        //     this.x < movableObj.x + movableObj.width && // L -> R
-        //     this.y < movableObj.y + movableObj.height; // B -> T
+    isColliding(movableObj) {
+        // hier egal wie man den gegner berührt, man bekommt schaden
+        // return this.x + this.offset.left + this.width - this.offset.right > movableObj.x + movableObj.offset.left && // R -> L
+        //     this.y + this.offset.top + this.height - this.offset.bottom > movableObj.y + movableObj.offset.top && // T -> B
+        //     this.x + this.offset.left < movableObj.x + movableObj.offset.left + movableObj.width - movableObj.offset.right && // L -> R
+        //     this.y + this.offset.top < movableObj.y + movableObj.offset.top + movableObj.height - movableObj.offset.bottom; // B -> T
 
+
+        //hier nur von rechts und links
         return this.x + this.offset.left + this.width - this.offset.right > movableObj.x + movableObj.offset.left && // R -> L
             this.y + this.offset.top + this.height - this.offset.bottom > movableObj.y + movableObj.offset.top && // T -> B
-            this.x + this.offset.left < movableObj.x + movableObj.offset.left + movableObj.width - movableObj.offset.right && // L -> R
-            this.y + this.offset.top < movableObj.y + movableObj.offset.top + movableObj.height - movableObj.offset.bottom; // B -> T
+            this.x + this.offset.left < movableObj.x + movableObj.offset.left + movableObj.width - movableObj.offset.right // L -> R       
+    }
+
+    // try to get collision from above
+    jumpCollision(movableObj) {
+        return this.y + this.offset.top + this.height - this.offset.bottom >= movableObj.height - movableObj.offset.bottom // T -> B
+            
     }
 
     // subtracts amount of energy when getting hits
-    hit(){
+    hit() {
         this.energy -= 20;
-        if(this.energy < 0){
+        if (this.energy < 0) {
             this.energy = 0;
-        } else{
+        } else {
             this.lastHit = new Date().getTime();
         }
     }
 
-    isHurt(){   
+    isHurt() {
         let timePassed = new Date().getTime() - this.lastHit; // Difference in ms
         timePassed = timePassed / 1000; //Difference in s
         return timePassed < 0.3;
     }
 
     // returns value energy 0
-    isDead(){
+    isDead() {
         return this.energy == 0;
     }
 
-    moveRight(){
+    moveRight() {
         //run right
         this.x += this.speed;
     }
 
-    moveLeft(){
+    moveLeft() {
         //run left
-        this.x -= this.speed;   
+        this.x -= this.speed;
     }
 
     //walking animation
-    playAnimation(images){
+    playAnimation(images) {
         let i = this.currentImage % images.length; // let i = 7 % 6 => 1, Rest 1
         let path = images[i];
         this.img = this.imageCache[path];
-        this.currentImage ++;
+        this.currentImage++;
     }
 
-    jump(){
+    jump() {
         this.speedY = 20;
     }
 
-    bottleAdded(){
+    bottleAdded() {
         this.amountOfBottles += 1;
         // if(this.amountOfBottles > 5){
         //     this.amountOfBottles  = 5;
@@ -99,15 +107,15 @@ class MovableObject extends DrawableObject{
         // else{
         //     // this.lastHit = new Date().getTime();
         //     console.log('percentage of amount bottle is going high');
-            
+
         // }
     }
 
-    bottleSubtracted(){
+    bottleSubtracted() {
         this.amountOfBottles -= 1;
     }
 
-    coinsAdded(){
+    coinsAdded() {
         this.amountOfCoins += 1;
         // if(this.amountOfCoins > 5){
         //     this.amountOfCoins = 5;
@@ -115,7 +123,7 @@ class MovableObject extends DrawableObject{
         // else{
         //     // this.lastHit = new Date().getTime();
         //     console.log('percentage of amount bottle is going high');
-            
+
         // }
     }
 

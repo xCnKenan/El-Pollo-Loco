@@ -72,6 +72,11 @@ class World {
   checkCollisions() {
     // here check if character colliding with enemy
     this.level.enemies.forEach((enemy) => {
+      if(this.character.jumpCollision(enemy)){
+        console.log('pepe jumps and hits');
+        
+      }
+
       if (this.character.isColliding(enemy)) {
         pepeHit.play();
         this.character.hit();
@@ -211,6 +216,7 @@ class World {
       this.stopGame();
     }
 
+    // check if enemy is dead and show you won img
     this.level.enemies.forEach((enemy) => {
       if (enemy.isDead() && enemy instanceof Endboss) {
         setInterval(() => {
