@@ -71,6 +71,7 @@ class Character extends MovableObject {
         left: 25,   // x
         right: 70,  // width
         bottom: 150 //height
+        // bottom: 100 //height
     };
     amountOfBottles = 0;
     amountOfCoins = 0;

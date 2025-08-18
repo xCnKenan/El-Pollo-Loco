@@ -72,13 +72,17 @@ class World {
   checkCollisions() {
     // here check if character colliding with enemy
     this.level.enemies.forEach((enemy) => {
-      if(this.character.jumpCollision(enemy)){
-        console.log('pepe jumps and hits');
-        
-      }
-
-      if (this.character.isColliding(enemy)) {
-        pepeHit.play();
+      if (this.character.jumpCollision(enemy)) { // try to kill enemy when jumping on them
+        console.log('colliding top');
+        enemy.energy = 0;
+        enemy.speed = 0; 
+        enemy.isDead();
+        setInterval(() => {
+          this.removeItem(enemy, this.level.enemies);
+        }, 250);
+      } else if (this.character.isColliding(enemy)) {
+        console.log('colliding right left');
+        // pepeHit.play();
         this.character.hit();
         this.statusBar.setPercentage(this.character.energy);
       }

@@ -30,31 +30,77 @@ class MovableObject extends DrawableObject {
         if (this instanceof ThrowableObject) { // Throwable Object should always fall
             return true;
         } else {
-            return this.y < 130;
+            return this.y < 130 ;
 
         }
     }
 
+
+
+
+
+
+
+
+
     // e.g. character.isColliding(chicken);
+    // isColliding(movableObj) {
+    //     // hier egal wie man den gegner berührt, man bekommt schaden
+    //     // return this.x + this.offset.left + this.width - this.offset.right > movableObj.x + movableObj.offset.left && // R -> L
+    //     //     this.y + this.offset.top + this.height - this.offset.bottom > movableObj.y + movableObj.offset.top && // T -> B
+    //     //     this.x + this.offset.left < movableObj.x + movableObj.offset.left + movableObj.width - movableObj.offset.right && // L -> R
+    //     //     this.y + this.offset.top < movableObj.y + movableObj.offset.top + movableObj.height - movableObj.offset.bottom; // B -> T
+
+
+    //     //hier nur von rechts und links
+    //     return this.x + this.offset.left + this.width - this.offset.right >= movableObj.x + movableObj.offset.left &&  // R -> L
+    //         this.x + this.offset.left <= movableObj.x + movableObj.offset.left + movableObj.width - movableObj.offset.right; // L-> R
+    //     // this.y + this.offset.top + this.height - this.offset.bottom > movableObj.y + movableObj.offset.top && // T -> B
+    //     // this.x + this.offset.left < movableObj.x + movableObj.offset.left + movableObj.width - movableObj.offset.right // L -> R       
+    // }
+
     isColliding(movableObj) {
-        // hier egal wie man den gegner berührt, man bekommt schaden
-        // return this.x + this.offset.left + this.width - this.offset.right > movableObj.x + movableObj.offset.left && // R -> L
-        //     this.y + this.offset.top + this.height - this.offset.bottom > movableObj.y + movableObj.offset.top && // T -> B
-        //     this.x + this.offset.left < movableObj.x + movableObj.offset.left + movableObj.width - movableObj.offset.right && // L -> R
-        //     this.y + this.offset.top < movableObj.y + movableObj.offset.top + movableObj.height - movableObj.offset.bottom; // B -> T
-
-
-        //hier nur von rechts und links
-        return this.x + this.offset.left + this.width - this.offset.right > movableObj.x + movableObj.offset.left && // R -> L
+        return this.x + this.offset.left + this.width - this.offset.right >= movableObj.x + movableObj.offset.left && // R -> L
+            this.x + this.offset.left <= movableObj.x + movableObj.offset.left + movableObj.width - movableObj.offset.right && // L -> R
             this.y + this.offset.top + this.height - this.offset.bottom > movableObj.y + movableObj.offset.top && // T -> B
-            this.x + this.offset.left < movableObj.x + movableObj.offset.left + movableObj.width - movableObj.offset.right // L -> R       
+            this.y + this.offset.top <= movableObj.y + movableObj.offset.top + movableObj.height - movableObj.offset.bottom;// B -> T
     }
 
     // try to get collision from above
     jumpCollision(movableObj) {
-        return this.y + this.offset.top + this.height - this.offset.bottom >= movableObj.height - movableObj.offset.bottom // T -> B
-            
+        // let horizontal = this.y + this.offset.top + this.height - this.offset.bottom >= movableObj.y + movableObj.offset.top && // T -> B
+        //     this.y + this.offset.top < movableObj.y + movableObj.offset.top + movableObj.height - movableObj.offset.bottom;
+
+        // let horizontal = this.x + this.offset.left + this.width - this.offset.right > movableObj.x + movableObj.offset.left &&
+        //                     this.x + this.offset.left < movableObj.x + movableObj.offset.left + movableObj.width - movableObj.offset.right;
+
+        
+        // let vertical = this.y + this.offset.top + this.height - this.offset.bottom > movableObj.y + movableObj.offset.top &&
+        //                 this.y + this.offset.top < movableObj.y + movableObj.offset.top + movableObj.height - movableObj.offset.bottom;
+
+        let falling = this.speedY > 0;
+        let enemytop =  movableObj.y + movableObj.offset.top;
+        return this.isColliding(movableObj) && this.isCollidingFromTop(movableObj) && enemytop && this.isAboveGround();
     }
+
+        isCollidingFromTop(movableObj){
+        return this.y + this.offset.top + this.height - this.offset.bottom > movableObj.y + movableObj.offset.top && // T -> B
+            this.y + this.offset.top <= movableObj.y + movableObj.offset.top + movableObj.height - movableObj.offset.bottom;// B -> T
+        }
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // subtracts amount of energy when getting hits
     hit() {

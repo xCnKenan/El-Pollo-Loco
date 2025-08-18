@@ -29,6 +29,9 @@ window.addEventListener("keydown", (event)=>{
     if(event.keyCode == 68){ // d 
         keyboard.D = true;
     }
+    if(event.keyCode == 13){
+        keyboard.ENTER = true; // startgame enter
+    }
 })
 
 window.addEventListener("keyup", (event)=>{
@@ -49,5 +52,11 @@ window.addEventListener("keyup", (event)=>{
     }
     if(event.keyCode == 68){ // d 
         keyboard.D = false;
+    }
+    if(event.keyCode == 13){            // remove after collision detection works
+        keyboard.ENTER = false; // startgame enter
+        removeButtons(); 
+        initLevel1();
+        init();
     }
 })
