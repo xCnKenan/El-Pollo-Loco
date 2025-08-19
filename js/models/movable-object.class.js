@@ -23,8 +23,6 @@ class MovableObject extends DrawableObject {
         // fall down animation
         this.y -= this.speedY;
         this.speedY -= this.acceleration;
-        console.log('applyGravity', this.speedY);
-        
       }
     }, 1000 / 60);
   }
@@ -53,7 +51,6 @@ class MovableObject extends DrawableObject {
     let jump = this.speedY < 0;
     return  this.isColliding(movableObj) && jump ; 
   }
-
 
   // subtracts amount of energy when getting hits
   hit() {
@@ -96,20 +93,10 @@ class MovableObject extends DrawableObject {
 
   jump() {
     this.speedY = 20;
-    console.log('jump',this.speedY);
-    
   }
 
   bottleAdded() {
     this.amountOfBottles += 1;
-    // if(this.amountOfBottles > 5){
-    //     this.amountOfBottles  = 5;
-    // }
-    // else{
-    //     // this.lastHit = new Date().getTime();
-    //     console.log('percentage of amount bottle is going high');
-
-    // }
   }
 
   bottleSubtracted() {
@@ -118,13 +105,5 @@ class MovableObject extends DrawableObject {
 
   coinsAdded() {
     this.amountOfCoins += 1;
-    // if(this.amountOfCoins > 5){
-    //     this.amountOfCoins = 5;
-    // }
-    // else{
-    //     // this.lastHit = new Date().getTime();
-    //     console.log('percentage of amount bottle is going high');
-
-    // }
   }
 }

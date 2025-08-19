@@ -120,7 +120,6 @@ class Character extends MovableObject {
                 // Walk animation
                 this.playAnimation(this.IMAGES_WALKING);
                 this.lastTimeWalking = new Date().getTime();
-                console.log('normales gehen',this.speedY);
                 this.speedY = 0;
             }
         }, 40);
@@ -136,10 +135,8 @@ class Character extends MovableObject {
         setInterval(() => {
             if (this.getSleep()) {
                 this.playAnimation(this.IMAGES_LONG_IDLE);
-                console.log('character sleeps');
             } else if (this.getTired()) {
                 this.playAnimation(this.IMAGES_IDLE);
-                console.log('character gets tired');
             }
         }, 250);
     }
