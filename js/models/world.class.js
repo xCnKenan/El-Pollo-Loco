@@ -101,7 +101,7 @@ class World {
     // here check if character colliding with coin
     this.level.coins.forEach((coin) => {
       if (this.character.isColliding(coin)) {
-        coinCollect.play();
+        // coinCollect.play();
         this.character.coinsAdded();
         this.statusBarCoins.setPercentage(this.character.amountOfCoins);
         this.removeItem(coin, this.level.coins);
@@ -126,7 +126,7 @@ class World {
         //check if bottle is colliding with enemy
         else if (bottle.isColliding(enemy) && enemy instanceof Chicken || bottle.isColliding(enemy) && enemy instanceof ChickenSmall) {
           this.againstNormalEnemy(bottle, enemy);
-          enemy_dead.play();
+          // enemy_dead.play();
         }
       });
     });

@@ -1,176 +1,164 @@
 class MovableObject extends DrawableObject {
-    speed = 0.15;
-    otherDirection = false;
-    speedY = 0;
-    acceleration = 1;
-    energy = 100;
-    lastHit = 0;
-    lastTimeWalking = new Date().getTime();
-    /**
-     * @type {object} - Numerical offsets for this instance´s coordinates and dimensions,
-     * used for collision check.
-     */
-    offset = {
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0
-    };
+  speed = 0.15;
+  otherDirection = false;
+  speedY = 0;
+  acceleration = 1;
+  energy = 100;
+  lastHit = 0;
+  lastTimeWalking = new Date().getTime();
+  /**
+   * @type {object} - Numerical offsets for this instance´s coordinates and dimensions,
+   * used for collision check.
+   */
+  offset = {
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  };
 
-    applyGravity() {
-        setInterval(() => {
-            if (this.isAboveGround() || this.speedY > 0) { // fall down animation
-                this.y -= this.speedY;
-                this.speedY -= this.acceleration;
-            }
-        }, 1000 / 60);
+  applyGravity() {
+    setInterval(() => {
+      if (this.isAboveGround() || this.speedY > 0) {
+        // fall down animation
+        this.y -= this.speedY;
+        this.speedY -= this.acceleration;
+      }
+    }, 1000 / 60);
+  }
+
+  isAboveGround() {
+    if (this instanceof ThrowableObject) {
+      // Throwable Object should always fall
+      return true;
+    } else {
+      return this.y < 130;
     }
+  }
 
-    isAboveGround() {
-        if (this instanceof ThrowableObject) { // Throwable Object should always fall
-            return true;
-        } else {
-            return this.y < 130 ;
+  // e.g. character.isColliding(chicken);
+  // isColliding(movableObj) {
+  //     // hier egal wie man den gegner berührt, man bekommt schaden
+  //     // return this.x + this.offset.left + this.width - this.offset.right > movableObj.x + movableObj.offset.left && // R -> L
+  //     //     this.y + this.offset.top + this.height - this.offset.bottom > movableObj.y + movableObj.offset.top && // T -> B
+  //     //     this.x + this.offset.left < movableObj.x + movableObj.offset.left + movableObj.width - movableObj.offset.right && // L -> R
+  //     //     this.y + this.offset.top < movableObj.y + movableObj.offset.top + movableObj.height - movableObj.offset.bottom; // B -> T
+  // }
 
-        }
+  isColliding(movableObj) {
+    return (
+      this.x + this.offset.left + this.width - this.offset.right >=
+        movableObj.x + movableObj.offset.left && // R -> L
+      this.x + this.offset.left <=
+        movableObj.x +
+          movableObj.offset.left +
+          movableObj.width -
+          movableObj.offset.right && // L -> R
+      this.y + this.offset.top + this.height - this.offset.bottom >
+        movableObj.y + movableObj.offset.top && // T -> B
+      this.y + this.offset.top <=
+        movableObj.y +
+          movableObj.offset.top +
+          movableObj.height -
+          movableObj.offset.bottom
+    ); // B -> T
+  }
+
+  // try to get collision from above
+  jumpCollision(movableObj) {
+    // let horizontal = this.y + this.offset.top + this.height - this.offset.bottom >= movableObj.y + movableObj.offset.top && // T -> B
+    //     this.y + this.offset.top < movableObj.y + movableObj.offset.top + movableObj.height - movableObj.offset.bottom;
+
+    // let horizontal = this.x + this.offset.left + this.width - this.offset.right > movableObj.x + movableObj.offset.left &&
+    //                     this.x + this.offset.left < movableObj.x + movableObj.offset.left + movableObj.width - movableObj.offset.right;
+
+    // let vertical = this.y + this.offset.top + this.height - this.offset.bottom > movableObj.y + movableObj.offset.top &&
+    //                 this.y + this.offset.top < movableObj.y + movableObj.offset.top + movableObj.height - movableObj.offset.bottom;
+
+    let falling = this.speedY > 0;
+    let enemytop = movableObj.y + movableObj.offset.top;
+    return (
+      this.isColliding(movableObj) &&
+      this.isCollidingFromTop(movableObj) &&
+      enemytop && falling
+    );
+  }
+
+  isCollidingFromTop(movableObj) {
+    return (
+      this.y + this.offset.top + this.height - this.offset.bottom > movableObj.y + movableObj.offset.top && // T -> B
+      this.y + this.offset.top <= movableObj.y + movableObj.offset.top + movableObj.height - movableObj.offset.bottom
+    ); // B -> T
+  }
+
+  // subtracts amount of energy when getting hits
+  hit() {
+    this.energy -= 20;
+    if (this.energy < 0) {
+      this.energy = 0;
+    } else {
+      this.lastHit = new Date().getTime();
     }
+  }
 
+  isHurt() {
+    let timePassed = new Date().getTime() - this.lastHit; // Difference in ms
+    timePassed = timePassed / 1000; //Difference in s
+    return timePassed < 0.3;
+  }
 
+  // returns value energy 0
+  isDead() {
+    return this.energy == 0;
+  }
 
+  moveRight() {
+    //run right
+    this.x += this.speed;
+  }
 
+  moveLeft() {
+    //run left
+    this.x -= this.speed;
+  }
 
+  //walking animation
+  playAnimation(images) {
+    let i = this.currentImage % images.length; // let i = 7 % 6 => 1, Rest 1
+    let path = images[i];
+    this.img = this.imageCache[path];
+    this.currentImage++;
+  }
 
+  jump() {
+    this.speedY = 20;
+  }
 
-
-
-    // e.g. character.isColliding(chicken);
-    // isColliding(movableObj) {
-    //     // hier egal wie man den gegner berührt, man bekommt schaden
-    //     // return this.x + this.offset.left + this.width - this.offset.right > movableObj.x + movableObj.offset.left && // R -> L
-    //     //     this.y + this.offset.top + this.height - this.offset.bottom > movableObj.y + movableObj.offset.top && // T -> B
-    //     //     this.x + this.offset.left < movableObj.x + movableObj.offset.left + movableObj.width - movableObj.offset.right && // L -> R
-    //     //     this.y + this.offset.top < movableObj.y + movableObj.offset.top + movableObj.height - movableObj.offset.bottom; // B -> T
-
-
-    //     //hier nur von rechts und links
-    //     return this.x + this.offset.left + this.width - this.offset.right >= movableObj.x + movableObj.offset.left &&  // R -> L
-    //         this.x + this.offset.left <= movableObj.x + movableObj.offset.left + movableObj.width - movableObj.offset.right; // L-> R
-    //     // this.y + this.offset.top + this.height - this.offset.bottom > movableObj.y + movableObj.offset.top && // T -> B
-    //     // this.x + this.offset.left < movableObj.x + movableObj.offset.left + movableObj.width - movableObj.offset.right // L -> R       
+  bottleAdded() {
+    this.amountOfBottles += 1;
+    // if(this.amountOfBottles > 5){
+    //     this.amountOfBottles  = 5;
     // }
+    // else{
+    //     // this.lastHit = new Date().getTime();
+    //     console.log('percentage of amount bottle is going high');
 
-    isColliding(movableObj) {
-        return this.x + this.offset.left + this.width - this.offset.right >= movableObj.x + movableObj.offset.left && // R -> L
-            this.x + this.offset.left <= movableObj.x + movableObj.offset.left + movableObj.width - movableObj.offset.right && // L -> R
-            this.y + this.offset.top + this.height - this.offset.bottom > movableObj.y + movableObj.offset.top && // T -> B
-            this.y + this.offset.top <= movableObj.y + movableObj.offset.top + movableObj.height - movableObj.offset.bottom;// B -> T
-    }
+    // }
+  }
 
-    // try to get collision from above
-    jumpCollision(movableObj) {
-        // let horizontal = this.y + this.offset.top + this.height - this.offset.bottom >= movableObj.y + movableObj.offset.top && // T -> B
-        //     this.y + this.offset.top < movableObj.y + movableObj.offset.top + movableObj.height - movableObj.offset.bottom;
+  bottleSubtracted() {
+    this.amountOfBottles -= 1;
+  }
 
-        // let horizontal = this.x + this.offset.left + this.width - this.offset.right > movableObj.x + movableObj.offset.left &&
-        //                     this.x + this.offset.left < movableObj.x + movableObj.offset.left + movableObj.width - movableObj.offset.right;
+  coinsAdded() {
+    this.amountOfCoins += 1;
+    // if(this.amountOfCoins > 5){
+    //     this.amountOfCoins = 5;
+    // }
+    // else{
+    //     // this.lastHit = new Date().getTime();
+    //     console.log('percentage of amount bottle is going high');
 
-        
-        // let vertical = this.y + this.offset.top + this.height - this.offset.bottom > movableObj.y + movableObj.offset.top &&
-        //                 this.y + this.offset.top < movableObj.y + movableObj.offset.top + movableObj.height - movableObj.offset.bottom;
-
-        let falling = this.speedY > 0;
-        let enemytop =  movableObj.y + movableObj.offset.top;
-        return this.isColliding(movableObj) && this.isCollidingFromTop(movableObj) && enemytop && this.isAboveGround();
-    }
-
-        isCollidingFromTop(movableObj){
-        return this.y + this.offset.top + this.height - this.offset.bottom > movableObj.y + movableObj.offset.top && // T -> B
-            this.y + this.offset.top <= movableObj.y + movableObj.offset.top + movableObj.height - movableObj.offset.bottom;// B -> T
-        }
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // subtracts amount of energy when getting hits
-    hit() {
-        this.energy -= 20;
-        if (this.energy < 0) {
-            this.energy = 0;
-        } else {
-            this.lastHit = new Date().getTime();
-        }
-    }
-
-    isHurt() {
-        let timePassed = new Date().getTime() - this.lastHit; // Difference in ms
-        timePassed = timePassed / 1000; //Difference in s
-        return timePassed < 0.3;
-    }
-
-    // returns value energy 0
-    isDead() {
-        return this.energy == 0;
-    }
-
-    moveRight() {
-        //run right
-        this.x += this.speed;
-    }
-
-    moveLeft() {
-        //run left
-        this.x -= this.speed;
-    }
-
-    //walking animation
-    playAnimation(images) {
-        let i = this.currentImage % images.length; // let i = 7 % 6 => 1, Rest 1
-        let path = images[i];
-        this.img = this.imageCache[path];
-        this.currentImage++;
-    }
-
-    jump() {
-        this.speedY = 20;
-    }
-
-    bottleAdded() {
-        this.amountOfBottles += 1;
-        // if(this.amountOfBottles > 5){
-        //     this.amountOfBottles  = 5;
-        // } 
-        // else{
-        //     // this.lastHit = new Date().getTime();
-        //     console.log('percentage of amount bottle is going high');
-
-        // }
-    }
-
-    bottleSubtracted() {
-        this.amountOfBottles -= 1;
-    }
-
-    coinsAdded() {
-        this.amountOfCoins += 1;
-        // if(this.amountOfCoins > 5){
-        //     this.amountOfCoins = 5;
-        // } 
-        // else{
-        //     // this.lastHit = new Date().getTime();
-        //     console.log('percentage of amount bottle is going high');
-
-        // }
-    }
-
+    // }
+  }
 }

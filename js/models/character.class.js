@@ -101,7 +101,7 @@ class Character extends MovableObject {
             }
             // check if also not above Ground
             if (this.world.keyboard.SPACE && !this.isAboveGround()){
-                pepeJump.play();
+                // pepeJump.play();
                 this.jump();
             } 
             this.world.camera_x = -this.x + 150;
