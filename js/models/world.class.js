@@ -91,7 +91,7 @@ class World {
     // here check if character colliding with bottles
     this.level.bottles.forEach((bottle) => {
       if (this.character.isColliding(bottle)) {
-        bottleCollect.play();
+        // bottleCollect.play();
         this.character.bottleAdded();
         this.statusBarBottle.setPercentage(this.character.amountOfBottles);
         this.removeItem(bottle, this.level.bottles);

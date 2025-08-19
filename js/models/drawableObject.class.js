@@ -29,16 +29,16 @@ class DrawableObject{
             this instanceof Coins
         ){
             //hitbox here
-            ctx.beginPath();
-            ctx.lineWidth = '3';
-            ctx.strokeStyle = 'blue';
-            ctx.rect(
-                this.x, 
-                this.y,
-                this.width,
-                this.height
-                );
-            ctx.stroke();
+            // ctx.beginPath();
+            // ctx.lineWidth = '3';
+            // ctx.strokeStyle = 'blue';
+            // ctx.rect(
+            //     this.x, 
+            //     this.y,
+            //     this.width,
+            //     this.height
+            //     );
+            // ctx.stroke();
             //hitbox end here
 
 
