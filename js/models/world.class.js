@@ -66,6 +66,7 @@ class World {
       // render statusbar and subtract from array
       this.character.bottleSubtracted();
       this.statusBarBottle.setPercentage(this.character.amountOfBottles);
+      world.character.lastTimeWalking = new Date().getTime();
     }
   }
 

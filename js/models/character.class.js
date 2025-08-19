@@ -116,6 +116,7 @@ class Character extends MovableObject {
             } else if (this.isAboveGround()) {
                 // above Ground img animation
                 this.playAnimation(this.IMAGES_JUMPING);
+                this.lastTimeWalking = new Date().getTime();
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 // Walk animation
                 this.playAnimation(this.IMAGES_WALKING);
