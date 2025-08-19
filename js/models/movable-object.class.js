@@ -23,11 +23,13 @@ class MovableObject extends DrawableObject {
         // fall down animation
         this.y -= this.speedY;
         this.speedY -= this.acceleration;
+        console.log('applyGravity', this.speedY);
+        
       }
     }, 1000 / 60);
   }
 
-  isAboveGround() {
+  isAboveGround() {                           
     if (this instanceof ThrowableObject) {
       // Throwable Object should always fall
       return true;
@@ -45,15 +47,11 @@ class MovableObject extends DrawableObject {
       this.y + this.offset.top < movableObj.y + movableObj.offset.top + movableObj.height - movableObj.offset.bottom; // B -> T
   }
 
-  isCollidingFromTop(movableObj) {
-    return this.y + this.offset.top + this.height - this.offset.bottom > movableObj.y + movableObj.offset.top && // T -> B
-        this.y + this.offset.top < movableObj.y + movableObj.offset.top + movableObj.height - movableObj.offset.bottom // B -> T
-  }
-
   // try to get collision from above
   jumpCollision(movableObj) {
     // return this.isCollidingFromTop(movableObj) && this.isColliding(movableObj);
-    return this.isCollidingFromTop(movableObj);
+    let jump = this.speedY < 0;
+    return  this.isColliding(movableObj) && jump ; 
   }
 
 
@@ -98,6 +96,8 @@ class MovableObject extends DrawableObject {
 
   jump() {
     this.speedY = 20;
+    console.log('jump',this.speedY);
+    
   }
 
   bottleAdded() {

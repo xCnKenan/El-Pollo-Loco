@@ -120,6 +120,8 @@ class Character extends MovableObject {
                 // Walk animation
                 this.playAnimation(this.IMAGES_WALKING);
                 this.lastTimeWalking = new Date().getTime();
+                console.log('normales gehen',this.speedY);
+                this.speedY = 0;
             }
         }, 40);
 
