@@ -70,6 +70,14 @@ canvas {
   justify-content: space-around;
 }
 
+#endScreenButtons {
+  width: 100%;
+  position: absolute;
+  top: 24px;
+  display: flex;
+  justify-content: space-around;
+}
+
 .controllsOverlay {
   /* background: rgba(0, 0, 0, 0.7); */
   background-color: #19a3cb;
@@ -116,7 +124,7 @@ canvas {
   position: relative;
 }
 
-h2{
+h2 {
   font-size: 32px;
   letter-spacing: 2px;
   text-shadow: 1px 1px 1px black;
