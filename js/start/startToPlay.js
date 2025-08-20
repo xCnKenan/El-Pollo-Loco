@@ -2,6 +2,8 @@ let screenCanvas;
 let mainScreen; // wie world
 let boundingRect;
 let ctxStart;
+let intervallIds = [];
+let animationFrameId = null;
 
 function getFullScreen(){
     let divRef = document.getElementById('relativeDiv');
@@ -46,10 +48,51 @@ function removeButtons() {
   addDisplayNone("controllsButton");
 }
 
+
+
+
+
+
+function stopDrawLoop() {
+  if (animationFrameId) {
+    cancelAnimationFrame(animationFrameId);
+    animationFrameId = null;
+  }
+}
+
 function removeEndScreenButtons(){
   addDisplayNone("restart");
   addDisplayNone("home");
 }
+
+// Wrapper für setInterval
+function setStoppableInterval(fn, time) {
+  let id = setInterval(fn, time);
+  intervallIds.push(id);
+  return id; // falls du den einzelnen Interval auch separat stoppen willst
+}
+
+// Stoppt alle Intervalle
+function clearStoppableIntervals() {
+  intervallIds.forEach(id => clearInterval(id));
+}
+
+function restartGame(){
+  clearStoppableIntervals();
+  stopDrawLoop();
+  world = null;
+  let ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  initLevel1();
+  init();
+  removeEndScreenButtons();
+}
+
+
+
+
+
+
 
 function addDisplayNone(id) {
   let idRef = document.getElementById(id);

@@ -90,7 +90,7 @@ class Character extends MovableObject {
     }
 
     animate() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.otherDirection = false;
@@ -108,7 +108,7 @@ class Character extends MovableObject {
         }, 1000 / 60);
 
         // IMG Animations here
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
             } else if (this.isHurt()) {
@@ -126,14 +126,14 @@ class Character extends MovableObject {
         }, 40);
 
         // if character not moves he gets standing animation
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (!this.world.keyboard.RIGHT && !this.world.keyboard.LEFT) {
                 this.playAnimation(this.IMAGES_STANDING);
             }
         }, 250);
 
         // check to sleep or tired
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (this.getSleep()) {
                 this.playAnimation(this.IMAGES_LONG_IDLE);
             } else if (this.getTired()) {

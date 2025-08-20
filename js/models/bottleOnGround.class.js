@@ -26,7 +26,7 @@ class BottleOnGround extends MovableObject{
     }
 
     animate(){
-        setInterval(() => {
+        setStoppableInterval(() => {
             this.playAnimation(this.IMAGES_BOTTLE_ON_GROUND);            
         }, 500);
     }

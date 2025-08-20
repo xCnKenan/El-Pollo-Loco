@@ -32,6 +32,7 @@ class World {
     this.draw();
     this.setWorld();
     this.run();
+    this.startDrawLoop();
   }
 
   setWorld() {
@@ -39,7 +40,7 @@ class World {
   }
 
   run() {
-    setInterval(() => {
+    setStoppableInterval(() => {
       this.checkCollisions();
       this.checkThrowObjects();
     }, 200);
@@ -78,7 +79,7 @@ class World {
         enemy.energy = 0;
         enemy.speed = 0; 
         enemy.isDead();
-        setInterval(() => {
+        setStoppableInterval(() => {
           this.removeItem(enemy, this.level.enemies);
         }, 250);
       } else if (this.character.isColliding(enemy)) {
@@ -138,7 +139,8 @@ class World {
     this.removeItem(bottle, this.throwableObjects);
     enemy.speed = 0;
     enemy.isDead();
-    setInterval(() => {
+
+    setStoppableInterval(() => {
       this.removeItem(enemy, this.level.enemies);
     }, 250);
   }
@@ -156,6 +158,14 @@ class World {
       array.splice(itemToRemove, 1);
     }
   }
+
+  startDrawLoop() {
+  let loop = () => {
+    this.draw();
+    animationFrameId = requestAnimationFrame(loop);
+  };
+  loop();
+}
 
   draw() {
     //clear old Frames
@@ -225,7 +235,7 @@ class World {
     // check if enemy is dead and show you won img
     this.level.enemies.forEach((enemy) => {
       if (enemy.isDead() && enemy instanceof Endboss) {
-        setInterval(() => {
+        setStoppableInterval(() => {
           this.stopGame();
           this.endScreenButtons();
           console.log('stopGame');
@@ -235,11 +245,11 @@ class World {
       }
     })
 
-    // draw wird immer wieder aufgerufen
-    let self = this;
-    requestAnimationFrame(function () {
-      self.draw();
-    });
+    // // draw wird immer wieder aufgerufen
+    // let self = this;
+    // requestAnimationFrame(function () {
+    //   self.draw();
+    // });
   }
 
   endScreenButtons(){

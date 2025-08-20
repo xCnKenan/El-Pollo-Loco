@@ -65,7 +65,7 @@ class Endboss extends MovableObject {
   }
 
   animate() {
-    setInterval(() => {
+    setStoppableInterval(() => {
       if (this.inAlertMode) {
         this.playAnimation(this.IMAGES_ALERT);
       } else if (this.inAttackMode) {
@@ -88,7 +88,7 @@ class Endboss extends MovableObject {
       }
     }, 150);
 
-    setInterval(() => {
+    setStoppableInterval(() => {
         if(this.hadFirstContact) {
           this.inAttackMode = true;
         }
