@@ -70,17 +70,17 @@ canvas {
   justify-content: space-around;
 }
 
-#endScreenButtons {
+#endScreenButtons{
   width: 100%;
   position: absolute;
-  top: 24px;
+  bottom: 64px;
   display: flex;
   justify-content: space-around;
 }
 
 .controllsOverlay {
   /* background: rgba(0, 0, 0, 0.7); */
-  background-color: #19a3cb;
+  background-color: #4da2bf;
   border: 4px solid #0b0f33;
   height: 300px;
   width: 320px;

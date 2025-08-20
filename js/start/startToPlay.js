@@ -22,59 +22,30 @@ function loadStartScreen() {
   screenCanvas = document.getElementById("canvas");
   ctxStart = screenCanvas.getContext("2d");
   mainScreen = new Mainscreen(screenCanvas);
-  console.log(mainScreen);
+  // console.log(mainScreen);
 //   boundingRect = screenCanvas.getBoundingClientRect();
+  // addDisplayNone('restart');
+  // addDisplayNone('home');
+  if(world){    
+    world.character.energy = 100;
+  } else {
+    return;
+  }
 }
-
-// check hier collision with btn image when click
-// let tip = {};
-// window.addEventListener("mousedown", (event) => {
-
-//   boundingRect = screenCanvas.getBoundingClientRect();
-//   tip.x = event.clientX - boundingRect.left;
-//   tip.y = event.clientY - boundingRect.top;
-
-//   console.log(tip);
-//   let btn = mainScreen.startButton;
-//   let ctrl = mainScreen.controllsButton;
-
-//   if (collisionWithStartButton(btn)) {
-//     console.log("clicked start game");
-//     initLevel1();
-//     init();
-//   } else if(collisionWithControllsButton(ctrl)){
-//     console.log('clicked ctrl');
-//     toggleOverlay(event);
-//   }
-    
-// });
-
-// function collisionWithStartButton(ctrl){
-//     return tip.x >= ctrl.x &&
-//     tip.x <= ctrl.x + ctrl.width &&
-//     tip.y >= ctrl.y &&
-//     tip.y <= ctrl.y + ctrl.height
-// }
-
-// function collisionWithControllsButton(btn){
-//     return tip.x >= btn.x &&
-//     tip.x <= btn.x + btn.width &&
-//     tip.y >= btn.y &&
-//     tip.y <= btn.y + btn.height
-// }
 
 function removeButtons() {
   let canvasRef = document.getElementById("canvas");
   canvasRef.style.backgroundImage = "none";
   let controllsOverlayRef = document.getElementById("controllsOverlay");
   controllsOverlayRef.classList.add("d-none");
-  remove("startButton");
-  remove("controllsButton");
+  addDisplayNone("startButton");
+  addDisplayNone("controllsButton");
 }
 
-function remove(id) {
+function addDisplayNone(id) {
   let idRef = document.getElementById(id);
-  idRef.remove();
+  // idRef.remove();
+  idRef.classList.add('d-none');
 }
 
 function toggleOverlay(event){
@@ -88,6 +59,19 @@ function stopPropagation(event) {
 }
 
 function closeOverlay(){
-    let controllsOverlayRef = document.getElementById('controllsOverlay');
-    controllsOverlayRef.classList.add('d-none');
+  let controllsOverlayRef = document.getElementById('controllsOverlay');
+  controllsOverlayRef.classList.add('d-none');
+}
+
+function backToHomeScreen(){
+  removeDisplayNone("startButton");
+  removeDisplayNone("controllsButton");
+  addDisplayNone("restart");
+  addDisplayNone("home");
+}
+
+function removeDisplayNone(id) {
+  let idRef = document.getElementById(id);
+  // idRef.remove();
+  idRef.classList.remove('d-none');
 }

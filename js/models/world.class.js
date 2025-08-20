@@ -219,6 +219,7 @@ class World {
     if (this.character.isDead()) {
       this.addObjectsToMap(this.level.youLost);
       this.stopGame();
+      this.endScreenButtons();
     }
 
     // check if enemy is dead and show you won img
@@ -226,6 +227,7 @@ class World {
       if (enemy.isDead() && enemy instanceof Endboss) {
         setInterval(() => {
           this.stopGame();
+          this.endScreenButtons();
           console.log('stopGame');
         }, 1000);
         this.addObjectsToMap(this.level.youWon);
@@ -238,6 +240,14 @@ class World {
     requestAnimationFrame(function () {
       self.draw();
     });
+  }
+
+  endScreenButtons(){
+    let restartRef = document.getElementById('restart');
+    restartRef.classList.remove('d-none');
+
+    let homeRef = document.getElementById('home');
+    homeRef.classList.remove('d-none');
   }
 
   stopGame() {

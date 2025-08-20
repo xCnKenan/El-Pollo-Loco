@@ -87,9 +87,9 @@
                 <button id="controllsButton" class="startButton" onclick="toggleOverlay(event)">Controls</button>
             </div>
 
-      <div id="endscreenButtons">
-                <button id="restart" class="startButton" onclick="removeButtons();initLevel1(); init()">Restart</button>
-                <button id="home" class="startButton" onclick="toggleOverlay(event)">Home</button>
+      <div id="endScreenButtons">
+                <button id="restart" class="startButton d-none" onclick="removeButtons();initLevel1(); init()">Restart</button>
+                <button id="home" class="startButton d-none" onclick="loadStartScreen(); backToHomeScreen()">Home</button>
             </div>      
 
       <div class="settingsSection">
