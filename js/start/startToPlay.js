@@ -26,7 +26,11 @@ function loadStartScreen() {
 //   boundingRect = screenCanvas.getBoundingClientRect();
   // addDisplayNone('restart');
   // addDisplayNone('home');
-  if(world){    
+  checkCharacterEnergy();
+}
+
+function checkCharacterEnergy(){
+   if(world){    
     world.character.energy = 100;
   } else {
     return;
@@ -40,6 +44,11 @@ function removeButtons() {
   controllsOverlayRef.classList.add("d-none");
   addDisplayNone("startButton");
   addDisplayNone("controllsButton");
+}
+
+function removeEndScreenButtons(){
+  addDisplayNone("restart");
+  addDisplayNone("home");
 }
 
 function addDisplayNone(id) {
