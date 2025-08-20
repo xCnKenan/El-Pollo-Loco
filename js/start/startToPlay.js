@@ -48,11 +48,6 @@ function removeButtons() {
   addDisplayNone("controllsButton");
 }
 
-
-
-
-
-
 function stopDrawLoop() {
   if (animationFrameId) {
     cancelAnimationFrame(animationFrameId);
@@ -69,7 +64,7 @@ function removeEndScreenButtons(){
 function setStoppableInterval(fn, time) {
   let id = setInterval(fn, time);
   intervallIds.push(id);
-  return id; // falls du den einzelnen Interval auch separat stoppen willst
+  return id;
 }
 
 // Stoppt alle Intervalle
