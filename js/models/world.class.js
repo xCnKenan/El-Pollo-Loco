@@ -74,7 +74,7 @@ class World {
   checkCollisions() {
     // here check if character colliding with enemy
     this.level.enemies.forEach((enemy) => {
-      if (this.character.jumpCollision(enemy)) { // try to kill enemy when jumping on them
+      if (this.character.jumpCollision(enemy) && enemy instanceof Chicken || this.character.jumpCollision(enemy) && enemy instanceof ChickenSmall) { // try to kill enemy when jumping on them
         console.log('colliding top');
         enemy.energy = 0;
         enemy.speed = 0; 
