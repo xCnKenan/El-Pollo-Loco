@@ -228,7 +228,6 @@ class World {
     // try to render game over img 
     if (this.character.isDead()) {
       this.addObjectsToMap(this.level.youLost);
-      this.stopGame();
       this.endScreenButtons();
     }
 
@@ -236,7 +235,6 @@ class World {
     this.level.enemies.forEach((enemy) => {
       if (enemy.isDead() && enemy instanceof Endboss) {
         setStoppableInterval(() => {
-          this.stopGame();
           this.endScreenButtons();
           console.log('stopGame');
         }, 1000);
@@ -245,11 +243,6 @@ class World {
       }
     })
 
-    // // draw wird immer wieder aufgerufen
-    // let self = this;
-    // requestAnimationFrame(function () {
-    //   self.draw();
-    // });
   }
 
   endScreenButtons(){
@@ -258,12 +251,6 @@ class World {
 
     let homeRef = document.getElementById('home');
     homeRef.classList.remove('d-none');
-  }
-
-  stopGame() {
-    // Intervalle beenden
-    //quick and dirty version
-    for (let i = 1; i < 9999; i++) window.clearInterval(i);
   }
 
   addObjectsToMap(objects) {
