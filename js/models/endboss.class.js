@@ -66,9 +66,9 @@ class Endboss extends MovableObject {
 
   animate() {
     setStoppableInterval(() => {
-      if (this.inAlertMode) {
+      if (this.inAlertMode && !this.isDead()) {
         this.playAnimation(this.IMAGES_ALERT);
-      } else if (this.inAttackMode) {
+      } else if (this.inAttackMode && !this.isHurt()) {
         console.log('in attackMode');
         this.stopMoving();
         this.playAnimation(this.IMAGES_ATTACK);
@@ -79,7 +79,6 @@ class Endboss extends MovableObject {
       } else if (this.hadFirstContact){
         this.playAnimation(this.IMAGES_WALKING);
         this.moveLeft();
-        
       }
 
       if (world.character.x >= 3000 && !this.hadFirstContact) {
