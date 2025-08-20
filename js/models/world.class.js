@@ -228,6 +228,7 @@ class World {
     // try to render game over img 
     if (this.character.isDead()) {
       this.addObjectsToMap(this.level.youLost);
+      clearStoppableIntervals();
       this.endScreenButtons();
     }
 
@@ -235,6 +236,7 @@ class World {
     this.level.enemies.forEach((enemy) => {
       if (enemy.isDead() && enemy instanceof Endboss) {
         setStoppableInterval(() => {
+          clearStoppableIntervals();
           this.endScreenButtons();
           console.log('stopGame');
         }, 1000);
