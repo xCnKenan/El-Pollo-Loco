@@ -82,7 +82,7 @@ class World {
         setStoppableInterval(() => {
           this.removeItem(enemy, this.level.enemies);
         }, 250);
-      } else if (this.character.isColliding(enemy)) {
+      } else if (this.character.isColliding(enemy) && !enemy.isDead()) {
         console.log('colliding right left');
         // pepeHit.play();
         this.character.hit();
