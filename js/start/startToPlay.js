@@ -25,7 +25,10 @@ function loadStartScreen() {
   ctxStart = screenCanvas.getContext("2d");
   mainScreen = new Mainscreen(screenCanvas);
   checkCharacterEnergy();
+  checkAudioStatus();
+}
 
+function checkAudioStatus() {
   if (localStorage.getItem('gameAudio') === null) {
     localStorage.setItem('gameAudio', JSON.stringify(true));
   }

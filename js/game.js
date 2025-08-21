@@ -6,16 +6,14 @@ let keyboard = new Keyboard();
 function init(){
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
-    console.log('My Character is', world.character);
-    console.log('All Data', world);
-
+    // console.log('My Character is', world.character);
+    // console.log('All Data', world);
     let audioStatus = JSON.parse(localStorage.getItem('gameAudio'));
     if (!audioStatus) {
         muteAllSounds();
     } else {
         unmuteAllSounds();
     }
-
     toggleSoundImg(audioStatus);
 }
 
@@ -24,11 +22,9 @@ function toggleAudio(){
     if(audioStatus){
         localStorage.setItem('gameAudio', JSON.stringify(false));
         muteAllSounds();
-        console.log('ton aus');
     } else if(!audioStatus){
         localStorage.setItem('gameAudio', JSON.stringify(true));
         unmuteAllSounds();
-        console.log('ton an');   
     }
     let newStatus = JSON.parse(localStorage.getItem('gameAudio'));
     toggleSoundImg(newStatus);
@@ -40,11 +36,9 @@ function toggleSoundImg(newStatus){
     if(newStatus){
         speakerRef.classList.remove('d-none');
         no_audioRef.classList.add('d-none');
-        console.log('audio ist an');
     } else if(!newStatus){
         speakerRef.classList.add('d-none');
         no_audioRef.classList.remove('d-none');
-        console.log('audio ist aus');
     }
 }
 
