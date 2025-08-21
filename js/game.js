@@ -11,6 +11,7 @@ function init(){
 
     if (localStorage.getItem('gameAudio') === null) {
         localStorage.setItem('gameAudio', JSON.stringify(true));
+        toggleAudio();
     }
 
     let audioStatus = JSON.parse(localStorage.getItem('gameAudio'));
@@ -22,15 +23,28 @@ function init(){
 function toggleAudio(){
     let audioStatus = JSON.parse(localStorage.getItem('gameAudio'));
     // console.log('audioStatus', audioStatus);
-
     if(audioStatus){
         localStorage.setItem('gameAudio', JSON.stringify(false));
         console.log('ton aus');
         muteAllSounds();
+        toggleSoundImg(audioStatus);
     } else {
         localStorage.setItem('gameAudio', JSON.stringify(true));
         console.log('ton an');   
         unmuteAllSounds();
+        toggleSoundImg(audioStatus);
+    }
+}
+
+function toggleSoundImg(audioStatus){
+    let speakerRef = document.getElementById('speaker');
+    let no_audioRef = document.getElementById('no-audio');
+    if(audioStatus){
+        speakerRef.classList.add('d-none');
+        no_audioRef.classList.remove('d-none');
+    } else{
+        speakerRef.classList.remove('d-none');
+        no_audioRef.classList.add('d-none');
     }
 }
 
