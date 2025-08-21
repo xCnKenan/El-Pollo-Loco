@@ -8,6 +8,40 @@ function init(){
     world = new World(canvas, keyboard);
     console.log('My Character is', world.character);
     console.log('All Data', world);
+
+    if (localStorage.getItem('gameAudio') === null) {
+        localStorage.setItem('gameAudio', JSON.stringify(true));
+    }
+
+    let audioStatus = JSON.parse(localStorage.getItem('gameAudio'));
+    if (!audioStatus) {
+        muteAllSounds();
+    }
+}
+
+function toggleAudio(){
+    let audioStatus = JSON.parse(localStorage.getItem('gameAudio'));
+    // console.log('audioStatus', audioStatus);
+
+    if(audioStatus){
+        localStorage.setItem('gameAudio', JSON.stringify(false));
+        console.log('ton aus');
+        muteAllSounds();
+    } else {
+        localStorage.setItem('gameAudio', JSON.stringify(true));
+        console.log('ton an');   
+        unmuteAllSounds();
+    }
+}
+
+function muteAllSounds(){
+    console.log('muteAllSounds');
+    gameSounds.forEach(sound => sound.muted = true);
+}
+
+function unmuteAllSounds(){
+    console.log('unmuteAllsounds');
+    gameSounds.forEach(sound => sound.muted = false);
 }
 
 window.addEventListener("keydown", (event)=>{    

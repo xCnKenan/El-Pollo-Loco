@@ -8,7 +8,8 @@ class Level{
     youLost;
     youWon; 
 
-    constructor(enemies, clouds, backgroundObject, bottles, coins, youLost, youWon){
+
+    constructor(enemies, clouds, backgroundObject, bottles, coins, youLost, youWon, gameSounds){
         this.enemies = enemies;
         this.clouds = clouds;
         this.backgroundObject = backgroundObject;
