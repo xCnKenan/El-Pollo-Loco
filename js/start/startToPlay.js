@@ -69,7 +69,6 @@ function removeEndScreenButtons() {
 function setStoppableInterval(fn, time) {
   let id = setInterval(fn, time);
   intervallIds.push(id);
-  return id;
 }
 
 // Stoppt alle Intervalle
