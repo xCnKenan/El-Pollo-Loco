@@ -9,52 +9,50 @@ function init(){
     console.log('My Character is', world.character);
     console.log('All Data', world);
 
-    if (localStorage.getItem('gameAudio') === null) {
-        localStorage.setItem('gameAudio', JSON.stringify(true));
-        toggleAudio();
-    }
-
     let audioStatus = JSON.parse(localStorage.getItem('gameAudio'));
     if (!audioStatus) {
         muteAllSounds();
+    } else {
+        unmuteAllSounds();
     }
+
+    toggleSoundImg(audioStatus);
 }
 
 function toggleAudio(){
     let audioStatus = JSON.parse(localStorage.getItem('gameAudio'));
-    // console.log('audioStatus', audioStatus);
     if(audioStatus){
         localStorage.setItem('gameAudio', JSON.stringify(false));
-        console.log('ton aus');
         muteAllSounds();
-        toggleSoundImg(audioStatus);
-    } else {
+        console.log('ton aus');
+    } else if(!audioStatus){
         localStorage.setItem('gameAudio', JSON.stringify(true));
-        console.log('ton an');   
         unmuteAllSounds();
-        toggleSoundImg(audioStatus);
+        console.log('ton an');   
     }
+    let newStatus = JSON.parse(localStorage.getItem('gameAudio'));
+    toggleSoundImg(newStatus);
 }
 
-function toggleSoundImg(audioStatus){
+function toggleSoundImg(newStatus){
     let speakerRef = document.getElementById('speaker');
     let no_audioRef = document.getElementById('no-audio');
-    if(audioStatus){
-        speakerRef.classList.add('d-none');
-        no_audioRef.classList.remove('d-none');
-    } else{
+    if(newStatus){
         speakerRef.classList.remove('d-none');
         no_audioRef.classList.add('d-none');
+        console.log('audio ist an');
+    } else if(!newStatus){
+        speakerRef.classList.add('d-none');
+        no_audioRef.classList.remove('d-none');
+        console.log('audio ist aus');
     }
 }
 
 function muteAllSounds(){
-    console.log('muteAllSounds');
     gameSounds.forEach(sound => sound.muted = true);
 }
 
 function unmuteAllSounds(){
-    console.log('unmuteAllsounds');
     gameSounds.forEach(sound => sound.muted = false);
 }
 

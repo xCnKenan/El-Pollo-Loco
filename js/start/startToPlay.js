@@ -5,9 +5,9 @@ let ctxStart;
 let intervallIds = [];
 let animationFrameId = null;
 
-function getFullScreen(){
-    let divRef = document.getElementById('relativeDiv');
-    openFullscreen(divRef);
+function getFullScreen() {
+  let divRef = document.getElementById('relativeDiv');
+  openFullscreen(divRef);
 }
 
 function openFullscreen(elem) {
@@ -24,15 +24,17 @@ function loadStartScreen() {
   screenCanvas = document.getElementById("canvas");
   ctxStart = screenCanvas.getContext("2d");
   mainScreen = new Mainscreen(screenCanvas);
-  // console.log(mainScreen);
-//   boundingRect = screenCanvas.getBoundingClientRect();
-  // addDisplayNone('restart');
-  // addDisplayNone('home');
   checkCharacterEnergy();
+
+  if (localStorage.getItem('gameAudio') === null) {
+    localStorage.setItem('gameAudio', JSON.stringify(true));
+  }
+  let newStatus = JSON.parse(localStorage.getItem('gameAudio'));
+  toggleSoundImg(newStatus);
 }
 
-function checkCharacterEnergy(){
-   if(world){    
+function checkCharacterEnergy() {
+  if (world) {
     world.character.energy = 100;
   } else {
     return;
@@ -55,7 +57,7 @@ function stopDrawLoop() {
   }
 }
 
-function removeEndScreenButtons(){
+function removeEndScreenButtons() {
   addDisplayNone("restart");
   addDisplayNone("home");
 }
@@ -72,7 +74,7 @@ function clearStoppableIntervals() {
   intervallIds.forEach(id => clearInterval(id));
 }
 
-function restartGame(){
+function restartGame() {
   clearStoppableIntervals();
   stopDrawLoop();
   world = null;
@@ -95,22 +97,22 @@ function addDisplayNone(id) {
   idRef.classList.add('d-none');
 }
 
-function toggleOverlay(event){
-    event.stopPropagation(event);
-    let controllsOverlayRef = document.getElementById('controllsOverlay');
-    controllsOverlayRef.classList.toggle('d-none');
+function toggleOverlay(event) {
+  event.stopPropagation(event);
+  let controllsOverlayRef = document.getElementById('controllsOverlay');
+  controllsOverlayRef.classList.toggle('d-none');
 }
 
 function stopPropagation(event) {
   event.stopPropagation(event);
 }
 
-function closeOverlay(){
+function closeOverlay() {
   let controllsOverlayRef = document.getElementById('controllsOverlay');
   controllsOverlayRef.classList.add('d-none');
 }
 
-function backToHomeScreen(){
+function backToHomeScreen() {
   removeDisplayNone("startButton");
   removeDisplayNone("controllsButton");
   addDisplayNone("restart");
