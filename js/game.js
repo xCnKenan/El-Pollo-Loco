@@ -93,4 +93,7 @@ window.addEventListener("keyup", (event)=>{
         initLevel1();
         init();
     }
+    if(event.keyCode == 77){ // M to Mute or unmute Gamesounds
+        toggleAudio();
+    }
 })
