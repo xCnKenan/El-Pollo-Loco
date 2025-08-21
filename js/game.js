@@ -15,6 +15,8 @@ function init(){
         unmuteAllSounds();
     }
     toggleSoundImg(audioStatus);
+    gameMusic.play();
+    gameMusic.loop = true;
 }
 
 function toggleAudio(){

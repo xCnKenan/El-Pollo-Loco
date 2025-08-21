@@ -4,6 +4,7 @@ let coinCollect = new Audio('audio/collect-coin.wav');
 let bottleCollect = new Audio('audio/collect-bottle.wav');
 let throwing = new Audio('audio/throwing.wav');
 let enemy_dead = new Audio('audio/enemy-dead.wav');
+let gameMusic = new Audio('audio/gameMusic.wav');
 
 let gameSounds = [
     pepeHit,
@@ -11,7 +12,8 @@ let gameSounds = [
     coinCollect,
     bottleCollect,
     throwing,
-    enemy_dead
+    enemy_dead,
+    gameMusic
 ];
 
 coinCollect.volume = 0.1;
