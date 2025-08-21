@@ -79,12 +79,13 @@ class World {
         enemy.energy = 0;
         enemy.speed = 0; 
         enemy.isDead();
+        enemy_dead.play();
         setStoppableInterval(() => {
           this.removeItem(enemy, this.level.enemies);
         }, 250);
       } else if (this.character.isColliding(enemy) && !enemy.isDead()) {
         console.log('colliding right left');
-        // pepeHit.play();
+        pepeHit.play();
         this.character.hit();
         this.statusBar.setPercentage(this.character.energy);
       }
@@ -93,7 +94,7 @@ class World {
     // here check if character colliding with bottles
     this.level.bottles.forEach((bottle) => {
       if (this.character.isColliding(bottle)) {
-        // bottleCollect.play();
+        bottleCollect.play();
         this.character.bottleAdded();
         this.statusBarBottle.setPercentage(this.character.amountOfBottles);
         this.removeItem(bottle, this.level.bottles);
@@ -103,7 +104,7 @@ class World {
     // here check if character colliding with coin
     this.level.coins.forEach((coin) => {
       if (this.character.isColliding(coin)) {
-        // coinCollect.play();
+        coinCollect.play();
         this.character.coinsAdded();
         this.statusBarCoins.setPercentage(this.character.amountOfCoins);
         this.removeItem(coin, this.level.coins);
@@ -128,7 +129,7 @@ class World {
         //check if bottle is colliding with enemy
         else if (bottle.isColliding(enemy) && enemy instanceof Chicken || bottle.isColliding(enemy) && enemy instanceof ChickenSmall) {
           this.againstNormalEnemy(bottle, enemy);
-          // enemy_dead.play();
+          enemy_dead.play();
         }
       });
     });
