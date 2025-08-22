@@ -27,6 +27,9 @@ function loadStartScreen() {
   checkCharacterEnergy();
   checkAudioStatus();
   game_over.pause();
+  if(animationFrameId != null){
+    stopDrawLoop();
+  }
 }
 
 function checkAudioStatus() {
