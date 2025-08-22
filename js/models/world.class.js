@@ -7,6 +7,7 @@ let enemy_dead = new Audio("audio/enemy-dead.wav");
 let gameMusic = new Audio("audio/gameMusic.wav");
 let snoring = new Audio("audio/snoring.mp3");
 let endgame_level = new Audio("audio/endgame_level.mp3");
+let attackMode = new Audio("audio/attackMode.mp3");
 
 let gameSounds = [
   pepeHit,
@@ -17,7 +18,8 @@ let gameSounds = [
   enemy_dead,
   gameMusic,
   snoring, 
-  endgame_level
+  endgame_level,
+  attackMode
 ];
 
 coinCollect.volume = 0.1;
