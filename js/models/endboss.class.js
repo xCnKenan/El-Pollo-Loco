@@ -66,7 +66,7 @@ class Endboss extends MovableObject {
 
   animate() {
     setStoppableInterval(() => {
-      if (this.inAlertMode && !this.isDead()) {
+      if (this.inAlertMode && !this.isDead() && !this.isHurt()) {
         this.playAnimation(this.IMAGES_ALERT);
         console.log('in alertmode');
       } else if (this.inAttackMode && !this.isHurt()) {
@@ -76,6 +76,7 @@ class Endboss extends MovableObject {
         this.playAnimation(this.IMAGES_ATTACK);
       } else if (this.isDead()) {
         this.playAnimation(this.IMAGES_DEAD);
+         this.inAttackMode = false;
       } else if (this.isHurt()) {
         this.playAnimation(this.IMAGES_HURT);
         endboss_hit.play();
