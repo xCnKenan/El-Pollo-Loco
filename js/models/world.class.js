@@ -9,6 +9,7 @@ let snoring = new Audio("audio/snoring.mp3");
 let endgame_level = new Audio("audio/endgame_level.mp3");
 let attackMode = new Audio("audio/attackMode.mp3");
 let endboss_hit = new Audio("audio/endboss_hit.mp3");
+let game_over = new Audio("audio/game_over.mp3");
 
 let gameSounds = [
   pepeHit,
@@ -21,13 +22,15 @@ let gameSounds = [
   snoring, 
   endgame_level,
   attackMode,
-  endboss_hit
+  endboss_hit,
+  game_over
 ];
 
 coinCollect.volume = 0.1;
 bottleCollect.volume = 0.5;
 enemy_dead.volume = 0.2;
-gameMusic.volume = 0.4; 
+gameMusic.volume = 0.4;
+game_over.volume = 0.4; 
 snoring.volume = 0.1;
 endgame_level.volume = 0.4;
 
@@ -255,7 +258,12 @@ class World {
 
     // try to render game over img
     if (this.character.isDead()) {
-
+      // here mute all sounds that playing 
+      pepeHit.pause();
+      gameMusic.pause();
+      endgame_level.pause();
+      game_over.play();
+      // here mute all sounds that playing
       setStoppableInterval(()=>{
       clearStoppableIntervals();
       this.endScreenButtons();
