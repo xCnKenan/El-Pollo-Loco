@@ -84,6 +84,9 @@ class Endboss extends MovableObject {
       if (world.character.x >= 3000 && !this.hadFirstContact) {
         this.hadFirstContact = true;
         this.startAlertMode();
+        gameMusic.pause();
+        endgame_level.play();
+        endgame_level.loop = true;
       }
     }, 150);
 

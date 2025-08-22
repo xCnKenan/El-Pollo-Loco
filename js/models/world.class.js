@@ -6,6 +6,7 @@ let throwing = new Audio("audio/throwing.wav");
 let enemy_dead = new Audio("audio/enemy-dead.wav");
 let gameMusic = new Audio("audio/gameMusic.wav");
 let snoring = new Audio("audio/snoring.mp3");
+let endgame_level = new Audio("audio/endgame_level.mp3");
 
 let gameSounds = [
   pepeHit,
@@ -15,7 +16,8 @@ let gameSounds = [
   throwing,
   enemy_dead,
   gameMusic,
-  snoring
+  snoring, 
+  endgame_level
 ];
 
 coinCollect.volume = 0.1;
@@ -23,6 +25,7 @@ bottleCollect.volume = 0.5;
 enemy_dead.volume = 0.2;
 gameMusic.volume = 0.4; 
 snoring.volume = 0.1;
+endgame_level.volume = 0.4;
 
 class World {
   character = new Character();
