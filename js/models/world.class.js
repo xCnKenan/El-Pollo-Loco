@@ -5,6 +5,7 @@ let bottleCollect = new Audio("audio/collect-bottle.wav");
 let throwing = new Audio("audio/throwing.wav");
 let enemy_dead = new Audio("audio/enemy-dead.wav");
 let gameMusic = new Audio("audio/gameMusic.wav");
+let snoring = new Audio("audio/snoring.mp3");
 
 let gameSounds = [
   pepeHit,
@@ -14,11 +15,14 @@ let gameSounds = [
   throwing,
   enemy_dead,
   gameMusic,
+  snoring
 ];
 
 coinCollect.volume = 0.1;
 bottleCollect.volume = 0.5;
 enemy_dead.volume = 0.2;
+gameMusic.volume = 0.4; 
+snoring.volume = 0.1;
 
 class World {
   character = new Character();
@@ -265,7 +269,7 @@ class World {
           clearStoppableIntervals();
           this.endScreenButtons();
           console.log("stopGame");
-        }, 4000);
+        }, 1000);
         this.addObjectsToMap(this.level.youWon);
         console.log("Endboss dead, You Won");
       }

@@ -122,6 +122,8 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_WALKING);
                 this.lastTimeWalking = new Date().getTime();
                 this.speedY = 0;
+            } else if (!this.getSleep()){
+                snoring.pause();
             }
         }, 40);
 
@@ -136,6 +138,8 @@ class Character extends MovableObject {
         setStoppableInterval(() => {
             if (this.getSleep()) {
                 this.playAnimation(this.IMAGES_LONG_IDLE);
+                snoring.play();
+                console.log('character snoring');
             } else if (this.getTired()) {
                 this.playAnimation(this.IMAGES_IDLE);
             }
