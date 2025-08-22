@@ -19,7 +19,7 @@ let gameSounds = [
   throwing,
   enemy_dead,
   gameMusic,
-  snoring, 
+  snoring,
   endgame_level,
   attackMode,
   endboss_hit,
@@ -30,7 +30,7 @@ coinCollect.volume = 0.1;
 bottleCollect.volume = 0.5;
 enemy_dead.volume = 0.2;
 gameMusic.volume = 0.4;
-game_over.volume = 0.4; 
+game_over.volume = 0.4;
 snoring.volume = 0.1;
 endgame_level.volume = 0.4;
 
@@ -170,7 +170,7 @@ class World {
     enemy.energy = 0;
     this.removeItem(bottle, this.throwableObjects);
     enemy.speed = 0;
-    enemy.isDead(); 
+    enemy.isDead();
     setStoppableInterval(() => {
       this.removeItem(enemy, this.level.enemies);
     }, 250);
@@ -265,29 +265,36 @@ class World {
       game_over.play();
       // here mute all sounds that playing
       this.endScreenButtons();
-      setStoppableInterval(()=>{
-      clearStoppableIntervals();
-      // this.endScreenButtons();
+      setStoppableInterval(() => {
+        clearStoppableIntervals();
+        // this.endScreenButtons();
+        console.log('stopgame normal mode');
+
       }, 1000);
       this.addObjectsToMap(this.level.youLost);
       this.keyboard = ''; // no longer availabe
       this.level.enemies.forEach((movableObject) => { // enemys cant move after losing game
-          movableObject.speed = 0;
+        movableObject.speed = 0;
       });
-      
+
     }
 
     // check if enemy is dead and show you won img
-    this.level.enemies.forEach((enemy) => {
+    
+        this.level.enemies.forEach((enemy) => {
       if (enemy.isDead() && enemy instanceof Endboss) {
         this.endScreenButtons();
         setStoppableInterval(() => {
           clearStoppableIntervals();
+          stopDrawLoop();
           // this.endScreenButtons();
-          console.log("stopGame");
+          console.log("stopGame you won");
         }, 1000);
         this.addObjectsToMap(this.level.youWon);
-        console.log("Endboss dead, You Won");
+        this.keyboard = ''; // no longer availabe
+        this.level.enemies.forEach((movableObject) => { // enemys cant move after losing game
+          movableObject.speed = 0;
+        });
       }
     });
   }
