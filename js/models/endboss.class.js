@@ -74,11 +74,11 @@ class Endboss extends MovableObject {
         attackMode.play();
         this.stopMoving();
         this.playAnimation(this.IMAGES_ATTACK);
-        
       } else if (this.isDead()) {
         this.playAnimation(this.IMAGES_DEAD);
       } else if (this.isHurt()) {
         this.playAnimation(this.IMAGES_HURT);
+        endboss_hit.play();
       } else if (this.hadFirstContact){
         this.playAnimation(this.IMAGES_WALKING);
         this.moveLeft();
@@ -118,6 +118,7 @@ class Endboss extends MovableObject {
     this.speed = 5;
     this.x -= this.speed;
     attackMode.pause(); 
+    endboss_hit.pause();
   }
 
   stopMoving(){

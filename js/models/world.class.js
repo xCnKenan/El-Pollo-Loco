@@ -8,6 +8,7 @@ let gameMusic = new Audio("audio/gameMusic.wav");
 let snoring = new Audio("audio/snoring.mp3");
 let endgame_level = new Audio("audio/endgame_level.mp3");
 let attackMode = new Audio("audio/attackMode.mp3");
+let endboss_hit = new Audio("audio/endboss_hit.mp3");
 
 let gameSounds = [
   pepeHit,
@@ -19,7 +20,8 @@ let gameSounds = [
   gameMusic,
   snoring, 
   endgame_level,
-  attackMode
+  attackMode,
+  endboss_hit
 ];
 
 coinCollect.volume = 0.1;
@@ -165,8 +167,7 @@ class World {
     enemy.energy = 0;
     this.removeItem(bottle, this.throwableObjects);
     enemy.speed = 0;
-    enemy.isDead();
-
+    enemy.isDead(); 
     setStoppableInterval(() => {
       this.removeItem(enemy, this.level.enemies);
     }, 250);
