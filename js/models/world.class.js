@@ -264,9 +264,10 @@ class World {
       endgame_level.pause();
       game_over.play();
       // here mute all sounds that playing
+      this.endScreenButtons();
       setStoppableInterval(()=>{
       clearStoppableIntervals();
-      this.endScreenButtons();
+      // this.endScreenButtons();
       }, 1000);
       this.addObjectsToMap(this.level.youLost);
       this.keyboard = ''; // no longer availabe
@@ -279,9 +280,10 @@ class World {
     // check if enemy is dead and show you won img
     this.level.enemies.forEach((enemy) => {
       if (enemy.isDead() && enemy instanceof Endboss) {
+        this.endScreenButtons();
         setStoppableInterval(() => {
           clearStoppableIntervals();
-          this.endScreenButtons();
+          // this.endScreenButtons();
           console.log("stopGame");
         }, 1000);
         this.addObjectsToMap(this.level.youWon);
