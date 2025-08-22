@@ -89,6 +89,8 @@ function restartGame() {
   initLevel1();
   init();
   removeEndScreenButtons();
+  endgame_level.pause();
+  endgame_level.currentTime = 0;
 }
 
 
@@ -123,6 +125,8 @@ function backToHomeScreen() {
   removeDisplayNone("controllsButton");
   addDisplayNone("restart");
   addDisplayNone("home");
+  endgame_level.pause();
+  endgame_level.currentTime = 0;
 }
 
 function removeDisplayNone(id) {
