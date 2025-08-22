@@ -1,108 +1,117 @@
 <!DOCTYPE html>
 <html lang="de" translate="no">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>El Pollo Loco</title>
 
-    <link rel="stylesheet" href="style.css" />
-    <link rel="icon" type="image/x-icon" href="img/9_intro_outro_screens/start/startscreen_1.png">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>El Pollo Loco</title>
 
-    <script src="js/models/drawableObject.class.js"></script>
-    <script src="js/models/movable-object.class.js"></script>
-    <script src="js/models/character.class.js"></script>
-    <script src="js/models/chicken.class.js"></script>
-    <script src="js/models/chicken.small.class.js"></script>
-    <script src="js/models/cloud.class.js"></script>
-    <script src="js/models/statusbar.class.js"></script>
-    <script src="js/models/statusbar-bottle.class.js"></script>
-    <script src="js/models/statusbar-coins.class.js"></script>
-    <script src="js/models/statusbar-endboss.class.js"></script>
-    <script src="js/models/world.class.js"></script>
-    <script src="js/models/background-object.class.js"></script>
-    <script src="js/models/you_lost.class.js"></script>
-    <script src="js/models/you_won.class.js"></script>
-    <script src="js/models/keyboard.class.js"></script>
-    <script src="js/models/level.class.js"></script>
-    <script src="js/models/endboss.class.js"></script>
-    <script src="js/models/throwableObject.class.js"></script>
-    <script src="js/models/bottleOnGround.class.js"></script>
-    <script src="js/models/coins.class.js"></script>
-    <script src="levels/level1.js"></script>
-    <!-- <script src="levels/level2.js"></script> -->
-    <script src="js/game.js"></script>
-    <!-- für den startbildschirm -->
-     <script src="js/start/mainScreen.class.js"></script>
-     <script src="js/start/buttons.class.js"></script>
-     <script src="js/start/startGame.class.js"></script>
-     <script src="js/start/controlls.class.js"></script>
-     <script src="js/start/backgroundImage.class.js"></script>
-    <script src="js/start/startToPlay.js"></script>
-  </head>
-  <!-- <body onload="initLevel1(); init()"> -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/x-icon" href="img/9_intro_outro_screens/start/startscreen_1.png">
 
-  <!-- <body onclick="closeOverlay()"> -->
-  <body onload="loadStartScreen()" onclick="closeOverlay()">
-    <h1>El Pollo Loco</h1>
+  <script src="js/models/drawableObject.class.js"></script>
+  <script src="js/models/movable-object.class.js"></script>
+  <script src="js/models/character.class.js"></script>
+  <script src="js/models/chicken.class.js"></script>
+  <script src="js/models/chicken.small.class.js"></script>
+  <script src="js/models/cloud.class.js"></script>
+  <script src="js/models/statusbar.class.js"></script>
+  <script src="js/models/statusbar-bottle.class.js"></script>
+  <script src="js/models/statusbar-coins.class.js"></script>
+  <script src="js/models/statusbar-endboss.class.js"></script>
+  <script src="js/models/world.class.js"></script>
+  <script src="js/models/background-object.class.js"></script>
+  <script src="js/models/you_lost.class.js"></script>
+  <script src="js/models/you_won.class.js"></script>
+  <script src="js/models/keyboard.class.js"></script>
+  <script src="js/models/level.class.js"></script>
+  <script src="js/models/endboss.class.js"></script>
+  <script src="js/models/throwableObject.class.js"></script>
+  <script src="js/models/bottleOnGround.class.js"></script>
+  <script src="js/models/coins.class.js"></script>
+  <script src="levels/level1.js"></script>
+  <!-- <script src="levels/level2.js"></script> -->
+  <script src="js/game.js"></script>
+  <!-- für den startbildschirm -->
+  <script src="js/start/mainScreen.class.js"></script>
+  <script src="js/start/buttons.class.js"></script>
+  <script src="js/start/startGame.class.js"></script>
+  <script src="js/start/controlls.class.js"></script>
+  <script src="js/start/backgroundImage.class.js"></script>
+  <script src="js/start/startToPlay.js"></script>
+</head>
+<!-- <body onload="initLevel1(); init()"> -->
 
-    <div id="relativeDiv" class="relativeDiv">
-      <!-- overlay for keybinds -->
-      <div id="controllsOverlay" class="controllsOverlay d-none" onclick="stopPropagation(event)">
+<!-- <body onclick="closeOverlay()"> -->
 
-            <div class="closeOverlay">
+<body onload="loadStartScreen()" onclick="closeOverlay()">
+  <h1>El Pollo Loco</h1>
 
-                <h2>Controls</h2>
+  <!-- try to show turn your device video -->
+  <video id="turnYourDevice" class="turnYourDevice d-none" autoplay muted loop>
+    <source src="video/turn-your-device.mp4" type="video/mp4">
+  </video>
 
-                <img onclick="toggleOverlay(event)" class="closeIcon" src="icons/close.png" alt="">
-            </div>
+  <div id="relativeDiv" class="relativeDiv">
 
-              <section class="keyControlls">
-                <div class="sectionButtons">
-                    <img class="keybindsButton" src="../img/keybinds/left-arrow.png" alt="left-arrow">
-                    <span class="infoKeybind">Move Left</span>
-                </div>
+    <!-- overlay for keybinds -->
+    <div id="controllsOverlay" class="controllsOverlay d-none" onclick="stopPropagation(event)">
 
-                <div class="sectionButtons"> 
-                    <img class="keybindsButton" src="../img/keybinds/right-arrow.png" alt="right-arrow">
-                    <span class="infoKeybind">Move Right</span>
-                </div>
+      <div class="closeOverlay">
 
-                <div class="sectionButtons">
-                    <img class="keybindsButton" src="../img/keybinds/space.png" alt="space">
-                    <span class="infoKeybind">Jump</span>
-                </div>
+        <h2>Controls</h2>
 
-                <div class="sectionButtons">
-                    <img class="keybindsButton" src="../img/keybinds/letter-d.png" alt="letter-d">
-                    <span class="infoKeybind">Throw Bottle</span>
-                </div>
-
-                <div class="sectionButtons">
-                    <img class="keybindsButton" src="../img/keybinds/letter-m.png" alt="letter-d">
-                    <span class="infoKeybind">Game Sound</span>
-                </div>
-              </section>
-
-        </div>
-      <!-- game -->
-      <canvas id="canvas" width="720" height="480"></canvas>
-      <!-- startscreen buttons -->
-      <div id="buttonsFromStart">
-                <button id="startButton" class="startButton" onclick="removeButtons();initLevel1(); init()">Start</button>
-                <button id="controllsButton" class="startButton" onclick="toggleOverlay(event)">Controls</button>
-            </div>
-
-      <div id="endScreenButtons">
-                <button id="restart" class="startButton d-none" onclick="restartGame()">Restart</button>
-                <button id="home" class="startButton d-none" onclick="loadStartScreen(); backToHomeScreen()">Home</button>
-            </div>      
-
-      <div class="settingsSection">
-        <img onclick="getFullScreen()" class="fullscreenMode" src="icons/fullscreen.png" alt="" />
-
-        <img onclick="toggleAudio()" id="speaker" class="speakerSettings" src="icons/speaker.png" alt="" />
-        <img onclick="toggleAudio()" id="no-audio" class="speakerSettings" src="icons/no-audio.png" alt="" />
+        <img onclick="toggleOverlay(event)" class="closeIcon" src="icons/close.png" alt="">
       </div>
+
+      <section class="keyControlls">
+        <div class="sectionButtons">
+          <img class="keybindsButton" src="../img/keybinds/left-arrow.png" alt="left-arrow">
+          <span class="infoKeybind">Move Left</span>
+        </div>
+
+        <div class="sectionButtons">
+          <img class="keybindsButton" src="../img/keybinds/right-arrow.png" alt="right-arrow">
+          <span class="infoKeybind">Move Right</span>
+        </div>
+
+        <div class="sectionButtons">
+          <img class="keybindsButton" src="../img/keybinds/space.png" alt="space">
+          <span class="infoKeybind">Jump</span>
+        </div>
+
+        <div class="sectionButtons">
+          <img class="keybindsButton" src="../img/keybinds/letter-d.png" alt="letter-d">
+          <span class="infoKeybind">Throw Bottle</span>
+        </div>
+
+        <div class="sectionButtons">
+          <img class="keybindsButton" src="../img/keybinds/letter-m.png" alt="letter-d">
+          <span class="infoKeybind">Game Sound</span>
+        </div>
+      </section>
+
     </div>
-  </body>
+    <!-- game -->
+    <canvas id="canvas" width="720" height="480"></canvas>
+    <!-- startscreen buttons -->
+    <div id="buttonsFromStart">
+      <button id="startButton" class="startButton" onclick="removeButtons();initLevel1(); init()">Start</button>
+      <button id="controllsButton" class="startButton" onclick="toggleOverlay(event)">Controls</button>
+    </div>
+
+    <div id="endScreenButtons">
+      <button id="restart" class="startButton d-none" onclick="restartGame()">Restart</button>
+      <button id="home" class="startButton d-none" onclick="loadStartScreen(); backToHomeScreen()">Home</button>
+    </div>
+
+    <div class="settingsSection">
+      <img onclick="getFullScreen()" class="fullscreenMode" src="icons/fullscreen.png" alt="" />
+
+      <img onclick="toggleAudio()" id="speaker" class="speakerSettings" src="icons/speaker.png" alt="" />
+      <img onclick="toggleAudio()" id="no-audio" class="speakerSettings" src="icons/no-audio.png" alt="" />
+    </div>
+  </div>
+</body>
+
 </html>

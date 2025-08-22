@@ -259,6 +259,8 @@ class World {
     // try to render game over img
     if (this.character.isDead()) {
       this.stopSounds();
+      game_over.loop = false; // try to play just one time 
+      game_over.play();
       this.gameEnding(this.level.youLost);
     }
     // check if enemy is dead and show you won img
@@ -285,7 +287,6 @@ class World {
     pepeHit.pause();
     gameMusic.pause();
     endgame_level.pause();
-    game_over.play();
   }
 
   endScreenButtons() {
