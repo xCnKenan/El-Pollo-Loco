@@ -265,7 +265,7 @@ class World {
           clearStoppableIntervals();
           this.endScreenButtons();
           console.log("stopGame");
-        }, 1000);
+        }, 4000);
         this.addObjectsToMap(this.level.youWon);
         console.log("Endboss dead, You Won");
       }

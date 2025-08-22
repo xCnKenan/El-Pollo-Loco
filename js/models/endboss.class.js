@@ -89,7 +89,9 @@ class Endboss extends MovableObject {
 
     setStoppableInterval(() => {
         if(this.hadFirstContact) {
-          this.inAttackMode = true;
+          if(!this.isDead()){
+            this.inAttackMode = true;  
+          }
         }
       setTimeout(() => {
             this.inAttackMode = false;
