@@ -204,6 +204,23 @@ h2 {
   }
 }
 
+@media (max-width: 600px){
+  .startButton{
+    font-size: 18px;
+    height: 32px;
+  }
+}
+
+@media (max-width: 500px){
+  #buttonsFromStart{
+    top: 16px;
+  }
+
+  #endScreenButtons{
+    bottom: 56px;
+  }
+}
+
 /* Smartphones---- */
 @media only screen and (max-height: 480px) {
   canvas {
