@@ -258,37 +258,34 @@ class World {
 
     // try to render game over img
     if (this.character.isDead()) {
-      pepeHit.pause();
-      gameMusic.pause();
-      endgame_level.pause();
-      game_over.play();
-      this.endScreenButtons();
-      setStoppableInterval(() => {
-        clearStoppableIntervals();
-      }, 1000);
-      this.addObjectsToMap(this.level.youLost);
-      this.keyboard = ''; // no longer availabe
-      this.level.enemies.forEach((movableObject) => { // enemys cant move after losing game
-        movableObject.speed = 0;
-      });
-
+      this.stopSounds();
+      this.gameEnding(this.level.youLost);
     }
-
     // check if enemy is dead and show you won img
-        this.level.enemies.forEach((enemy) => {
+    this.level.enemies.forEach((enemy) => {
       if (enemy.isDead() && enemy instanceof Endboss) {
-        this.endScreenButtons();
+        this.gameEnding(this.level.youWon);
+      }
+    });
+  }
+
+  gameEnding(status){
+     this.endScreenButtons();
         setStoppableInterval(() => {
           clearStoppableIntervals();
-          console.log("stopGame you won");
         }, 1000);
-        this.addObjectsToMap(this.level.youWon);
+        this.addObjectsToMap(status);
         this.keyboard = ''; // no longer availabe
         this.level.enemies.forEach((movableObject) => { // enemys cant move after losing game
           movableObject.speed = 0;
         });
-      }
-    });
+  }
+
+  stopSounds() {
+    pepeHit.pause();
+    gameMusic.pause();
+    endgame_level.pause();
+    game_over.play();
   }
 
   endScreenButtons() {
