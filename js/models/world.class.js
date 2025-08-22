@@ -247,11 +247,14 @@ class World {
     if (this.character.isDead()) {
 
       setStoppableInterval(()=>{
-        
       clearStoppableIntervals();
       this.endScreenButtons();
       }, 1000);
       this.addObjectsToMap(this.level.youLost);
+      this.keyboard = ''; // no longer availabe
+      this.level.enemies.forEach((movableObject) => { // enemys cant move after losing game
+          movableObject.speed = 0;
+      });
       
     }
 
