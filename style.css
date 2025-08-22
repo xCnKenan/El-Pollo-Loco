@@ -192,9 +192,9 @@ h2 {
 }
 
 @media (max-width: 768px){
-  .turnYourDevice{
+  /* .turnYourDevice{
     display: block !important;
-  }
+  } */
 }
 
 /* Smartphones---- */
