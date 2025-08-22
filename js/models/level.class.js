@@ -6,10 +6,10 @@ class Level{
     bottles;
     level_end_x = 720*5; // 3600
     youLost;
-    youWon; 
+    youWon;
 
 
-    constructor(enemies, clouds, backgroundObject, bottles, coins, youLost, youWon, gameSounds){
+    constructor(enemies, clouds, backgroundObject, bottles, coins, youLost, youWon){
         this.enemies = enemies;
         this.clouds = clouds;
         this.backgroundObject = backgroundObject;

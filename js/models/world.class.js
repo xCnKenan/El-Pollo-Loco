@@ -10,6 +10,7 @@ let endgame_level = new Audio("audio/endgame_level.mp3");
 let attackMode = new Audio("audio/attackMode.mp3");
 let endboss_hit = new Audio("audio/endboss_hit.mp3");
 let game_over = new Audio("audio/game_over.mp3");
+let success = new Audio("audio/you-win.m4a");
 
 let gameSounds = [
   pepeHit,
@@ -23,7 +24,8 @@ let gameSounds = [
   endgame_level,
   attackMode,
   endboss_hit,
-  game_over
+  game_over,
+  success,
 ];
 
 coinCollect.volume = 0.1;
@@ -33,6 +35,8 @@ gameMusic.volume = 0.4;
 game_over.volume = 0.4;
 snoring.volume = 0.1;
 endgame_level.volume = 0.4;
+game_overPlayed = false;
+successPlayed = false;
 
 class World {
   character = new Character();
@@ -259,28 +263,40 @@ class World {
     // try to render game over img
     if (this.character.isDead()) {
       this.stopSounds();
-      game_over.loop = false; // try to play just one time 
-      game_over.play();
+      this.youLoseSound();
       this.gameEnding(this.level.youLost);
     }
     // check if enemy is dead and show you won img
     this.level.enemies.forEach((enemy) => {
       if (enemy.isDead() && enemy instanceof Endboss) {
+        this.stopSounds();
+        if(!successPlayed){
+          success.play();
+          successPlayed = true;
+        }
         this.gameEnding(this.level.youWon);
       }
     });
   }
 
-  gameEnding(status){
-     this.endScreenButtons();
-        setStoppableInterval(() => {
-          clearStoppableIntervals();
-        }, 1000);
-        this.addObjectsToMap(status);
-        this.keyboard = ''; // no longer availabe
-        this.level.enemies.forEach((movableObject) => { // enemys cant move after losing game
-          movableObject.speed = 0;
-        });
+  youLoseSound() {
+    if (!game_overPlayed) {
+      game_over.play();
+      game_overPlayed = true;
+    }
+  }
+
+  gameEnding(status) {
+    this.endScreenButtons();
+    setStoppableInterval(() => {
+      clearStoppableIntervals();
+    }, 1000);
+    this.addObjectsToMap(status);
+    this.keyboard = ""; // no longer availabe
+    this.level.enemies.forEach((movableObject) => {
+      // enemys cant move after losing game
+      movableObject.speed = 0;
+    });
   }
 
   stopSounds() {

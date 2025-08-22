@@ -27,6 +27,8 @@ function loadStartScreen() {
   checkCharacterEnergy();
   checkAudioStatus();
   game_over.pause();
+  success.pause();
+  success.currentTime = 0;
   if(animationFrameId != null){
     stopDrawLoop();
   }
@@ -91,6 +93,8 @@ function restartGame() {
   removeEndScreenButtons();
   endgame_level.pause();
   endgame_level.currentTime = 0;
+  success.pause();
+  success.currentTime = 0;
 }
 
 
