@@ -26,6 +26,7 @@ function loadStartScreen() {
   mainScreen = new Mainscreen(screenCanvas);
   checkCharacterEnergy();
   checkAudioStatus();
+  game_over.pause();
 }
 
 function checkAudioStatus() {
