@@ -1,25 +1,24 @@
-let pepeHit = new Audio('audio/pepe_hit.wav');
-let pepeJump = new Audio('audio/pepe_jump.wav');
-let coinCollect = new Audio('audio/collect-coin.wav');
-let bottleCollect = new Audio('audio/collect-bottle.wav');
-let throwing = new Audio('audio/throwing.wav');
-let enemy_dead = new Audio('audio/enemy-dead.wav');
-let gameMusic = new Audio('audio/gameMusic.wav');
+let pepeHit = new Audio("audio/pepe_hit.wav");
+let pepeJump = new Audio("audio/pepe_jump.wav");
+let coinCollect = new Audio("audio/collect-coin.wav");
+let bottleCollect = new Audio("audio/collect-bottle.wav");
+let throwing = new Audio("audio/throwing.wav");
+let enemy_dead = new Audio("audio/enemy-dead.wav");
+let gameMusic = new Audio("audio/gameMusic.wav");
 
 let gameSounds = [
-    pepeHit,
-    pepeJump,
-    coinCollect,
-    bottleCollect,
-    throwing,
-    enemy_dead,
-    gameMusic
+  pepeHit,
+  pepeJump,
+  coinCollect,
+  bottleCollect,
+  throwing,
+  enemy_dead,
+  gameMusic,
 ];
 
 coinCollect.volume = 0.1;
 bottleCollect.volume = 0.5;
 enemy_dead.volume = 0.2;
-
 
 class World {
   character = new Character();
@@ -85,17 +84,21 @@ class World {
   checkCollisions() {
     // here check if character colliding with enemy
     this.level.enemies.forEach((enemy) => {
-      if (this.character.jumpCollision(enemy) && enemy instanceof Chicken || this.character.jumpCollision(enemy) && enemy instanceof ChickenSmall) { // try to kill enemy when jumping on them
-        console.log('colliding top');
+      if (
+        (this.character.jumpCollision(enemy) && enemy instanceof Chicken) ||
+        (this.character.jumpCollision(enemy) && enemy instanceof ChickenSmall)
+      ) {
+        // try to kill enemy when jumping on them
+        console.log("colliding top");
         enemy.energy = 0;
-        enemy.speed = 0; 
+        enemy.speed = 0;
         enemy.isDead();
         enemy_dead.play();
         setStoppableInterval(() => {
           this.removeItem(enemy, this.level.enemies);
         }, 250);
       } else if (this.character.isColliding(enemy) && !enemy.isDead()) {
-        console.log('colliding right left');
+        console.log("colliding right left");
         pepeHit.play();
         this.character.hit();
         this.statusBar.setPercentage(this.character.energy);
@@ -138,7 +141,10 @@ class World {
           this.againstFinalBoss(bottle, enemy);
         }
         //check if bottle is colliding with enemy
-        else if (bottle.isColliding(enemy) && enemy instanceof Chicken || bottle.isColliding(enemy) && enemy instanceof ChickenSmall) {
+        else if (
+          (bottle.isColliding(enemy) && enemy instanceof Chicken) ||
+          (bottle.isColliding(enemy) && enemy instanceof ChickenSmall)
+        ) {
           this.againstNormalEnemy(bottle, enemy);
           enemy_dead.play();
         }
@@ -172,12 +178,12 @@ class World {
   }
 
   startDrawLoop() {
-  let loop = () => {
-    this.draw();
-    animationFrameId = requestAnimationFrame(loop);
-  };
-  loop();
-}
+    let loop = () => {
+      this.draw();
+      animationFrameId = requestAnimationFrame(loop);
+    };
+    loop();
+  }
 
   draw() {
     //clear old Frames
@@ -237,11 +243,16 @@ class World {
     // ctx wird in gegenrichtung verschoben
     this.ctx.translate(-this.camera_x, 0);
 
-    // try to render game over img 
+    // try to render game over img
     if (this.character.isDead()) {
-      this.addObjectsToMap(this.level.youLost);
+
+      setStoppableInterval(()=>{
+        
       clearStoppableIntervals();
       this.endScreenButtons();
+      }, 1000);
+      this.addObjectsToMap(this.level.youLost);
+      
     }
 
     // check if enemy is dead and show you won img
@@ -250,21 +261,20 @@ class World {
         setStoppableInterval(() => {
           clearStoppableIntervals();
           this.endScreenButtons();
-          console.log('stopGame');
+          console.log("stopGame");
         }, 1000);
         this.addObjectsToMap(this.level.youWon);
-        console.log('Endboss dead, You Won');
+        console.log("Endboss dead, You Won");
       }
-    })
-
+    });
   }
 
-  endScreenButtons(){
-    let restartRef = document.getElementById('restart');
-    restartRef.classList.remove('d-none');
+  endScreenButtons() {
+    let restartRef = document.getElementById("restart");
+    restartRef.classList.remove("d-none");
 
-    let homeRef = document.getElementById('home');
-    homeRef.classList.remove('d-none');
+    let homeRef = document.getElementById("home");
+    homeRef.classList.remove("d-none");
   }
 
   addObjectsToMap(objects) {
