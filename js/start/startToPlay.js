@@ -97,12 +97,6 @@ function restartGame() {
   success.currentTime = 0;
 }
 
-
-
-
-
-
-
 function addDisplayNone(id) {
   let idRef = document.getElementById(id);
   // idRef.remove();

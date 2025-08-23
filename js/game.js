@@ -107,3 +107,36 @@ window.addEventListener("keyup", (event)=>{
         toggleAudio();
     }
 })
+
+// test mobile version
+window.addEventListener("load", checkMobileButtons);
+window.addEventListener("resize", checkMobileButtons);
+
+function checkMobileButtons() {
+    let isMobile = window.matchMedia("(max-width: 768px) and (orientation: landscape)").matches;
+
+    let isTablet = window.matchMedia("(max-width: 1024px) and (orientation: landscape)").matches;
+
+    if (isMobile || isTablet) {
+        document.getElementById("mobileButtons").style.display = "flex";
+        bindMobileButtons();
+    } else {
+        document.getElementById("mobileButtons").style.display = "none";
+    }
+}
+
+function bindMobileButtons() {
+    addButtonEvents("btn-left", "LEFT");
+    addButtonEvents("btn-right", "RIGHT");
+    addButtonEvents("btn-space", "SPACE");
+    addButtonEvents("btn-d", "D");
+}
+
+function addButtonEvents(elementId, key) {
+    let elementIdRef = document.getElementById(elementId);
+    elementIdRef.addEventListener("touchstart", () => keyboard[key] = true);
+    elementIdRef.addEventListener("mousedown", () => keyboard[key] = true);
+    elementIdRef.addEventListener("touchend", () => keyboard[key] = false);
+    elementIdRef.addEventListener("mouseup", () => keyboard[key] = false);
+    elementIdRef.addEventListener("mouseleave", () => keyboard[key] = false);
+}
