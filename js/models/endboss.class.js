@@ -1,3 +1,7 @@
+/**
+ * Represents the final boss enemy in the game.
+ * Extends MovableObject and handles animations, movement, and attack behavior.
+ */
 class Endboss extends MovableObject {
   height = 400;
   width = 400;
@@ -38,7 +42,6 @@ class Endboss extends MovableObject {
     "img/4_enemie_boss_chicken/3_attack/G19.png",
     "img/4_enemie_boss_chicken/3_attack/G20.png",
   ];
-
   offset = {
     top: 70,
     left: 60,
@@ -50,6 +53,9 @@ class Endboss extends MovableObject {
   inAlertMode = false;
   inAttackMode = false;
 
+  /**
+   * Initializes the endboss by loading all animation images and starting animation.
+   */
   constructor() {
     super().loadImage(this.IMAGES_WALKING[0]);
     this.loadImages(this.IMAGES_WALKING);
@@ -61,13 +67,14 @@ class Endboss extends MovableObject {
     this.animate();
   }
 
+  /**
+   * Animates the endboss based on its state (walking, alert, attacking, hurt, or dead).
+   */
   animate() {
     setStoppableInterval(() => {
       if (this.inAlertMode && !this.isDead() && !this.isHurt()) {
         this.playAnimation(this.IMAGES_ALERT);
-        console.log("in alertmode");
       } else if (this.inAttackMode && !this.isHurt()) {
-        console.log("in attackMode");
         attackMode.play();
         this.stopMoving();
         this.playAnimation(this.IMAGES_ATTACK);
@@ -81,7 +88,6 @@ class Endboss extends MovableObject {
         this.playAnimation(this.IMAGES_WALKING);
         this.moveLeft();
       }
-
       if (world.character.x >= 3000 && !this.hadFirstContact) {
         this.hadFirstContact = true;
         this.startAlertMode();
@@ -91,6 +97,14 @@ class Endboss extends MovableObject {
       }
     }, 150);
 
+    /**
+     * Sets a repeating interval to control the endboss's attack mode.
+     * Every 5 seconds, if the endboss has had first contact and is not dead,
+     * it enters attack mode for 1.2 seconds.
+     *
+     * @fires setStoppableInterval
+     * @fires setTimeout
+     */
     setStoppableInterval(() => {
       if (this.hadFirstContact) {
         if (!this.isDead()) {
@@ -103,15 +117,20 @@ class Endboss extends MovableObject {
     }, 5000);
   }
 
+  /**
+   * Activates alert mode for a short duration.
+   */
   startAlertMode() {
     this.inAlertMode = true;
-    console.log("alertmode", this.inAlertMode);
-
     setTimeout(() => {
       this.inAlertMode = false;
     }, 1500);
   }
 
+  /**
+   * Moves the endboss to the left with increased speed.
+   * Pauses attack and hit sounds.
+   */
   moveLeft() {
     this.speed = 5;
     this.x -= this.speed;
@@ -119,6 +138,9 @@ class Endboss extends MovableObject {
     endboss_hit.pause();
   }
 
+  /**
+   * Stops the endboss movement.
+   */
   stopMoving() {
     this.speed = 0;
   }
