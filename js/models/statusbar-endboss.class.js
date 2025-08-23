@@ -1,3 +1,8 @@
+/**
+ * Represents the Endboss health status bar.
+ * Displays different images depending on the current Endboss health percentage.
+ * Extends {@link DrawableObject}.
+ */
 class StatusBarEndboss extends DrawableObject {
   IMAGES_STATUSBAR_ENDBOSS = [
     "img/7_statusbars/2_statusbar_endboss/orange/orange0.png",
@@ -9,6 +14,12 @@ class StatusBarEndboss extends DrawableObject {
   ];
   percentage = 100;
 
+  /**
+   * Creates a new Endboss status bar instance, loads images, and sets default position and size.
+   * Initializes the bar with the default percentage.
+   *
+   * @constructor
+   */
   constructor() {
     super().loadImages(this.IMAGES_STATUSBAR_ENDBOSS);
     this.x = 480;
@@ -18,7 +29,12 @@ class StatusBarEndboss extends DrawableObject {
     this.setPercentage(this.percentage);
   }
 
-  //setPercentage(50)
+  /**
+   * Updates the Endboss status bar to reflect the current percentage.
+   *
+   * @param {number} percentage - The current Endboss health percentage (0–100).
+   * @returns {void}
+   */
   setPercentage(percentage) {
     this.percentage = percentage; // => 0...5
     // console.log('current status health', this.percentage);
@@ -26,6 +42,11 @@ class StatusBarEndboss extends DrawableObject {
     this.img = this.imageCache[path];
   }
 
+  /**
+   * Resolves the correct image index based on the current Endboss health percentage.
+   *
+   * @returns {number} The index of the corresponding status bar image.
+   */
   resolveImageIndex() {
     if (this.percentage == 100) {
       return 5;

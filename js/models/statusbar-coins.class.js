@@ -1,3 +1,8 @@
+/**
+ * Represents the coin collection status bar of the character.
+ * Displays different images depending on the number of collected coins.
+ * Extends {@link DrawableObject}.
+ */
 class StatusBarCoins extends DrawableObject {
   IMAGES_STATUSBAR_COINS = [
     "img/7_statusbars/1_statusbar/1_statusbar_coin/blue/0.png",
@@ -9,6 +14,12 @@ class StatusBarCoins extends DrawableObject {
   ];
   percentage = 100;
 
+   /**
+   * Creates a new coin status bar instance, loads images, and sets default position and size.
+   * Initializes the bar to show 0 coins collected.
+   *
+   * @constructor
+   */
   constructor() {
     super().loadImages(this.IMAGES_STATUSBAR_COINS);
     this.x = 30;
@@ -18,7 +29,12 @@ class StatusBarCoins extends DrawableObject {
     this.setPercentage(0);
   }
 
-  //setPercentage(50)
+   /**
+   * Updates the coin status bar based on the current number of collected coins.
+   *
+   * @param {number} amountOfCoins - Number of coins collected by the character (0–5).
+   * @returns {void}
+   */
   setPercentage(amountOfCoins) {
     this.amountOfCoins = amountOfCoins; // => 0...5
     // console.log('current status coins', this.amountOfCoins);
@@ -26,6 +42,11 @@ class StatusBarCoins extends DrawableObject {
     this.img = this.imageCache[path];
   }
 
+  /**
+   * Resolves the correct image index based on the number of collected coins.
+   *
+   * @returns {number} The index of the corresponding coin status bar image.
+   */
   resolveImageIndex() {
     if (this.amountOfCoins >= 5) {
       return 5;
