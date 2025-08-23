@@ -1,13 +1,16 @@
 let canvas;
 let world;
-
 let keyboard = new Keyboard();
 
 function init() {
   canvas = document.getElementById("canvas");
   world = new World(canvas, keyboard);
-  // console.log('My Character is', world.character);
-  // console.log('All Data', world);
+  checkAudioOnload();
+  startGameMusicFromBeginning();
+  removeDisplayNone("mobileButtons");
+}
+
+function checkAudioOnload() {
   let audioStatus = JSON.parse(localStorage.getItem("gameAudio"));
   if (!audioStatus) {
     muteAllSounds();
@@ -15,13 +18,13 @@ function init() {
     unmuteAllSounds();
   }
   toggleSoundImg(audioStatus);
+}
+
+function startGameMusicFromBeginning() {
   gameMusic.play();
   gameMusic.loop = true;
   game_over.currentTime = 0;
   game_over.pause();
-
-  let mobileButtonsRef = document.getElementById("mobileButtons");
-  mobileButtonsRef.classList.remove("d-none");
 }
 
 // desktop version
@@ -39,28 +42,30 @@ function toggleAudio() {
 }
 
 function toggleSoundImg(newStatus) {
-  let speakerRef = document.getElementById("speaker");
-  let no_audioRef = document.getElementById("no-audio");
-
-  let speakerRefMobile = document.getElementById("speakerMobile");
-  let no_audioRefMobile = document.getElementById("no-audioMobile");
-
   if (newStatus) {
-    speakerRef.classList.remove("d-none");
-    no_audioRef.classList.add("d-none");
-
-    speakerRefMobile.classList.remove("d-none");
-    no_audioRefMobile.classList.add("d-none");
+    removeImg("speaker");
+    addImg("no-audio");
+    removeImg("speakerMobile");
+    addImg("no-audioMobile");
   } else if (!newStatus) {
-    speakerRef.classList.add("d-none");
-    no_audioRef.classList.remove("d-none");
-
-    speakerRefMobile.classList.add("d-none");
-    no_audioRefMobile.classList.remove("d-none");
+    addImg("speaker");
+    removeImg("no-audio");
+    addImg("speakerMobile");
+    removeImg("no-audioMobile");
   }
 }
 
-function toggleAudioMobile() {}
+function addImg(id) {
+  let idRef = document.getElementById(id);
+  if (!idRef) return;
+  idRef.classList.add("d-none");
+}
+
+function removeImg(id) {
+  let idRef = document.getElementById(id);
+  if (!idRef) return;
+  idRef.classList.remove("d-none");
+}
 
 function muteAllSounds() {
   gameSounds.forEach((sound) => (sound.muted = true));
@@ -95,9 +100,6 @@ window.addEventListener("keydown", (event) => {
     // d
     keyboard.D = true;
   }
-  if (event.keyCode == 13) {
-    keyboard.ENTER = true; // startgame enter
-  }
 });
 
 window.addEventListener("keyup", (event) => {
@@ -125,16 +127,8 @@ window.addEventListener("keyup", (event) => {
     // d
     keyboard.D = false;
   }
-  if (event.keyCode == 13) {
-    // remove after collision detection works
-    keyboard.ENTER = false; // startgame enter
-    removeButtons();
-    initLevel1();
-    init();
-  }
   if (event.keyCode == 77) {
-    // M to Mute or unmute Gamesounds
-    toggleAudio();
+    toggleAudio(); // M to Mute or unmute Gamesounds
   }
 });
 
