@@ -1,7 +1,5 @@
 * {
   margin: 0;
-  /* see her which elements leads to scroll */
-  outline: 1px solid red; 
 } 
 
 @font-face {
@@ -209,9 +207,23 @@ h2 {
   object-fit: contain;
 }
 
+@media (max-width: 1024px) and (min-height:768px){
+  .mobileButtons{
+    bottom: 48px;
+  }
+}
+
 @media (max-width: 768px){
   .turnYourDevice{
     display: block !important;
+  }
+}
+
+/* Smartphones---- */
+@media only screen and (max-width: 720px) {
+  canvas {
+    /* width: 100%; */
+    width: 100vw;
   }
 }
 
@@ -221,14 +233,6 @@ h2 {
   }
 
   canvas{
-    width: 100vw;
-  }
-}
-
-/* Smartphones---- */
-@media only screen and (max-width: 720px) {
-  canvas {
-    /* width: 100%; */
     width: 100vw;
   }
 }
