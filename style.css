@@ -210,9 +210,19 @@ h2 {
 }
 
 @media (max-width: 768px){
-  /* .turnYourDevice{
+  .turnYourDevice{
     display: block !important;
-  } */
+  }
+}
+
+@media (max-height: 768px) and (max-height:600px){
+  .turnYourDevice{
+    display: none !important;
+  }
+
+  canvas{
+    width: 100vw;
+  }
 }
 
 /* Smartphones---- */
