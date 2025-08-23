@@ -1,6 +1,6 @@
 * {
   margin: 0;
-} 
+}
 
 @font-face {
   font-family: "zabars";
@@ -71,7 +71,7 @@ canvas {
   justify-content: space-around;
 }
 
-#endScreenButtons{
+#endScreenButtons {
   width: 100%;
   position: absolute;
   bottom: 64px;
@@ -180,10 +180,9 @@ h2 {
   height: 100%;
 }
 
-
 /* all elements fit to display size */
 
-.turnYourDevice{
+.turnYourDevice {
   width: 100%;
   position: fixed;
   top: 0;
@@ -193,7 +192,7 @@ h2 {
   object-fit: cover;
 }
 
-.mobileButtons{
+.mobileButtons {
   position: absolute;
   /* bottom: 48px; */
   bottom: 8px;
@@ -203,25 +202,36 @@ h2 {
   align-items: center;
 }
 
-.mobilekeybinds{
+.mobilekeybinds {
   height: 64px;
   object-fit: contain;
 }
 
-@media (max-width: 1024px) and (min-height: 900px){
-  .mobileButtons{
+.mobileSettingsSection {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}
+
+.mobileAudio{
+  height: 32px;
+  object-fit: contain;
+}
+
+@media (max-width: 1024px) and (min-height: 900px) {
+  .mobileButtons {
     display: none !important;
   }
 }
 
-@media (max-width: 1024px) and (min-height:768px){
-  .mobileButtons{
+@media (max-width: 1024px) and (min-height: 768px) {
+  .mobileButtons {
     bottom: 48px;
   }
 }
 
-@media (max-width: 768px){
-  .turnYourDevice{
+@media (max-width: 768px) {
+  .turnYourDevice {
     display: block !important;
   }
 }
@@ -234,29 +244,29 @@ h2 {
   }
 }
 
-@media (max-height: 768px) and (max-height:600px){
-  .turnYourDevice{
+@media (max-height: 768px) and (max-height: 600px) {
+  .turnYourDevice {
     display: none !important;
   }
 
-  canvas{
+  canvas {
     width: 100vw;
   }
 }
 
-@media (max-width: 600px){
-  .startButton{
+@media (max-width: 600px) {
+  .startButton {
     font-size: 18px;
     height: 32px;
   }
 }
 
-@media (max-width: 500px){
-  #buttonsFromStart{
+@media (max-width: 500px) {
+  #buttonsFromStart {
     top: 16px;
   }
 
-  #endScreenButtons{
+  #endScreenButtons {
     bottom: 56px;
   }
 }
@@ -272,7 +282,7 @@ h2 {
     display: none;
   }
 
-  .settingsSection{
+  .settingsSection {
     display: none;
   }
 }

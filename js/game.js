@@ -24,6 +24,8 @@ function init(){
     mobileButtonsRef.classList.remove('d-none');
 }
 
+
+// desktop version
 function toggleAudio(){
     let audioStatus = JSON.parse(localStorage.getItem('gameAudio'));
     if(audioStatus){
@@ -47,6 +49,10 @@ function toggleSoundImg(newStatus){
         speakerRef.classList.add('d-none');
         no_audioRef.classList.remove('d-none');
     }
+}
+
+function toggleAudioMobile(){
+
 }
 
 function muteAllSounds(){
