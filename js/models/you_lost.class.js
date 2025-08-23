@@ -9,7 +9,7 @@ class YouLost extends MovableObject {
   width = 720;
   height = 480;
 
-   /**
+  /**
    * Creates an instance of the "You Lost" screen.
    * Loads the defeat image and positions it at the bottom of the canvas.
    *

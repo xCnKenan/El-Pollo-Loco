@@ -9,7 +9,7 @@ class YouWon extends MovableObject {
   width = 720;
   height = 480;
 
-   /**
+  /**
    * Creates an instance of the "You Won" screen.
    * Loads the victory image and sets its position at the bottom of the canvas.
    *

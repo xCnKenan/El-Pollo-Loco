@@ -1,3 +1,7 @@
+/**
+ * Represents a throwable object (e.g., a bottle) that the character can throw.
+ * Extends {@link MovableObject}.
+ */
 class ThrowableObject extends MovableObject {
   IMAGES_THROW = [
     "img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png",
@@ -13,6 +17,11 @@ class ThrowableObject extends MovableObject {
     bottom: 12,
   };
 
+  /**
+   * Creates a throwable object at a specific position.
+   * @param {number} x - The horizontal position.
+   * @param {number} y - The vertical position.
+   */
   constructor(x, y) {
     super().loadImage(
       "img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png"
@@ -25,12 +34,21 @@ class ThrowableObject extends MovableObject {
     this.throw();
   }
 
+  /**
+   * Initiates the throw by applying gravity and moving in the correct direction.
+   * @returns {void}
+   */
   throw() {
     this.speedY = 7;
     this.applyGravity();
     this.checkDirection(world.character.otherDirection);
   }
 
+  /**
+   * Checks the direction of the throw (left or right) and updates the object's movement.
+   * @param {boolean} leftSide - Whether the character is facing left.
+   * @returns {void}
+   */
   checkDirection(leftSide) {
     if (leftSide) {
       setStoppableInterval(() => {
@@ -44,6 +62,10 @@ class ThrowableObject extends MovableObject {
     this.animate();
   }
 
+  /**
+   * Starts the animation for the bottle rotation while flying.
+   * @returns {void}
+   */
   animate() {
     setStoppableInterval(() => {
       this.playAnimation(this.IMAGES_THROW);
