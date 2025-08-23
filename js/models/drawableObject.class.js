@@ -1,3 +1,7 @@
+/**
+ * Represents a drawable object in the game.
+ * Handles image loading, drawing, and optional hitbox rendering.
+ */
 class DrawableObject {
   x = 130;
   y = 135;
@@ -7,6 +11,10 @@ class DrawableObject {
   imageCache = [];
   currentImage = 0;
 
+  /**
+   * Draws the object on the provided canvas context.
+   * @param {CanvasRenderingContext2D} ctx - The canvas 2D context to draw on.
+   */
   draw(ctx) {
     try {
       ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
@@ -16,8 +24,12 @@ class DrawableObject {
     }
   }
 
+  /**
+   * Draws the hitbox frame for debugging purposes.
+   * Only applies to certain object types (Character, ThrowableObject, Chicken, etc.).
+   * @param {CanvasRenderingContext2D} ctx - The canvas 2D context to draw on.
+   */
   drawFrame(ctx) {
-    // because of instanceof frames are only shown for given classes
     if (
       this instanceof Character ||
       this instanceof ThrowableObject ||
