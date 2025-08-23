@@ -1,3 +1,7 @@
+/**
+ * Represents a bottle lying on the ground in the game.
+ * Extends MovableObject and handles animation of the bottle.
+ */
 class BottleOnGround extends MovableObject {
   y = 350;
   height = 70;
@@ -13,6 +17,10 @@ class BottleOnGround extends MovableObject {
     bottom: 15,
   };
 
+  /**
+   * Initializes the bottle on the ground by loading images,
+   * setting a random x-position, and starting its animation.
+   */
   constructor() {
     super().loadImage("img/6_salsa_bottle/1_salsa_bottle_on_ground.png");
     this.loadImages(this.IMAGES_BOTTLE_ON_GROUND);
@@ -20,6 +28,10 @@ class BottleOnGround extends MovableObject {
     this.animate();
   }
 
+  /**
+   * Animates the bottle on the ground by cycling through its images.
+   * Runs every 500 milliseconds.
+   */
   animate() {
     setStoppableInterval(() => {
       this.playAnimation(this.IMAGES_BOTTLE_ON_GROUND);

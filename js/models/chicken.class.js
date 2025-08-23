@@ -1,3 +1,7 @@
+/**
+ * Represents a normal chicken enemy in the game.
+ * Extends MovableObject and handles walking animation and death state.
+ */
 class Chicken extends MovableObject {
   y = 325;
   height = 100;
@@ -15,6 +19,9 @@ class Chicken extends MovableObject {
     bottom: 12,
   };
 
+  /**
+   * Initializes a normal chicken by loading walking images, setting a random x position and speed, and starting animation.
+   */
   constructor() {
     super().loadImage("img/3_enemies_chicken/chicken_normal/1_walk/1_w.png");
     this.loadImages(this.IMAGES_WALKING);
@@ -23,6 +30,10 @@ class Chicken extends MovableObject {
     this.animate();
   }
 
+    /**
+   * Animates the chicken by moving it left and playing the walking animation.
+   * If the chicken is dead, switches to the dead image.
+   */
   animate() {
     setStoppableInterval(() => {
       if (this.isDead()) {

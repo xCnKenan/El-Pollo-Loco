@@ -1,3 +1,7 @@
+/**
+ * Represents the main character in the game.
+ * Extends MovableObject and handles movement, animations, gravity, and interaction with the game world.
+ */
 class Character extends MovableObject {
   speed = 10;
   IMAGES_STANDING = [
@@ -63,14 +67,17 @@ class Character extends MovableObject {
   ];
   world;
   offset = {
-    top: 135, // y
-    left: 25, // x
-    right: 70, // width
-    bottom: 150, //height
+    top: 135,
+    left: 25,
+    right: 70,
+    bottom: 150,
   };
   amountOfBottles = 0;
   amountOfCoins = 0;
 
+  /**
+   * Initializes the character by loading all animation images, applying gravity, and starting animation loops.
+   */
   constructor() {
     super().loadImage("img/2_character_pepe/2_walk/W-21.png");
     this.loadImages(this.IMAGES_STANDING);
@@ -80,10 +87,13 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_JUMPING);
     this.loadImages(this.IMAGES_IDLE);
     this.loadImages(this.IMAGES_LONG_IDLE);
-    this.applyGravity(); // test gravity
+    this.applyGravity();
     this.animate();
   }
 
+  /**
+   * Handles character animations, movement, gravity, and idle/sleep behavior based on keyboard input.
+   */
   animate() {
     setStoppableInterval(() => {
       if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
@@ -94,7 +104,6 @@ class Character extends MovableObject {
         this.moveLeft();
         this.otherDirection = true;
       }
-      // check if also not above Ground
       if (this.world.keyboard.SPACE && !this.isAboveGround()) {
         pepeJump.play();
         this.jump();
@@ -102,18 +111,25 @@ class Character extends MovableObject {
       this.world.camera_x = -this.x + 150;
     }, 1000 / 60);
 
-    // IMG Animations here
+    /**
+     * Updates the character's animation based on its current state.
+     * Runs every 40 milliseconds.
+     *
+     * - If the character is dead, plays the dead animation.
+     * - If the character is hurt, plays the hurt animation.
+     * - If the character is in the air (jumping/falling), plays the jumping animation and updates lastTimeWalking.
+     * - If the character is moving left or right, plays the walking animation, updates lastTimeWalking, and resets vertical speed.
+     * - If the character is idle but not sleeping, pauses the snoring sound.
+     */
     setStoppableInterval(() => {
       if (this.isDead()) {
         this.playAnimation(this.IMAGES_DEAD);
       } else if (this.isHurt()) {
         this.playAnimation(this.IMAGES_HURT);
       } else if (this.isAboveGround()) {
-        // above Ground img animation
         this.playAnimation(this.IMAGES_JUMPING);
         this.lastTimeWalking = new Date().getTime();
       } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-        // Walk animation
         this.playAnimation(this.IMAGES_WALKING);
         this.lastTimeWalking = new Date().getTime();
         this.speedY = 0;
@@ -122,36 +138,53 @@ class Character extends MovableObject {
       }
     }, 40);
 
-    // if character not moves he gets standing animation
+    /**
+     * Plays the standing animation when the character is not moving.
+     * Runs every 250 milliseconds.
+     *
+     * - Checks if neither the RIGHT nor LEFT keys are pressed.
+     * - If idle, plays the standing animation.
+     */
     setStoppableInterval(() => {
       if (!this.world.keyboard.RIGHT && !this.world.keyboard.LEFT) {
         this.playAnimation(this.IMAGES_STANDING);
       }
     }, 250);
 
-    // check to sleep or tired
+    /**
+     * Handles the character's idle and sleeping animations.
+     * Runs every 250 milliseconds.
+     *
+     * - If the character has been inactive long enough to sleep, plays the long idle animation and starts snoring sound.
+     * - If the character is tired but not asleep yet, plays the regular idle animation.
+     */
     setStoppableInterval(() => {
       if (this.getSleep()) {
         this.playAnimation(this.IMAGES_LONG_IDLE);
         snoring.play();
-        console.log("character snoring");
       } else if (this.getTired()) {
         this.playAnimation(this.IMAGES_IDLE);
       }
     }, 250);
   }
 
-  // time passed when tired should be active
+  /**
+   * Checks if the character is tired (not moving for >= 5 seconds).
+   * @returns {boolean} True if tired, otherwise false.
+   */
   getTired() {
-    let timePassed = new Date().getTime() - this.lastTimeWalking; // Difference in ms
-    timePassed = timePassed / 1000; //Difference in s
+    let timePassed = new Date().getTime() - this.lastTimeWalking;
+    timePassed = timePassed / 1000;
     return timePassed >= 5;
   }
 
-  // time passed when sleep should be active
+  /**
+   * Checks if the character should sleep (not moving for >= 15 seconds).
+   * @returns {boolean} True if sleeping, otherwise false.
+   */
   getSleep() {
-    let timePassed = new Date().getTime() - this.lastTimeWalking; // Difference in ms
-    timePassed = timePassed / 1000; //Difference in s
+    let timePassed = new Date().getTime() - this.lastTimeWalking;
+    timePassed = timePassed / 1000;
     return timePassed >= 15;
   }
 }
