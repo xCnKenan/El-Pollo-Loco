@@ -265,6 +265,8 @@ class World {
       this.stopSounds();
       this.youLoseSound();
       this.gameEnding(this.level.youLost);
+      let mobileButtonsRef = document.getElementById("mobileButtons");
+    mobileButtonsRef.classList.add('d-none');
     }
     // check if enemy is dead and show you won img
     this.level.enemies.forEach((enemy) => {
@@ -275,6 +277,8 @@ class World {
           successPlayed = true;
         }
         this.gameEnding(this.level.youWon);
+        let mobileButtonsRef = document.getElementById("mobileButtons");
+    mobileButtonsRef.classList.add('d-none');
       }
     });
   }

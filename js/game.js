@@ -19,6 +19,9 @@ function init(){
     gameMusic.loop = true;
     game_over.currentTime=0;
     game_over.pause();
+
+    let mobileButtonsRef = document.getElementById("mobileButtons");
+    mobileButtonsRef.classList.remove('d-none');
 }
 
 function toggleAudio(){
@@ -97,7 +100,7 @@ window.addEventListener("keyup", (event)=>{
     if(event.keyCode == 68){ // d 
         keyboard.D = false;
     }
-    if(event.keyCode == 13){            // remove after collision detection works
+    if(event.keyCode == 13){ // remove after collision detection works
         keyboard.ENTER = false; // startgame enter
         removeButtons(); 
         initLevel1();
