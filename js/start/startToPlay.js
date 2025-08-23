@@ -226,6 +226,7 @@ function closeOverlay() {
  * - Shows start and controls buttons.
  * - Hides restart and home buttons.
  * - Stops and resets level end audio.
+ * - Removes mobile buttons.
  *
  * @function backToHomeScreen
  * @returns {void}
@@ -237,6 +238,7 @@ function backToHomeScreen() {
   addDisplayNone("home");
   endgame_level.pause();
   endgame_level.currentTime = 0;
+  addDisplayNone("mobileButtons");
 }
 
 /**
