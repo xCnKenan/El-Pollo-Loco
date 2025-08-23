@@ -1,7 +1,4 @@
-// ist wie world
 class Mainscreen {
-  // startButton = new Startgame();
-  // controllsButton = new Controlls();
   screenCanvas;
   ctxStartScreen;
   background = new Backgroundimage(
