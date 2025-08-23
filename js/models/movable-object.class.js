@@ -1,3 +1,7 @@
+/**
+ * Represents any object that can move in the game world.
+ * Extends {@link DrawableObject}.
+ */
 class MovableObject extends DrawableObject {
   speed = 0.15;
   otherDirection = false;
@@ -17,6 +21,10 @@ class MovableObject extends DrawableObject {
     bottom: 0,
   };
 
+  /**
+   * Applies gravity to the object, causing it to fall if above the ground.
+   * @returns {void}
+   */
   applyGravity() {
     setStoppableInterval(() => {
       if (this.isAboveGround() || this.speedY > 0) {
@@ -27,44 +35,56 @@ class MovableObject extends DrawableObject {
     }, 1000 / 60);
   }
 
+  /**
+   * Checks if the object is above the ground.
+   * @returns {boolean} True if the object is above ground.
+   */
   isAboveGround() {
     if (this instanceof ThrowableObject) {
-      // Throwable Object should always fall
       return true;
     } else {
       return this.y < 130;
     }
   }
 
-  // e.g. character.isColliding(chicken);
+  /**
+   * Checks if this object is colliding with another MovableObject.
+   * @param {MovableObject} movableObj - Another object to check collision with.
+   * @returns {boolean} True if objects are colliding.
+   */
   isColliding(movableObj) {
-    // hier egal wie man den gegner berührt, man bekommt schaden
     return (
       this.x + this.offset.left + this.width - this.offset.right >
-        movableObj.x + movableObj.offset.left && // R -> L
+        movableObj.x + movableObj.offset.left &&
       this.y + this.offset.top + this.height - this.offset.bottom >
-        movableObj.y + movableObj.offset.top && // T -> B
+        movableObj.y + movableObj.offset.top &&
       this.x + this.offset.left <
         movableObj.x +
           movableObj.offset.left +
           movableObj.width -
-          movableObj.offset.right && // L -> R
+          movableObj.offset.right &&
       this.y + this.offset.top <
         movableObj.y +
           movableObj.offset.top +
           movableObj.height -
           movableObj.offset.bottom
-    ); // B -> T
+    );
   }
 
-  // try to get collision from above
+  /**
+   * Checks if the object collides with another object while jumping.
+   * @param {MovableObject} movableObj - Another object to check jump collision with.
+   * @returns {boolean} True if colliding while jumping.
+   */
   jumpCollision(movableObj) {
-    // return this.isCollidingFromTop(movableObj) && this.isColliding(movableObj);
     let jump = this.speedY < 0;
     return this.isColliding(movableObj) && jump;
   }
 
-  // subtracts amount of energy when getting hits
+  /**
+   * Reduces the object's energy when hit.
+   * @returns {void}
+   */
   hit() {
     this.energy -= 20;
     if (this.energy < 0) {
@@ -74,47 +94,80 @@ class MovableObject extends DrawableObject {
     }
   }
 
+  /**
+   * Checks if the object is currently hurt (recently hit).
+   * @returns {boolean} True if the object was hit less than 0.3 seconds ago.
+   */
   isHurt() {
-    let timePassed = new Date().getTime() - this.lastHit; // Difference in ms
-    timePassed = timePassed / 1000; //Difference in s
+    let timePassed = new Date().getTime() - this.lastHit;
+    timePassed = timePassed / 1000;
     return timePassed < 0.3;
   }
 
-  // returns value energy 0
+  /**
+   * Checks if the object is dead (energy is 0).
+   * @returns {boolean} True if the object is dead.
+   */
   isDead() {
     return this.energy == 0;
   }
 
+  /**
+   * Moves the object to the right.
+   * @returns {void}
+   */
   moveRight() {
-    //run right
     this.x += this.speed;
   }
 
+  /**
+   * Moves the object to the left.
+   * @returns {void}
+   */
   moveLeft() {
-    //run left
     this.x -= this.speed;
   }
 
-  //walking animation
+  /**
+   * Plays an animation from an array of images.
+   * @param {string[]} images - Array of image paths for the animation.
+   * @returns {void}
+   */
   playAnimation(images) {
-    let i = this.currentImage % images.length; // let i = 7 % 6 => 1, Rest 1
+    let i = this.currentImage % images.length;
     let path = images[i];
     this.img = this.imageCache[path];
     this.currentImage++;
   }
 
+  /**
+   * Makes the object jump by setting its vertical speed.
+   * @returns {void}
+   */
   jump() {
     this.speedY = 20;
   }
 
+  /**
+   * Increases the number of bottles the character possesses.
+   * @returns {void}
+   */
   bottleAdded() {
     this.amountOfBottles += 1;
   }
 
+  /**
+   * Decreases the number of bottles the character possesses.
+   * @returns {void}
+   */
   bottleSubtracted() {
     this.amountOfBottles -= 1;
   }
 
+  /**
+   * Increases the number of coins the character has collected.
+   * @returns {void}
+   */
   coinsAdded() {
     this.amountOfCoins += 1;
   }
