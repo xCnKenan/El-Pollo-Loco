@@ -38,6 +38,12 @@ endgame_level.volume = 0.4;
 game_overPlayed = false;
 successPlayed = false;
 
+/**
+ * Represents the main game world where all game logic is executed,
+ * including rendering, collision detection, object management, and audio control.
+ *
+ * @class World
+ */
 class World {
   character = new Character();
   level = level1;
@@ -51,6 +57,12 @@ class World {
   statusBarEndboss = new StatusBarEndboss();
   throwableObjects = [];
 
+  /**
+   * Creates the game world.
+   *
+   * @param {HTMLCanvasElement} canvas - The canvas where the world is drawn.
+   * @param {Keyboard} keyboard - The keyboard input handler.
+   */
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
@@ -61,10 +73,19 @@ class World {
     this.startDrawLoop();
   }
 
+  /**
+   * Assigns the world reference to the character.
+   * @returns {void}
+   */
   setWorld() {
     this.character.world = this;
   }
 
+  /**
+   * Starts the main update loop (collision checks, throw logic, etc.).
+   * Runs every 200ms.
+   * @returns {void}
+   */
   run() {
     setStoppableInterval(() => {
       this.checkCollisions();
@@ -72,7 +93,11 @@ class World {
     }, 200);
   }
 
-  //throw bottle with D
+  /**
+   * Checks if the player throws a bottle when pressing "D".
+   * Adds the bottle to the throwable objects list if available.
+   * @returns {void}
+   */
   checkThrowObjects() {
     if (this.keyboard.D && this.character.amountOfBottles) {
       let bottle;
@@ -96,6 +121,14 @@ class World {
     }
   }
 
+  /**
+   * Handles all collision checks:
+   * - Player with enemies
+   * - Player with coins
+   * - Player with bottles
+   * - Thrown bottles with enemies
+   * @returns {void}
+   */
   checkCollisions() {
     // here check if character colliding with enemy
     this.level.enemies.forEach((enemy) => {
@@ -144,6 +177,10 @@ class World {
     }
   }
 
+  /**
+   * Checks if thrown bottles collide with enemies and applies effects.
+   * @returns {void}
+   */
   checkCollisionWithEnemy() {
     // go through array of bottles
     this.throwableObjects.forEach((bottle) => {
@@ -165,6 +202,12 @@ class World {
     });
   }
 
+  /**
+   * Handles collision when a bottle hits a normal enemy (e.g., Chicken).
+   * @param {ThrowableObject} bottle - The thrown bottle.
+   * @param {MovableObject} enemy - The enemy being hit.
+   * @returns {void}
+   */
   againstNormalEnemy(bottle, enemy) {
     enemy.energy = 0;
     this.removeItem(bottle, this.throwableObjects);
@@ -175,13 +218,24 @@ class World {
     }, 250);
   }
 
+  /**
+   * Handles collision when a bottle hits the Endboss.
+   * @param {ThrowableObject} bottle - The thrown bottle.
+   * @param {Endboss} enemy - The Endboss being hit.
+   * @returns {void}
+   */
   againstFinalBoss(bottle, enemy) {
     enemy.hit();
     this.removeItem(bottle, this.throwableObjects);
     this.statusBarEndboss.setPercentage(enemy.energy);
   }
 
-  // remove item on ground after picked up
+  /**
+   * Removes an item from a given array (e.g., bottles, coins, enemies).
+   * @param {any} item - The object to remove.
+   * @param {Array<any>} array - The array containing the item.
+   * @returns {void}
+   */
   removeItem(item, array) {
     let itemToRemove = array.indexOf(item);
     if (itemToRemove > -1) {
@@ -189,6 +243,10 @@ class World {
     }
   }
 
+  /**
+   * Starts the animation loop that continuously redraws the game.
+   * @returns {void}
+   */
   startDrawLoop() {
     let loop = () => {
       this.draw();
@@ -197,6 +255,10 @@ class World {
     loop();
   }
 
+  /**
+   * Draws all game objects, background, UI, and checks for game-ending conditions.
+   * @returns {void}
+   */
   draw() {
     //clear old Frames
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -278,6 +340,10 @@ class World {
     });
   }
 
+  /**
+   * Plays the game-over sound only once.
+   * @returns {void}
+   */
   youLoseSound() {
     if (!game_overPlayed) {
       game_over.play();
@@ -285,6 +351,11 @@ class World {
     }
   }
 
+  /**
+   * Handles the end of the game (win or lose).
+   * @param {Array<MovableObject>} status - The objects to display (YouWon or YouLost screen).
+   * @returns {void}
+   */
   gameEnding(status) {
     this.endScreenButtons();
     setStoppableInterval(() => {
@@ -298,12 +369,20 @@ class World {
     });
   }
 
+  /**
+   * Stops background sounds/music.
+   * @returns {void}
+   */
   stopSounds() {
     pepeHit.pause();
     gameMusic.pause();
     endgame_level.pause();
   }
 
+  /**
+   * Displays restart and home buttons on the end screen.
+   * @returns {void}
+   */
   endScreenButtons() {
     let restartRef = document.getElementById("restart");
     restartRef.classList.remove("d-none");
@@ -312,12 +391,22 @@ class World {
     homeRef.classList.remove("d-none");
   }
 
+  /**
+   * Adds multiple objects to the canvas.
+   * @param {Array<MovableObject>} objects - List of objects to draw.
+   * @returns {void}
+   */
   addObjectsToMap(objects) {
     objects.forEach((obj) => {
       this.addToMap(obj);
     });
   }
 
+  /**
+   * Adds a single object to the canvas, including its hitbox and flipped orientation if needed.
+   * @param {MovableObject} moveObj - The object to draw.
+   * @returns {void}
+   */
   addToMap(moveObj) {
     if (moveObj.otherDirection) {
       this.flipImage(moveObj);
@@ -332,6 +421,11 @@ class World {
     }
   }
 
+  /**
+   * Flips an object horizontally for rendering.
+   * @param {MovableObject} moveObj - The object to flip.
+   * @returns {void}
+   */
   flipImage(moveObj) {
     this.ctx.save();
     this.ctx.translate(moveObj.width, 0);
@@ -339,6 +433,11 @@ class World {
     moveObj.x = moveObj.x * -1;
   }
 
+  /**
+   * Restores the flipped image back to its original orientation.
+   * @param {MovableObject} moveObj - The object to restore.
+   * @returns {void}
+   */
   flipImageBack(moveObj) {
     moveObj.x = moveObj.x * -1;
     this.ctx.restore();
