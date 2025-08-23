@@ -236,6 +236,13 @@ h2 {
   }
 }
 
+/* try to show only on mobile devices */
+@media (min-width: 768px) and (max-height: 400px) {
+  .mobileSettingsSection {
+    display: none;
+  }
+}
+
 /* Smartphones---- */
 @media only screen and (max-width: 720px) {
   canvas {
