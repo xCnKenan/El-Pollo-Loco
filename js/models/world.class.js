@@ -40,7 +40,6 @@ successPlayed = false;
 
 class World {
   character = new Character();
-  // level = level1;
   level = level1;
   canvas;
   ctx;
@@ -51,7 +50,6 @@ class World {
   statusBarCoins = new StatusBarCoins();
   statusBarEndboss = new StatusBarEndboss();
   throwableObjects = [];
-  // throwableObjects = new ThrowableObject(this.character.x + 100, this.character.y + 100);
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -92,7 +90,6 @@ class World {
       }
       throwing.play();
       this.throwableObjects.push(bottle);
-      // render statusbar and subtract from array
       this.character.bottleSubtracted();
       this.statusBarBottle.setPercentage(this.character.amountOfBottles);
       world.character.lastTimeWalking = new Date().getTime();
@@ -107,7 +104,6 @@ class World {
         (this.character.jumpCollision(enemy) && enemy instanceof ChickenSmall)
       ) {
         // try to kill enemy when jumping on them
-        console.log("colliding top");
         enemy.energy = 0;
         enemy.speed = 0;
         enemy.isDead();
@@ -116,7 +112,6 @@ class World {
           this.removeItem(enemy, this.level.enemies);
         }, 250);
       } else if (this.character.isColliding(enemy) && !enemy.isDead()) {
-        console.log("colliding right left");
         pepeHit.play();
         this.character.hit();
         this.statusBar.setPercentage(this.character.energy);
@@ -266,19 +261,19 @@ class World {
       this.youLoseSound();
       this.gameEnding(this.level.youLost);
       let mobileButtonsRef = document.getElementById("mobileButtons");
-    mobileButtonsRef.classList.add('d-none');
+      mobileButtonsRef.classList.add("d-none");
     }
     // check if enemy is dead and show you won img
     this.level.enemies.forEach((enemy) => {
       if (enemy.isDead() && enemy instanceof Endboss) {
         this.stopSounds();
-        if(!successPlayed){
+        if (!successPlayed) {
           success.play();
           successPlayed = true;
         }
         this.gameEnding(this.level.youWon);
         let mobileButtonsRef = document.getElementById("mobileButtons");
-    mobileButtonsRef.classList.add('d-none');
+        mobileButtonsRef.classList.add("d-none");
       }
     });
   }

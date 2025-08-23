@@ -14,7 +14,12 @@ class Mainscreen {
   }
 
   draw() {
-    this.ctxStartScreen.clearRect(0,0,this.screenCanvas.width,this.screenCanvas.height);
+    this.ctxStartScreen.clearRect(
+      0,
+      0,
+      this.screenCanvas.width,
+      this.screenCanvas.height
+    );
     this.showOnScreen(this.background);
     // this.showOnScreen(this.startButton);
     // this.showOnScreen(this.controllsButton);

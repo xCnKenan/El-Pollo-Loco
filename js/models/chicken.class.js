@@ -1,5 +1,4 @@
 class Chicken extends MovableObject {
-  // y = 330;
   y = 325;
   height = 100;
   width = 100;
@@ -9,7 +8,6 @@ class Chicken extends MovableObject {
     "img/3_enemies_chicken/chicken_normal/1_walk/3_w.png",
   ];
   IMAGES_DEAD = ["img/3_enemies_chicken/chicken_normal/2_dead/dead.png"];
-
   offset = {
     top: 4,
     left: 1,

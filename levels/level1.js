@@ -8,13 +8,13 @@ function initLevel1() {
       new Chicken(),
       new Chicken(),
       new Chicken(),
-      
+
       new ChickenSmall(),
       new ChickenSmall(),
       new ChickenSmall(),
       new ChickenSmall(),
       new ChickenSmall(),
-      
+
       new Endboss(),
     ],
     [new Cloud(), new Cloud(), new Cloud(), new Cloud()],
@@ -126,11 +126,8 @@ function initLevel1() {
       new Coins(),
       new Coins(),
       new Coins(),
-    ],[
-      new YouLost()
     ],
-    [
-      new YouWon()
-    ]
+    [new YouLost()],
+    [new YouWon()]
   );
 }

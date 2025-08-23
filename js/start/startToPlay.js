@@ -6,16 +6,18 @@ let intervallIds = [];
 let animationFrameId = null;
 
 function getFullScreen() {
-  let divRef = document.getElementById('relativeDiv');
+  let divRef = document.getElementById("relativeDiv");
   openFullscreen(divRef);
 }
 
 function openFullscreen(elem) {
   if (elem.requestFullscreen) {
     elem.requestFullscreen();
-  } else if (elem.webkitRequestFullscreen) { /* Safari */
+  } else if (elem.webkitRequestFullscreen) {
+    /* Safari */
     elem.webkitRequestFullscreen();
-  } else if (elem.msRequestFullscreen) { /* IE11 */
+  } else if (elem.msRequestFullscreen) {
+    /* IE11 */
     elem.msRequestFullscreen();
   }
 }
@@ -29,16 +31,16 @@ function loadStartScreen() {
   game_over.pause();
   success.pause();
   success.currentTime = 0;
-  if(animationFrameId != null){
+  if (animationFrameId != null) {
     stopDrawLoop();
   }
 }
 
 function checkAudioStatus() {
-  if (localStorage.getItem('gameAudio') === null) {
-    localStorage.setItem('gameAudio', JSON.stringify(true));
+  if (localStorage.getItem("gameAudio") === null) {
+    localStorage.setItem("gameAudio", JSON.stringify(true));
   }
-  let newStatus = JSON.parse(localStorage.getItem('gameAudio'));
+  let newStatus = JSON.parse(localStorage.getItem("gameAudio"));
   toggleSoundImg(newStatus);
 }
 
@@ -79,14 +81,14 @@ function setStoppableInterval(fn, time) {
 
 // Stoppt alle Intervalle
 function clearStoppableIntervals() {
-  intervallIds.forEach(id => clearInterval(id));
+  intervallIds.forEach((id) => clearInterval(id));
 }
 
 function restartGame() {
   clearStoppableIntervals();
   stopDrawLoop();
   world = null;
-  let ctx = canvas.getContext('2d');
+  let ctx = canvas.getContext("2d");
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   initLevel1();
   init();
@@ -100,13 +102,13 @@ function restartGame() {
 function addDisplayNone(id) {
   let idRef = document.getElementById(id);
   // idRef.remove();
-  idRef.classList.add('d-none');
+  idRef.classList.add("d-none");
 }
 
 function toggleOverlay(event) {
   event.stopPropagation(event);
-  let controllsOverlayRef = document.getElementById('controllsOverlay');
-  controllsOverlayRef.classList.toggle('d-none');
+  let controllsOverlayRef = document.getElementById("controllsOverlay");
+  controllsOverlayRef.classList.toggle("d-none");
 }
 
 function stopPropagation(event) {
@@ -114,8 +116,8 @@ function stopPropagation(event) {
 }
 
 function closeOverlay() {
-  let controllsOverlayRef = document.getElementById('controllsOverlay');
-  controllsOverlayRef.classList.add('d-none');
+  let controllsOverlayRef = document.getElementById("controllsOverlay");
+  controllsOverlayRef.classList.add("d-none");
 }
 
 function backToHomeScreen() {
@@ -130,5 +132,5 @@ function backToHomeScreen() {
 function removeDisplayNone(id) {
   let idRef = document.getElementById(id);
   // idRef.remove();
-  idRef.classList.remove('d-none');
+  idRef.classList.remove("d-none");
 }

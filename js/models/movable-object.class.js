@@ -27,7 +27,7 @@ class MovableObject extends DrawableObject {
     }, 1000 / 60);
   }
 
-  isAboveGround() {                           
+  isAboveGround() {
     if (this instanceof ThrowableObject) {
       // Throwable Object should always fall
       return true;
@@ -39,17 +39,29 @@ class MovableObject extends DrawableObject {
   // e.g. character.isColliding(chicken);
   isColliding(movableObj) {
     // hier egal wie man den gegner berührt, man bekommt schaden
-    return this.x + this.offset.left + this.width - this.offset.right > movableObj.x + movableObj.offset.left && // R -> L
-      this.y + this.offset.top + this.height - this.offset.bottom > movableObj.y + movableObj.offset.top && // T -> B
-      this.x + this.offset.left < movableObj.x + movableObj.offset.left + movableObj.width - movableObj.offset.right && // L -> R
-      this.y + this.offset.top < movableObj.y + movableObj.offset.top + movableObj.height - movableObj.offset.bottom; // B -> T
+    return (
+      this.x + this.offset.left + this.width - this.offset.right >
+        movableObj.x + movableObj.offset.left && // R -> L
+      this.y + this.offset.top + this.height - this.offset.bottom >
+        movableObj.y + movableObj.offset.top && // T -> B
+      this.x + this.offset.left <
+        movableObj.x +
+          movableObj.offset.left +
+          movableObj.width -
+          movableObj.offset.right && // L -> R
+      this.y + this.offset.top <
+        movableObj.y +
+          movableObj.offset.top +
+          movableObj.height -
+          movableObj.offset.bottom
+    ); // B -> T
   }
 
   // try to get collision from above
   jumpCollision(movableObj) {
     // return this.isCollidingFromTop(movableObj) && this.isColliding(movableObj);
     let jump = this.speedY < 0;
-    return  this.isColliding(movableObj) && jump ; 
+    return this.isColliding(movableObj) && jump;
   }
 
   // subtracts amount of energy when getting hits

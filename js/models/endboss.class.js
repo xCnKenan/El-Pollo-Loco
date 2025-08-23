@@ -50,8 +50,6 @@ class Endboss extends MovableObject {
   inAlertMode = false;
   inAttackMode = false;
 
-  // energy = 100;
-
   constructor() {
     super().loadImage(this.IMAGES_WALKING[0]);
     this.loadImages(this.IMAGES_WALKING);
@@ -60,7 +58,6 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_ALERT);
     this.loadImages(this.IMAGES_ATTACK);
     this.x = 3300;
-
     this.animate();
   }
 
@@ -68,19 +65,19 @@ class Endboss extends MovableObject {
     setStoppableInterval(() => {
       if (this.inAlertMode && !this.isDead() && !this.isHurt()) {
         this.playAnimation(this.IMAGES_ALERT);
-        console.log('in alertmode');
+        console.log("in alertmode");
       } else if (this.inAttackMode && !this.isHurt()) {
-        console.log('in attackMode');
+        console.log("in attackMode");
         attackMode.play();
         this.stopMoving();
         this.playAnimation(this.IMAGES_ATTACK);
       } else if (this.isDead()) {
         this.playAnimation(this.IMAGES_DEAD);
-         this.inAttackMode = false;
+        this.inAttackMode = false;
       } else if (this.isHurt()) {
         this.playAnimation(this.IMAGES_HURT);
         endboss_hit.play();
-      } else if (this.hadFirstContact){
+      } else if (this.hadFirstContact) {
         this.playAnimation(this.IMAGES_WALKING);
         this.moveLeft();
       }
@@ -95,34 +92,34 @@ class Endboss extends MovableObject {
     }, 150);
 
     setStoppableInterval(() => {
-        if(this.hadFirstContact) {
-          if(!this.isDead()){
-            this.inAttackMode = true;  
-          }
+      if (this.hadFirstContact) {
+        if (!this.isDead()) {
+          this.inAttackMode = true;
         }
+      }
       setTimeout(() => {
-            this.inAttackMode = false;
+        this.inAttackMode = false;
       }, 1200);
     }, 5000);
   }
 
   startAlertMode() {
     this.inAlertMode = true;
-    console.log('alertmode', this.inAlertMode);
-    
+    console.log("alertmode", this.inAlertMode);
+
     setTimeout(() => {
       this.inAlertMode = false;
     }, 1500);
   }
 
-  moveLeft(){
+  moveLeft() {
     this.speed = 5;
     this.x -= this.speed;
-    attackMode.pause(); 
+    attackMode.pause();
     endboss_hit.pause();
   }
 
-  stopMoving(){
-    this.speed = 0; 
+  stopMoving() {
+    this.speed = 0;
   }
 }
