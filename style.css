@@ -246,6 +246,14 @@ h2 {
   transition: all 250ms ease;
 }
 
+.allInfoAboutCreatorMobile{
+  font-size: 24px;
+  color: white;
+  letter-spacing: 2px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .goBack {
   margin-top: 40px;
   font-size: 24px;
