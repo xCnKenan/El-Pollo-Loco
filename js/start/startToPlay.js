@@ -239,6 +239,7 @@ function backToHomeScreen() {
   endgame_level.pause();
   endgame_level.currentTime = 0;
   addDisplayNone("mobileButtons");
+  removeDisplayNone("allInfoAboutCreatorMobile");
 }
 
 /**

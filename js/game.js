@@ -20,6 +20,7 @@ function init() {
   checkAudioOnload();
   startGameMusicFromBeginning();
   removeDisplayNone("mobileButtons");
+  addDisplayNone("allInfoAboutCreatorMobile");
 }
 
 /**
