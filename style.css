@@ -252,6 +252,11 @@ h2 {
   letter-spacing: 2px;
   text-decoration: none;
   cursor: pointer;
+  position: absolute;
+  bottom: 48px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
 }
 
 .goBack {
@@ -298,6 +303,11 @@ h2 {
   .allInfoAboutCreator{
     display: none;
   }
+
+  .allInfoAboutCreatorMobile{
+  bottom: 0px;
+  display: block;
+}
 }
 
 /* Smartphones---- */
