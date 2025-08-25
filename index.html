@@ -56,12 +56,12 @@
       <source src="video/turn-your-device.mp4" type="video/mp4" />
     </video>
 
-    <div id="sectionLegalNotice" class="sectionLegalNotice">
-        <div id="legalNotice" class="legalNotice">
+    <div id="sectionLegalNotice" class="sectionLegalNotice d-none">
+        <div onclick="stopPropagation(event)" id="legalNotice" class="legalNotice">
         
           <div id="closeLegalNotice" class="closeLegalNotice">
         <h2>Impressum</h2>
-        <img class="closeLegalNoticeCross" src="icons/close.png" alt="">
+        <img onclick="toggleOverlay('sectionLegalNotice', event)" class="closeLegalNoticeCross" src="icons/close.png" alt="">
         </div>
 
         <p class="infoAbout">
@@ -95,7 +95,7 @@
         <div class="closeOverlay">
           <h2>Controls</h2>
           <img
-            onclick="toggleOverlay(event)"
+            onclick="toggleOverlay('controllsOverlay', event)"
             class="closeIcon"
             src="icons/close.png"
             alt=""
@@ -193,7 +193,7 @@
         <button
           id="controllsButton"
           class="startButton"
-          onclick="toggleOverlay(event)"
+          onclick="toggleOverlay('controllsOverlay', event)"
         >
           Controls
         </button>
@@ -262,6 +262,6 @@
       </div>
     </div>
 
-    <a id="allInfoAboutCreator" href="impressum.html" target="_blank" class="allInfoAboutCreator">Impressum</a>
+    <a onclick="toggleOverlay('sectionLegalNotice', event)" id="allInfoAboutCreator" class="allInfoAboutCreator">Impressum</a>
   </body>
 </html>

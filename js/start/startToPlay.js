@@ -193,10 +193,10 @@ function addDisplayNone(id) {
  * @param {Event} event - The triggering event.
  * @returns {void}
  */
-function toggleOverlay(event) {
+function toggleOverlay(id, event) {
   event.stopPropagation(event);
-  let controllsOverlayRef = document.getElementById("controllsOverlay");
-  controllsOverlayRef.classList.toggle("d-none");
+  let overlayRef = document.getElementById(id);
+  overlayRef.classList.toggle("d-none");
 }
 
 /**
@@ -219,6 +219,9 @@ function stopPropagation(event) {
 function closeOverlay() {
   let controllsOverlayRef = document.getElementById("controllsOverlay");
   controllsOverlayRef.classList.add("d-none");
+
+  let legalNotiveOverlay = document.getElementById("sectionLegalNotice");
+  legalNotiveOverlay.classList.add("d-none");
 }
 
 /**
