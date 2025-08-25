@@ -63,7 +63,8 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_DEAD);
     this.loadImages(this.IMAGES_ALERT);
     this.loadImages(this.IMAGES_ATTACK);
-    this.x = 3300;
+    // this.x = 3300;
+    this.x = 1500;
     this.animate();
   }
 
@@ -86,9 +87,10 @@ class Endboss extends MovableObject {
         endboss_hit.play();
       } else if (this.hadFirstContact) {
         this.playAnimation(this.IMAGES_WALKING);
-        this.moveLeft();
+        this.moveToCharacter();
       }
-      if (world.character.x >= 3000 && !this.hadFirstContact) {
+      // if (world.character.x >= 3000 && !this.hadFirstContact) {
+      if (world.character.x >= 1200 && !this.hadFirstContact) {
         this.hadFirstContact = true;
         this.startAlertMode();
         gameMusic.pause();
@@ -128,12 +130,28 @@ class Endboss extends MovableObject {
   }
 
   /**
-   * Moves the endboss to the left with increased speed.
-   * Pauses attack and hit sounds.
+   * Moves the Endboss towards the character based on their relative positions.
+   *
+   * The Endboss will move left if the character is to the left beyond a certain distance,
+   * or move right if the character is to the right beyond that distance.
+   * The `otherDirection` property is updated to flip the Endboss image correctly.
+   *
+   * Additionally, attack and hit sounds are paused during movement.
+   *
+   * @returns {void}
    */
-  moveLeft() {
-    this.speed = 25;
-    this.x -= this.speed;
+  moveToCharacter() {
+    let characterX = world.character.x;
+    let endbossX = this.x;
+
+    let distance = 100;
+    if (characterX <= endbossX - distance) {
+      this.x -= 25;
+      this.otherDirection = false;
+    } else if (characterX > endbossX + distance) {
+      this.x += 25;
+      this.otherDirection = true;
+    }
     attackMode.pause();
     endboss_hit.pause();
   }
