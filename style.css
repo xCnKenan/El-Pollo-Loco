@@ -221,7 +221,7 @@ h2 {
   text-align: center;
 }
 
-.infoAbout a{
+.infoAbout a {
   color: white;
 }
 
@@ -288,8 +288,25 @@ h2 {
   border-radius: 8px;
 }
 
-.legalNotice h2{
+.legalNotice h2 {
   letter-spacing: 4px;
+}
+
+.closeLegalNotice {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+.closeLegalNoticeCross {
+  filter: invert(1);
+  height: 32px;
+  object-fit: contain;
+  right: 0;
+  cursor: pointer;
+  position: absolute;
 }
 
 @media (max-width: 1024px) and (min-height: 900px) {
