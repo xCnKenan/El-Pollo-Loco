@@ -309,9 +309,33 @@ h2 {
   position: absolute;
 }
 
+@media (min-width: 1024px) and (min-height: 1300px) {
+  .turnYourDevice {
+    display: block !important;
+  }
+}
+
+@media (min-width: 800px) and (min-height: 1180px) {
+  .turnYourDevice {
+    display: block !important;
+  }
+}
+
 @media (max-width: 1024px) and (min-height: 900px) {
   .mobileButtons {
     display: none !important;
+  }
+}
+
+@media (max-width: 1400px) and (min-height: 850px) {
+  .mobileButtons {
+    bottom: 50px;
+  }
+}
+
+@media (max-width: 1200px) and (min-height: 800px) {
+  .mobileButtons {
+    bottom: 50px;
   }
 }
 
@@ -324,6 +348,21 @@ h2 {
 @media (max-width: 768px) {
   .turnYourDevice {
     display: block !important;
+  }
+}
+
+@media (max-width: 940px) and (max-height: 450px) {
+  .allInfoAboutCreator {
+    display: none !important;
+  }
+
+  .allInfoAboutCreatorMobile {
+    bottom: 0px;
+    display: block;
+  }
+
+  .mobileSettingsSection {
+    display: flex;
   }
 }
 

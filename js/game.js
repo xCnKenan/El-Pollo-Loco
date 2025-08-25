@@ -213,15 +213,8 @@ window.addEventListener("contextmenu", (event) => {
  * @returns {void}
  */
 function checkMobileButtons() {
-  let isMobile = window.matchMedia(
-    "(max-width: 768px) and (orientation: landscape)"
-  ).matches;
-
-  let isTablet = window.matchMedia(
-    "(max-width: 1024px) and (orientation: landscape)"
-  ).matches;
-
-  if (isMobile || isTablet) {
+  let hasTouch = window.matchMedia("(pointer: coarse)").matches;
+  if (hasTouch) {
     document.getElementById("mobileButtons").style.display = "flex";
     bindMobileButtons();
   } else {
