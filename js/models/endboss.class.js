@@ -132,7 +132,7 @@ class Endboss extends MovableObject {
    * Pauses attack and hit sounds.
    */
   moveLeft() {
-    this.speed = 5;
+    this.speed = 25;
     this.x -= this.speed;
     attackMode.pause();
     endboss_hit.pause();
