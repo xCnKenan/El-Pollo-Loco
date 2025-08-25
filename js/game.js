@@ -199,6 +199,10 @@ window.addEventListener("keyup", (event) => {
 
 window.addEventListener("load", checkMobileButtons);
 window.addEventListener("resize", checkMobileButtons);
+window.addEventListener("contextmenu", (event) => { 
+  event.preventDefault();
+})
+
 
 /**
  * Checks if the game is being played on mobile or tablet (landscape mode).
