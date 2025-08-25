@@ -1,9 +1,14 @@
 /**
  * Represents the main character in the game.
- * Extends MovableObject and handles movement, animations, gravity, and interaction with the game world.
+ * Handles movement, animations, gravity, interactions, and states like idle, jump, hurt, dead, and sleep.
+ * Extends {@link MovableObject}.
  */
 class Character extends MovableObject {
   speed = 10;
+  currentImage = 0;
+  jumpFrameCounter = 0;
+  jumpSpeed = 3;
+
   IMAGES_WALKING = [
     "img/2_character_pepe/2_walk/W-21.png",
     "img/2_character_pepe/2_walk/W-22.png",
@@ -61,6 +66,7 @@ class Character extends MovableObject {
     "img/2_character_pepe/1_idle/long_idle/I-19.png",
     "img/2_character_pepe/1_idle/long_idle/I-20.png",
   ];
+
   world;
   offset = {
     top: 135,
@@ -87,9 +93,27 @@ class Character extends MovableObject {
   }
 
   /**
-   * Handles character animations, movement, gravity, and idle/sleep behavior based on keyboard input.
+   * Main animation and movement loop.
+   * Handles walking, jumping, idle, hurt, dead, and sleeping states.
+   * Uses multiple intervals with different refresh rates.
    */
   animate() {
+    /**
+     * Main animation loop for the character.
+     * Runs every 40ms (~25 FPS).
+     *
+     * State priority (checked in order):
+     * 1. Dead  → Plays death animation
+     * 2. Hurt  → Plays hurt animation
+     * 3. Jumping → Plays jump animation once (slowed by jumpSpeed),
+     *              then holds the last jump frame until back on ground
+     * 4. Walking → Plays walking animation while moving left or right
+     *              (resets lastTimeWalking and stops vertical speed)
+     * 5. Idle (not sleeping) → Pauses snoring sound
+     *
+     * This ensures the correct animation is always shown
+     * depending on the character’s current state.
+     */
     setStoppableInterval(() => {
       if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
         this.moveRight();
@@ -101,20 +125,21 @@ class Character extends MovableObject {
       }
       if (this.world.keyboard.SPACE && !this.isAboveGround()) {
         pepeJump.play();
+        this.resetJumpAnimation();
         this.jump();
       }
       this.world.camera_x = -this.x + 150;
     }, 1000 / 60);
 
     /**
-     * Updates the character's animation based on its current state.
-     * Runs every 40 milliseconds.
+     * Animation loop for the main states (dead, hurt, jumping, walking).
+     * Runs every 40ms (~25 FPS).
      *
-     * - If the character is dead, plays the dead animation.
-     * - If the character is hurt, plays the hurt animation.
-     * - If the character is in the air (jumping/falling), plays the jumping animation and updates lastTimeWalking.
-     * - If the character is moving left or right, plays the walking animation, updates lastTimeWalking, and resets vertical speed.
-     * - If the character is idle but not sleeping, pauses the snoring sound.
+     * - Dead → plays dead animation
+     * - Hurt → plays hurt animation
+     * - Jumping → plays jump animation once
+     * - Walking → plays walking animation
+     * - Otherwise (idle but not sleeping) → pauses snoring
      */
     setStoppableInterval(() => {
       if (this.isDead()) {
@@ -122,7 +147,7 @@ class Character extends MovableObject {
       } else if (this.isHurt()) {
         this.playAnimation(this.IMAGES_HURT);
       } else if (this.isAboveGround()) {
-        this.playAnimation(this.IMAGES_JUMPING);
+        this.playAnimationOnce(this.IMAGES_JUMPING);
         this.lastTimeWalking = new Date().getTime();
       } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
         this.playAnimation(this.IMAGES_WALKING);
@@ -133,18 +158,68 @@ class Character extends MovableObject {
       }
     }, 40);
 
+    /**
+     * Idle animation loop.
+     * Runs every 250ms (~4 FPS).
+     *
+     * Plays idle animation when the character:
+     * - is not moving left/right
+     * - is not jumping
+     * - is not sleeping
+     */
     setStoppableInterval(() => {
-      if (!this.world.keyboard.RIGHT && !this.world.keyboard.LEFT) {
+      if (
+        !this.world.keyboard.RIGHT &&
+        !this.world.keyboard.LEFT &&
+        !this.isAboveGround()
+      ) {
         this.playAnimation(this.IMAGES_IDLE);
       }
     }, 250);
 
+    /**
+     * Sleep (long idle) animation loop.
+     * Runs every 250ms (~4 FPS).
+     *
+     * Plays long idle animation and triggers snoring sound
+     * if the character has been inactive for >= 15s.
+     */
     setStoppableInterval(() => {
       if (this.getSleep()) {
         this.playAnimation(this.IMAGES_LONG_IDLE);
         snoring.play();
       }
     }, 250);
+  }
+
+  /**
+   * Plays an animation sequence exactly once.
+   * After the last frame, the last image stays displayed until reset.
+   *
+   * @param {string[]} images - Array of image paths for the animation.
+   */
+  playAnimationOnce(images) {
+    if (this.currentImage >= images.length) {
+      let path = images[images.length - 1];
+      this.img = this.imageCache[path];
+      return;
+    }
+
+    this.jumpFrameCounter++;
+    if (this.jumpFrameCounter % this.jumpSpeed === 0) {
+      let path = images[this.currentImage];
+      this.img = this.imageCache[path];
+      this.currentImage++;
+    }
+  }
+
+  /**
+   * Resets the jump animation to the first frame.
+   * Called whenever a new jump is initiated.
+   */
+  resetJumpAnimation() {
+    this.currentImage = 0;
+    this.jumpFrameCounter = 0;
   }
 
   /**
