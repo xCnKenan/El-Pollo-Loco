@@ -4,10 +4,6 @@
  */
 class Character extends MovableObject {
   speed = 10;
-  IMAGES_STANDING = [
-    "img/2_character_pepe/2_walk/W-21.png",
-    "img/2_character_pepe/2_walk/W-26.png",
-  ];
   IMAGES_WALKING = [
     "img/2_character_pepe/2_walk/W-21.png",
     "img/2_character_pepe/2_walk/W-22.png",
@@ -80,7 +76,6 @@ class Character extends MovableObject {
    */
   constructor() {
     super().loadImage("img/2_character_pepe/2_walk/W-21.png");
-    this.loadImages(this.IMAGES_STANDING);
     this.loadImages(this.IMAGES_DEAD);
     this.loadImages(this.IMAGES_HURT);
     this.loadImages(this.IMAGES_WALKING);
@@ -138,44 +133,18 @@ class Character extends MovableObject {
       }
     }, 40);
 
-    /**
-     * Plays the standing animation when the character is not moving.
-     * Runs every 250 milliseconds.
-     *
-     * - Checks if neither the RIGHT nor LEFT keys are pressed.
-     * - If idle, plays the standing animation.
-     */
     setStoppableInterval(() => {
       if (!this.world.keyboard.RIGHT && !this.world.keyboard.LEFT) {
-        this.playAnimation(this.IMAGES_STANDING);
+        this.playAnimation(this.IMAGES_IDLE);
       }
     }, 250);
 
-    /**
-     * Handles the character's idle and sleeping animations.
-     * Runs every 250 milliseconds.
-     *
-     * - If the character has been inactive long enough to sleep, plays the long idle animation and starts snoring sound.
-     * - If the character is tired but not asleep yet, plays the regular idle animation.
-     */
     setStoppableInterval(() => {
       if (this.getSleep()) {
         this.playAnimation(this.IMAGES_LONG_IDLE);
         snoring.play();
-      } else if (this.getTired()) {
-        this.playAnimation(this.IMAGES_IDLE);
       }
     }, 250);
-  }
-
-  /**
-   * Checks if the character is tired (not moving for >= 5 seconds).
-   * @returns {boolean} True if tired, otherwise false.
-   */
-  getTired() {
-    let timePassed = new Date().getTime() - this.lastTimeWalking;
-    timePassed = timePassed / 1000;
-    return timePassed >= 5;
   }
 
   /**
