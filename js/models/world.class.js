@@ -151,24 +151,46 @@ class World {
       }
     });
 
-    // here check if character colliding with bottles
-    this.level.bottles.forEach((bottle) => {
+    /**
+     * Checks all bottles in the level for collisions with the character
+     * and removes collected bottles from the array.
+     *
+     * On collision:
+     * - plays the collection sound,
+     * - increases the character's bottle count,
+     * - updates the bottle status bar.
+     *
+     * @returns {Array<Object>} A new array containing only the bottles that have not been collected.
+     */
+    this.level.bottles = this.level.bottles.filter((bottle) => {
       if (this.character.isColliding(bottle)) {
         bottleCollect.play();
         this.character.bottleAdded();
         this.statusBarBottle.setPercentage(this.character.amountOfBottles);
-        this.removeItem(bottle, this.level.bottles);
+        return false;
       }
+      return true;
     });
 
-    // here check if character colliding with coin
-    this.level.coins.forEach((coin) => {
+    /**
+     * Checks all coins in the level for collisions with the character
+     * and removes collected coins from the array.
+     *
+     * On collision:
+     * - plays the coin collection sound,
+     * - increases the character's coin count,
+     * - updates the coin status bar.
+     *
+     * @returns {Array<Object>} A new array containing only the coins that have not been collected.
+     */
+    this.level.coins = this.level.coins.filter((coin) => {
       if (this.character.isColliding(coin)) {
         coinCollect.play();
         this.character.coinsAdded();
         this.statusBarCoins.setPercentage(this.character.amountOfCoins);
-        this.removeItem(coin, this.level.coins);
+        return false;
       }
+      return true;
     });
 
     // here check if bottle colliding with enemy
