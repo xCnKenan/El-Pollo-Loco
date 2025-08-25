@@ -5,6 +5,7 @@ let ctxStart;
 let intervallIds = [];
 let animationFrameId = null;
 
+window.addEventListener("load", checkMobileButtons);
 window.addEventListener("resize", toggleVideo);
 /**
  * Toggles the visibility of the "turnYourDevice" video element
@@ -23,6 +24,29 @@ function toggleVideo(){
   }
   if(window.innerWidth > 768) {
     video.classList.add("d-none");
+  }
+}
+
+/**
+ * Checks if the game is being played on mobile or tablet (landscape mode).
+ * - Displays mobile buttons if true.
+ * - Hides them if false.
+ *
+ * @function checkMobileButtons
+ * @returns {void}
+ */
+function checkMobileButtons() {
+  let hasTouch = window.matchMedia("(pointer: coarse)").matches;
+  let isPortrait = window.innerHeight > window.innerWidth;
+  let video = document.getElementById("turnYourDevice");
+  if (hasTouch && !isPortrait) {
+    video.classList.add("d-none");
+  } else if (hasTouch && isPortrait) {
+    document.getElementById("mobileButtons").style.display = "flex";
+    video.classList.remove("d-none");
+    bindMobileButtons();
+  } else if (!isPortrait) {
+    document.getElementById("mobileButtons").style.display = "none";
   }
 }
 
