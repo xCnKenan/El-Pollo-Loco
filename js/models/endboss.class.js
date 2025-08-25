@@ -144,11 +144,11 @@ class Endboss extends MovableObject {
     let characterX = world.character.x;
     let endbossX = this.x;
 
-    let distance = 100;
-    if (characterX <= endbossX - distance) {
+    let throughCharacter = 200;
+    if (characterX <= endbossX + throughCharacter) {
       this.x -= 25;
       this.otherDirection = false;
-    } else if (characterX > endbossX + distance) {
+    } else if (characterX > endbossX - throughCharacter) {
       this.x += 25;
       this.otherDirection = true;
     }
