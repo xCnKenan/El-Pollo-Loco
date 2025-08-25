@@ -199,10 +199,9 @@ window.addEventListener("keyup", (event) => {
 
 window.addEventListener("load", checkMobileButtons);
 window.addEventListener("resize", checkMobileButtons);
-window.addEventListener("contextmenu", (event) => { 
+window.addEventListener("contextmenu", (event) => {
   event.preventDefault();
-})
-
+});
 
 /**
  * Checks if the game is being played on mobile or tablet (landscape mode).
@@ -214,10 +213,15 @@ window.addEventListener("contextmenu", (event) => {
  */
 function checkMobileButtons() {
   let hasTouch = window.matchMedia("(pointer: coarse)").matches;
-  if (hasTouch) {
+  let isPortrait = window.innerHeight > window.innerWidth;
+  let video = document.getElementById("turnYourDevice");
+  if (hasTouch && !isPortrait) {
+    video.classList.add("d-none");
+  } else if (hasTouch && isPortrait) {
     document.getElementById("mobileButtons").style.display = "flex";
+    video.classList.remove("d-none");
     bindMobileButtons();
-  } else {
+  } else if (!isPortrait) {
     document.getElementById("mobileButtons").style.display = "none";
   }
 }

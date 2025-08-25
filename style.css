@@ -309,17 +309,17 @@ h2 {
   position: absolute;
 }
 
-@media (min-width: 1024px) and (min-height: 1300px) {
+/* @media (min-width: 1024px) and (min-height: 1300px) {
   .turnYourDevice {
     display: block !important;
   }
-}
+} */
 
-@media (min-width: 800px) and (min-height: 1180px) {
+/* @media (min-width: 800px) and (min-height: 1180px) {
   .turnYourDevice {
     display: block !important;
   }
-}
+} */
 
 @media (max-width: 1024px) and (min-height: 900px) {
   .mobileButtons {
@@ -345,11 +345,11 @@ h2 {
   }
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .turnYourDevice {
     display: block !important;
   }
-}
+} */
 
 @media (max-width: 940px) and (max-height: 450px) {
   .allInfoAboutCreator {
@@ -390,9 +390,9 @@ h2 {
 }
 
 @media (max-height: 768px) and (max-height: 600px) {
-  .turnYourDevice {
+  /* .turnYourDevice {
     display: none !important;
-  }
+  } */
 
   canvas {
     width: 100vw;

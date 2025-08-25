@@ -5,6 +5,27 @@ let ctxStart;
 let intervallIds = [];
 let animationFrameId = null;
 
+window.addEventListener("resize", toggleVideo);
+/**
+ * Toggles the visibility of the "turnYourDevice" video element
+ * based on the current viewport width.
+ *
+ * - Shows the video when the viewport width is 768px or smaller.
+ * - Hides the video when the viewport width is larger than 768px.
+ *
+ * @function toggleVideo
+ * @returns {void}
+ */
+function toggleVideo(){
+  let video = document.getElementById("turnYourDevice");
+  if(window.innerWidth <= 768){
+     video.classList.remove("d-none");
+  }
+  if(window.innerWidth > 768) {
+    video.classList.add("d-none");
+  }
+}
+
 /**
  * Loads the start screen, initializes canvas and UI states.
  * - Prepares the start screen rendering context.
