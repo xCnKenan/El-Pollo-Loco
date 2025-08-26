@@ -63,7 +63,8 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_DEAD);
     this.loadImages(this.IMAGES_ALERT);
     this.loadImages(this.IMAGES_ATTACK);
-    this.x = 3300;
+    // this.x = 3300;
+    this.x = 1500;
     this.animate();
   }
 
@@ -88,7 +89,8 @@ class Endboss extends MovableObject {
         this.playAnimation(this.IMAGES_WALKING);
         this.moveToCharacter();
       }
-      if (world.character.x >= 3000 && !this.hadFirstContact) {
+      // if (world.character.x >= 3000 && !this.hadFirstContact) {
+      if (world.character.x >= 1300 && !this.hadFirstContact) {
         this.hadFirstContact = true;
         this.startAlertMode();
         gameMusic.pause();
@@ -144,10 +146,10 @@ class Endboss extends MovableObject {
 
     let throughCharacter = 200;
     if (characterX <= endbossX + throughCharacter) {
-      this.x -= 25;
+      this.x -= 45;
       this.otherDirection = false;
     } else if (characterX > endbossX - throughCharacter) {
-      this.x += 25;
+      this.x += 45;
       this.otherDirection = true;
     }
     attackMode.pause();

@@ -82,20 +82,6 @@ class World {
   }
 
   /**
-   * Starts the main update loop (collision checks, throw logic, etc.).
-   * @returns {void}
-   */
-  run() {
-    setStoppableInterval(() => {
-      this.checkCollisions();
-    }, 30);
-
-    setStoppableInterval(()=>{
-      this.checkThrowObjects();
-    },200)
-  }
-
-  /**
    * Checks if the player throws a bottle when pressing "D".
    * Adds the bottle to the throwable objects list if available.
    * @returns {void}
@@ -121,6 +107,21 @@ class World {
       this.statusBarBottle.setPercentage(this.character.amountOfBottles);
       world.character.lastTimeWalking = new Date().getTime();
     }
+  }
+
+  /**
+   * Starts the main update loop (collision checks, throw logic, etc.).
+   * @returns {void}
+   */
+  run() {
+    setStoppableInterval(() => {
+      this.checkCollisions();
+      this.checkThrowObjects();
+    }, 200);
+
+    setStoppableInterval(() => {
+      this.checkElementsToPickUp();
+    }, 30);
   }
 
   /**
@@ -150,7 +151,13 @@ class World {
         this.statusBar.setPercentage(this.character.energy);
       }
     });
+  }
 
+  /**
+   * Checks ELements in World which can be picked up
+   * runs every 30ms
+   */
+  checkElementsToPickUp() {
     /**
      * Checks all bottles in the level for collisions with the character
      * and removes collected bottles from the array.
@@ -206,8 +213,7 @@ class World {
       this.level.enemies.forEach((enemy) => {
         if (bottle.isColliding(enemy) && enemy instanceof Endboss) {
           this.againstFinalBoss(bottle, enemy);
-        }
-        else if (
+        } else if (
           (bottle.isColliding(enemy) && enemy instanceof Chicken) ||
           (bottle.isColliding(enemy) && enemy instanceof ChickenSmall)
         ) {
