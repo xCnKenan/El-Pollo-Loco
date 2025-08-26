@@ -219,6 +219,7 @@ function restartGame() {
   endgame_level.currentTime = 0;
   success.pause();
   success.currentTime = 0;
+  successPlayed = false;
   game_overPlayed = false;
 }
 
@@ -291,6 +292,7 @@ function backToHomeScreen() {
   removeDisplayNone("allInfoAboutCreatorMobile");
   endgame_level.pause();
   endgame_level.currentTime = 0;
+  successPlayed = false;
 }
 
 /**

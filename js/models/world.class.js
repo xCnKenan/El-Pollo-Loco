@@ -320,7 +320,6 @@ class World {
     this.level.enemies.forEach((enemy) => {
       if (enemy.isDead() && enemy instanceof Endboss) {
         this.stopSounds();
-        this.youLoseSound();
         if (!successPlayed) {
           success.play();
           successPlayed = true;
