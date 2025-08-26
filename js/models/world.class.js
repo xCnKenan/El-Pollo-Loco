@@ -310,25 +310,52 @@ class World {
     this.addObjectsToMap(this.level.bottles);
     this.addObjectsToMap(this.level.coins);
     this.ctx.translate(-this.camera_x, 0);
+    this.checkGameStatus();
+  }
+
+  /**
+ * Checks the current status of the game.
+ * - If the player's character is dead, triggers the losing sequence.
+ * - If any enemy that is an instance of Endboss is dead, triggers the winning sequence.
+ */
+  checkGameStatus() {
     if (this.character.isDead()) {
-      this.stopSounds();
-      this.youLoseSound();
-      this.gameEnding(this.level.youLost);
-      let mobileButtonsRef = document.getElementById("mobileButtons");
-      mobileButtonsRef.classList.add("d-none");
+      this.youLostGame();
     }
     this.level.enemies.forEach((enemy) => {
       if (enemy.isDead() && enemy instanceof Endboss) {
-        this.stopSounds();
-        if (!successPlayed) {
-          success.play();
-          successPlayed = true;
-        }
-        this.gameEnding(this.level.youWon);
-        let mobileButtonsRef = document.getElementById("mobileButtons");
-        mobileButtonsRef.classList.add("d-none");
+        this.youWonGame();
       }
     });
+  }
+
+  /**
+ * Handles the actions when the player loses the game.
+ * Stops all sounds, plays the losing sound, triggers the game ending with
+ * a losing message, and hides the mobile buttons.
+ */
+  youLostGame() {
+    this.stopSounds();
+    this.youLoseSound();
+    this.gameEnding(this.level.youLost);
+    let mobileButtonsRef = document.getElementById("mobileButtons");
+    mobileButtonsRef.classList.add("d-none");
+  }
+
+  /**
+ * Handles the actions when the player wins the game.
+ * Stops all sounds, plays the success sound once, triggers the game ending
+ * with a winning message, and hides the mobile buttons.
+ */
+  youWonGame() {
+    this.stopSounds();
+    if (!successPlayed) {
+      success.play();
+      successPlayed = true;
+    }
+    this.gameEnding(this.level.youWon);
+    let mobileButtonsRef = document.getElementById("mobileButtons");
+    mobileButtonsRef.classList.add("d-none");
   }
 
   /**
