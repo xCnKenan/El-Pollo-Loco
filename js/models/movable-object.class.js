@@ -28,7 +28,6 @@ class MovableObject extends DrawableObject {
   applyGravity() {
     setStoppableInterval(() => {
       if (this.isAboveGround() || this.speedY > 0) {
-        // fall down animation
         this.y -= this.speedY;
         this.speedY -= this.acceleration;
       }

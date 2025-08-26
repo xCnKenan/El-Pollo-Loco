@@ -52,11 +52,11 @@ class ThrowableObject extends MovableObject {
   checkDirection(leftSide) {
     if (leftSide) {
       setStoppableInterval(() => {
-        this.x -= 10; // throw to left
+        this.x -= 10;
       }, 25);
     } else if (!leftSide) {
       setStoppableInterval(() => {
-        this.x += 10; // throw to right
+        this.x += 10;
       }, 25);
     }
     this.animate();

@@ -36,8 +36,7 @@ class StatusBarCoins extends DrawableObject {
    * @returns {void}
    */
   setPercentage(amountOfCoins) {
-    this.amountOfCoins = amountOfCoins; // => 0...5
-    // console.log('current status coins', this.amountOfCoins);
+    this.amountOfCoins = amountOfCoins;
     let path = this.IMAGES_STATUSBAR_COINS[this.resolveImageIndex()];
     this.img = this.imageCache[path];
   }

@@ -7,7 +7,7 @@ class Level {
   backgroundObject;
   coins;
   bottles;
-  level_end_x = 720 * 5; // 3600
+  level_end_x = 720 * 5;
   youLost;
   youWon;
 

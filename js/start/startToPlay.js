@@ -1,5 +1,5 @@
 let screenCanvas;
-let mainScreen; // wie world
+let mainScreen;
 let boundingRect;
 let ctxStart;
 let intervallIds = [];

@@ -25,49 +25,6 @@ class DrawableObject {
   }
 
   /**
-   * Draws the hitbox frame for debugging purposes.
-   * Only applies to certain object types (Character, ThrowableObject, Chicken, etc.).
-   * @param {CanvasRenderingContext2D} ctx - The canvas 2D context to draw on.
-   */
-  drawFrame(ctx) {
-    if (
-      this instanceof Character ||
-      this instanceof ThrowableObject ||
-      this instanceof Chicken ||
-      this instanceof ChickenSmall ||
-      this instanceof Endboss ||
-      this instanceof BottleOnGround ||
-      this instanceof Coins
-    ) {
-      //hitbox here
-      // ctx.beginPath();
-      // ctx.lineWidth = '3';
-      // ctx.strokeStyle = 'blue';
-      // ctx.rect(
-      //     this.x,
-      //     this.y,
-      //     this.width,
-      //     this.height
-      //     );
-      // ctx.stroke();
-      //hitbox end here
-      //hitbox here
-      // ctx.beginPath();
-      // ctx.lineWidth = '3';
-      // ctx.strokeStyle = 'red';
-      // ctx.rect(
-      //     //here fit hitbox to object
-      //     this.x + this.offset.left,
-      //     this.y + this.offset.top,
-      //     this.width - this.offset.right,
-      //     this.height - this.offset.bottom
-      //     );
-      // ctx.stroke();
-      //hitbox end here
-    }
-  }
-
-  /**
    *
    * @param {Array} path - ('img/test.png');
    */

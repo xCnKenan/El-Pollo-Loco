@@ -42,8 +42,6 @@ class Mainscreen {
       this.screenCanvas.height
     );
     this.showOnScreen(this.background);
-    // this.showOnScreen(this.startButton);
-    // this.showOnScreen(this.controllsButton);
     let self = this;
     requestAnimationFrame(function () {
       self.draw();
