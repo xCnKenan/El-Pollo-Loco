@@ -75,6 +75,7 @@ class Endboss extends MovableObject {
     setStoppableInterval(() => {
       if (this.inAlertMode && !this.isDead() && !this.isHurt()) {
         this.playAnimation(this.IMAGES_ALERT);
+        world.keyboard.D = false;
       } else if (this.inAttackMode && !this.isHurt()) {
         attackMode.play();
         this.stopMoving();
