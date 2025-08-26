@@ -81,22 +81,37 @@ class World {
     this.character.world = this;
   }
 
-
+  /**
+   * Checks if the player can throw a bottle.
+   * - A bottle can only be thrown if the "D" key is pressed
+   *   and the character still has bottles available.
+   * - A cooldown of 1000 ms (1 sec) is enforced between throws.
+   *
+   * Effects:
+   * - Creates a new `ThrowableObject` at the character's position.
+   * - Plays the throwing sound effect.
+   * - Decreases the character's bottle count.
+   * - Updates the bottle status bar.
+   * - Saves the timestamp of the last throw.
+   *
+   * @method checkThrowObjects
+   * @returns {void}
+   */
   checkThrowObjects() {
     if (this.keyboard.D && this.character.amountOfBottles) {
       let nowThrown = new Date().getTime();
       if (!this.lastBottleThrowTime) {
         this.lastBottleThrowTime = 0;
       }
-      if (nowThrown - this.lastBottleThrowTime < 1000) return
-        let offsetX = world.character.otherDirection ? 10 : 80;
-        let offsetY = 100;
-        let bottle = new ThrowableObject(this.character.x + offsetX, this.character.y + offsetY);
-        throwing.play();
-        this.throwableObjects.push(bottle);
-        this.character.bottleSubtracted();
-        this.statusBarBottle.setPercentage(this.character.amountOfBottles);
-        this.lastBottleThrowTime = nowThrown;
+      if (nowThrown - this.lastBottleThrowTime < 700) return
+      let offsetX = world.character.otherDirection ? 10 : 80;
+      let offsetY = 100;
+      let bottle = new ThrowableObject(this.character.x + offsetX, this.character.y + offsetY);
+      throwing.play();
+      this.throwableObjects.push(bottle);
+      this.character.bottleSubtracted();
+      this.statusBarBottle.setPercentage(this.character.amountOfBottles);
+      this.lastBottleThrowTime = nowThrown;
     }
   }
 

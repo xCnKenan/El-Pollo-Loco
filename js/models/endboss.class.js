@@ -69,56 +69,55 @@ class Endboss extends MovableObject {
   }
 
   /**
-   * Animates the endboss based on its state (walking, alert, attacking, hurt, or dead).
-   */
+ * Animates the endboss based on its state (walking, alert, attacking, hurt, or dead)
+ * and triggers the first encounter when the character reaches a threshold.
+ */
   animate() {
-    setStoppableInterval(() => {
-      if (this.inAlertMode && !this.isDead() && !this.isHurt()) {
-        this.playAnimation(this.IMAGES_ALERT);
-        world.keyboard.D = false;
-      } else if (this.inAttackMode && !this.isHurt()) {
-        attackMode.play();
-        this.stopMoving();
-        this.playAnimation(this.IMAGES_ATTACK);
-      } else if (this.isDead()) {
-        this.playAnimation(this.IMAGES_DEAD);
-        this.inAttackMode = false;
-      } else if (this.isHurt()) {
-        this.playAnimation(this.IMAGES_HURT);
-        endboss_hit.play();
-      } else if (this.hadFirstContact) {
-        this.playAnimation(this.IMAGES_WALKING);
-        this.moveToCharacter();
-      }
-      // if (world.character.x >= 3000 && !this.hadFirstContact) {
-      if (world.character.x >= 1300 && !this.hadFirstContact) {
-        this.hadFirstContact = true;
-        this.startAlertMode();
-        gameMusic.pause();
-        endgame_level.play();
-        endgame_level.loop = true;
-      }
-    }, 150);
-
     /**
-     * Sets a repeating interval to control the endboss's attack mode.
-     * Every 5 seconds, if the endboss has had first contact and is not dead,
-     * it enters attack mode for 1.2 seconds.
-     *
-     * @fires setStoppableInterval
-     * @fires setTimeout
-     */
-    setStoppableInterval(() => {
-      if (this.hadFirstContact) {
-        if (!this.isDead()) {
-          this.inAttackMode = true;
-        }
-      }
-      setTimeout(() => {
-        this.inAttackMode = false;
-      }, 1200);
-    }, 5000);
+   * Determines the current state and executes the corresponding animation or action.
+   */
+    let handleState = () => {
+      if (this.isDead()) return this.playDead();
+      if (this.isHurt()) return this.playHurt();
+      if (this.inAttackMode) return this.playAttack();
+      if (this.inAlertMode) return this.playAlert();
+      if (this.hadFirstContact) this.playWalking();
+      if (world.character.x >= 1300 && !this.hadFirstContact) this.startEncounter();
+    };
+
+    setStoppableInterval(handleState, 150);
+    /**
+  * Controls the endboss's attack mode.
+  * Every 5 seconds, if the endboss has had first contact and is not dead,
+  * it enters attack mode for 1.2 seconds.
+  */
+    setStoppableInterval(() => { if (this.hadFirstContact && !this.isDead()) { this.inAttackMode = true; setTimeout(() => this.inAttackMode = false, 1200); } }, 5000);
   }
+
+  /**
+ * Plays the dead animation and stops attack mode.
+ */
+  playDead() { this.playAnimation(this.IMAGES_DEAD); this.inAttackMode = false; }
+  /**
+ * Plays the hurt animation and plays the hit sound.
+ */
+  playHurt() { this.playAnimation(this.IMAGES_HURT); endboss_hit.play(); }
+  /**
+ * Plays the attack animation, stops movement, and plays attack sound.
+ */
+  playAttack() { attackMode.play(); this.stopMoving(); this.playAnimation(this.IMAGES_ATTACK); }
+  /**
+ * Plays the alert animation and disables movement input temporarily.
+ */
+  playAlert() { this.playAnimation(this.IMAGES_ALERT); world.keyboard.D = false; }
+  /**
+ * Plays the walking animation and moves the endboss toward the character.
+ */
+  playWalking() { this.playAnimation(this.IMAGES_WALKING); this.moveToCharacter(); }
+  /**
+ * Triggers the first encounter sequence, enabling alert mode and music changes.
+ */
+  startEncounter() { this.hadFirstContact = true; this.startAlertMode(); gameMusic.pause(); endgame_level.play(); endgame_level.loop = true; }
 
   /**
    * Activates alert mode for a short duration.
