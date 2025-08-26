@@ -83,14 +83,16 @@ class World {
 
   /**
    * Starts the main update loop (collision checks, throw logic, etc.).
-   * Runs every 200ms.
    * @returns {void}
    */
   run() {
     setStoppableInterval(() => {
       this.checkCollisions();
+    }, 30);
+
+    setStoppableInterval(()=>{
       this.checkThrowObjects();
-    }, 200);
+    },200)
   }
 
   /**
