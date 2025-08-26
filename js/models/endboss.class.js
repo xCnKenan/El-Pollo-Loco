@@ -63,41 +63,40 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_DEAD);
     this.loadImages(this.IMAGES_ALERT);
     this.loadImages(this.IMAGES_ATTACK);
-    // this.x = 3300;
-    this.x = 1500;
+    this.x = 3300;
     this.animate();
   }
 
-/**
- * Controls the Endboss's animations and behavior based on its state.
- * 
- * - Plays walking, alert, attack, hurt, or dead animations.
- * - Moves towards the character after the first contact.
- * - Triggers alert mode and endgame music when the character reaches a certain position.
- * - Sets up a repeating attack mode every 5 seconds for 1.2 seconds.
- *
- * @fires setStoppableInterval - Repeatedly updates animation and attack state.
- * @fires setTimeout - Temporarily sets attack mode duration.
- * @memberof Endboss
- */
-animate() {
-  setStoppableInterval(() => {
-    if (this.isDead()) { this.playAnimation(this.IMAGES_DEAD); this.inAttackMode = false; }
-    else if (this.isHurt()) { this.playAnimation(this.IMAGES_HURT); endboss_hit.play(); }
-    else if (this.inAlertMode) this.playAnimation(this.IMAGES_ALERT);
-    else if (this.inAttackMode) { attackMode.play(); this.stopMoving(); this.playAnimation(this.IMAGES_ATTACK); }
-    else { this.playAnimation(this.IMAGES_WALKING); if (this.hadFirstContact) this.moveToCharacter(); }
+  /**
+   * Controls the Endboss's animations and behavior based on its state.
+   * 
+   * - Plays walking, alert, attack, hurt, or dead animations.
+   * - Moves towards the character after the first contact.
+   * - Triggers alert mode and endgame music when the character reaches a certain position.
+   * - Sets up a repeating attack mode every 5 seconds for 1.2 seconds.
+   *
+   * @fires setStoppableInterval - Repeatedly updates animation and attack state.
+   * @fires setTimeout - Temporarily sets attack mode duration.
+   * @memberof Endboss
+   */
+  animate() {
+    setStoppableInterval(() => {
+      if (this.isDead()) { this.playAnimation(this.IMAGES_DEAD); this.inAttackMode = false; }
+      else if (this.isHurt()) { this.playAnimation(this.IMAGES_HURT); endboss_hit.play(); }
+      else if (this.inAlertMode) this.playAnimation(this.IMAGES_ALERT);
+      else if (this.inAttackMode) { attackMode.play(); this.stopMoving(); this.playAnimation(this.IMAGES_ATTACK); }
+      else { this.playAnimation(this.IMAGES_WALKING); if (this.hadFirstContact) this.moveToCharacter(); }
 
-    if (world.character.x >= 1300 && !this.hadFirstContact) {
-      this.hadFirstContact = true; this.startAlertMode(); gameMusic.pause(); endgame_level.play(); endgame_level.loop = true;
-    }
-  }, 150);
+      if (world.character.x >= 3000 && !this.hadFirstContact) {
+        this.hadFirstContact = true; this.startAlertMode(); gameMusic.pause(); endgame_level.play(); endgame_level.loop = true;
+      }
+    }, 150);
 
-  setStoppableInterval(() => {
-    if (this.hadFirstContact && !this.isDead()) this.inAttackMode = true;
-    setTimeout(() => this.inAttackMode = false, 1200);
-  }, 5000);
-}
+    setStoppableInterval(() => {
+      if (this.hadFirstContact && !this.isDead()) this.inAttackMode = true;
+      setTimeout(() => this.inAttackMode = false, 1200);
+    }, 5000);
+  }
 
   /**
    * Activates alert mode for a short duration.
