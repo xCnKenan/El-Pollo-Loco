@@ -44,7 +44,7 @@ successPlayed = false;
  *
  * @class World
  */
-class World {
+class World extends DrawableObject {
   character = new Character();
   level = level1;
   canvas;
@@ -64,6 +64,7 @@ class World {
    * @param {Keyboard} keyboard - The keyboard input handler.
    */
   constructor(canvas, keyboard) {
+    super();
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
@@ -71,14 +72,6 @@ class World {
     this.setWorld();
     this.run();
     this.startDrawLoop();
-  }
-
-  /**
-   * Assigns the world reference to the character.
-   * @returns {void}
-   */
-  setWorld() {
-    this.character.world = this;
   }
 
   /**
@@ -113,21 +106,6 @@ class World {
       this.statusBarBottle.setPercentage(this.character.amountOfBottles);
       this.lastBottleThrowTime = nowThrown;
     }
-  }
-
-  /**
-   * Starts the main update loop (collision checks, throw logic, etc.).
-   * @returns {void}
-   */
-  run() {
-    setStoppableInterval(() => {
-      this.checkCollisions();
-      this.checkThrowObjects();
-    }, 200);
-
-    setStoppableInterval(() => {
-      this.checkElementsToPickUp();
-    }, 30);
   }
 
   /**
@@ -272,18 +250,6 @@ class World {
   }
 
   /**
-   * Starts the animation loop that continuously redraws the game.
-   * @returns {void}
-   */
-  startDrawLoop() {
-    let loop = () => {
-      this.draw();
-      animationFrameId = requestAnimationFrame(loop);
-    };
-    loop();
-  }
-
-  /**
    * Draws all game objects, background, UI, and checks for game-ending conditions.
    * @returns {void}
    */
@@ -359,34 +325,6 @@ class World {
   }
 
   /**
-   * Stops background sounds/music.
-   * @returns {void}
-   */
-  stopSounds() {
-    pepeHit.pause();
-    pepeHit.currentTime = 0;
-    gameMusic.pause();
-    gameMusic.currentTime = 0;
-    endgame_level.pause();
-    endgame_level.currentTime = 0;
-    attackMode.pause();
-    endgame_level.currentTime = 0;
-    endboss_hit.pause();
-    endboss_hit.currentTime = 0;
-  }
-
-  /**
-   * Plays the game-over sound only once.
-   * @returns {void}
-   */
-  youLoseSound() {
-    if (!game_overPlayed) {
-      game_over.play();
-      game_overPlayed = true;
-    }
-  }
-
-  /**
    * Handles the end of the game (win or lose).
    * @param {Array<MovableObject>} status - The objects to display (YouWon or YouLost screen).
    * @returns {void}
@@ -401,18 +339,6 @@ class World {
     this.level.enemies.forEach((movableObject) => {
       movableObject.speed = 0;
     });
-  }
-
-  /**
-   * Displays restart and home buttons on the end screen.
-   * @returns {void}
-   */
-  endScreenButtons() {
-    let restartRef = document.getElementById("restart");
-    restartRef.classList.remove("d-none");
-
-    let homeRef = document.getElementById("home");
-    homeRef.classList.remove("d-none");
   }
 
   /**

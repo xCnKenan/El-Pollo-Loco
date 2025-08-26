@@ -17,12 +17,12 @@ window.addEventListener("resize", toggleVideo);
  * @function toggleVideo
  * @returns {void}
  */
-function toggleVideo(){
+function toggleVideo() {
   let video = document.getElementById("turnYourDevice");
-  if(window.innerWidth <= 768){
-     video.classList.remove("d-none");
+  if (window.innerWidth <= 768) {
+    video.classList.remove("d-none");
   }
-  if(window.innerWidth > 768) {
+  if (window.innerWidth > 768) {
     video.classList.add("d-none");
   }
 }
@@ -293,6 +293,8 @@ function backToHomeScreen() {
   endgame_level.pause();
   endgame_level.currentTime = 0;
   successPlayed = false;
+  clearStoppableIntervals();
+  stopDrawLoop();
 }
 
 /**
