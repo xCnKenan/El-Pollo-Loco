@@ -88,6 +88,8 @@ class Endboss extends MovableObject {
       } else if (this.hadFirstContact) {
         this.playAnimation(this.IMAGES_WALKING);
         this.moveToCharacter();
+      } else if (!this.hadFirstContact){
+        this.playAnimation(this.IMAGES_WALKING);
       }
       // if (world.character.x >= 3000 && !this.hadFirstContact) {
       if (world.character.x >= 1300 && !this.hadFirstContact) {
