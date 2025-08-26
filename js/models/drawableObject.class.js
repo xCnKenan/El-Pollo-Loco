@@ -53,10 +53,10 @@ class DrawableObject {
     this.character.world = this;
   }
 
-   /**
-   * Starts the main update loop (collision checks, throw logic, etc.).
-   * @returns {void}
-   */
+  /**
+  * Starts the main update loop (collision checks, throw logic, etc.).
+  * @returns {void}
+  */
   run() {
     setStoppableInterval(() => {
       this.checkCollisions();
@@ -80,10 +80,10 @@ class DrawableObject {
     loop();
   }
 
-   /**
-   * Displays restart and home buttons on the end screen.
-   * @returns {void}
-   */
+  /**
+  * Displays restart and home buttons on the end screen.
+  * @returns {void}
+  */
   endScreenButtons() {
     let restartRef = document.getElementById("restart");
     restartRef.classList.remove("d-none");
@@ -92,10 +92,10 @@ class DrawableObject {
     homeRef.classList.remove("d-none");
   }
 
-   /**
-   * Plays the game-over sound only once.
-   * @returns {void}
-   */
+  /**
+  * Plays the game-over sound only once.
+  * @returns {void}
+  */
   youLoseSound() {
     if (!game_overPlayed) {
       game_over.play();
@@ -103,10 +103,10 @@ class DrawableObject {
     }
   }
 
-   /**
-   * Stops background sounds/music.
-   * @returns {void}
-   */
+  /**
+  * Stops background sounds/music.
+  * @returns {void}
+  */
   stopSounds() {
     pepeHit.pause();
     pepeHit.currentTime = 0;
@@ -118,5 +118,48 @@ class DrawableObject {
     endgame_level.currentTime = 0;
     endboss_hit.pause();
     endboss_hit.currentTime = 0;
+  }
+
+  /**
+* Renders all background objects in the game.
+* Applies camera translation to correctly position the objects on the canvas.
+*/
+  backGroundObjects() {
+    this.ctx.translate(this.camera_x, 0);
+    this.addObjectsToMap(this.level.backgroundObject);
+    this.addObjectsToMap(this.level.clouds);
+    this.ctx.translate(-this.camera_x, 0);
+  }
+
+  /**
+ * Renders all status bars in the game, such as health, bottles, coins, and endboss bar.
+ * Applies camera translation where necessary to ensure correct positioning.
+ */
+  statusBarsInGame() {
+    this.addToMap(this.statusBar);
+    this.ctx.translate(this.camera_x, 0);
+    this.ctx.translate(-this.camera_x, 0);
+    this.addToMap(this.statusBarBottle);
+    this.ctx.translate(this.camera_x, 0);
+    this.ctx.translate(-this.camera_x, 0);
+    this.addToMap(this.statusBarCoins);
+    this.ctx.translate(this.camera_x, 0);
+    this.ctx.translate(-this.camera_x, 0);
+    this.addToMap(this.statusBarEndboss);
+    this.ctx.translate(this.camera_x, 0);
+  }
+
+  /**
+ * Renders all movable objects in the game.
+ * This includes the player character, enemies, throwable objects, bottles, and coins.
+ * Reverses camera translation after drawing to maintain correct canvas state.
+ */
+  movableObjectsInGame() {
+    this.addToMap(this.character);
+    this.addObjectsToMap(this.level.enemies);
+    this.addObjectsToMap(this.throwableObjects);
+    this.addObjectsToMap(this.level.bottles);
+    this.addObjectsToMap(this.level.coins);
+    this.ctx.translate(-this.camera_x, 0);
   }
 }

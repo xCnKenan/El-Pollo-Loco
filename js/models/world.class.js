@@ -255,27 +255,9 @@ class World extends DrawableObject {
    */
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.ctx.translate(this.camera_x, 0);
-    this.addObjectsToMap(this.level.backgroundObject);
-    this.addObjectsToMap(this.level.clouds);
-    this.ctx.translate(-this.camera_x, 0);
-    this.addToMap(this.statusBar);
-    this.ctx.translate(this.camera_x, 0);
-    this.ctx.translate(-this.camera_x, 0);
-    this.addToMap(this.statusBarBottle);
-    this.ctx.translate(this.camera_x, 0);
-    this.ctx.translate(-this.camera_x, 0);
-    this.addToMap(this.statusBarCoins);
-    this.ctx.translate(this.camera_x, 0);
-    this.ctx.translate(-this.camera_x, 0);
-    this.addToMap(this.statusBarEndboss);
-    this.ctx.translate(this.camera_x, 0);
-    this.addToMap(this.character);
-    this.addObjectsToMap(this.level.enemies);
-    this.addObjectsToMap(this.throwableObjects);
-    this.addObjectsToMap(this.level.bottles);
-    this.addObjectsToMap(this.level.coins);
-    this.ctx.translate(-this.camera_x, 0);
+    this.backGroundObjects();
+    this.statusBarsInGame();
+    this.movableObjectsInGame();
     this.checkGameStatus();
   }
 
