@@ -69,7 +69,7 @@ function loadStartScreen() {
   success.pause();
   success.currentTime = 0;
   game_over.currentTime = 0;
-  
+  game_overPlayed = false;
   if (animationFrameId != null) {
     stopDrawLoop();
   }
