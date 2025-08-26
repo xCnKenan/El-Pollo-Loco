@@ -68,6 +68,8 @@ function loadStartScreen() {
   game_over.pause();
   success.pause();
   success.currentTime = 0;
+  game_over.currentTime = 0;
+  
   if (animationFrameId != null) {
     stopDrawLoop();
   }
@@ -217,6 +219,7 @@ function restartGame() {
   endgame_level.currentTime = 0;
   success.pause();
   success.currentTime = 0;
+  game_overPlayed = false;
 }
 
 /**
@@ -284,10 +287,10 @@ function backToHomeScreen() {
   removeDisplayNone("controllsButton");
   addDisplayNone("restart");
   addDisplayNone("home");
-  endgame_level.pause();
-  endgame_level.currentTime = 0;
   addDisplayNone("mobileButtons");
   removeDisplayNone("allInfoAboutCreatorMobile");
+  endgame_level.pause();
+  endgame_level.currentTime = 0;
 }
 
 /**
