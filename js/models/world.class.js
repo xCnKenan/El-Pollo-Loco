@@ -81,31 +81,22 @@ class World {
     this.character.world = this;
   }
 
-  /**
-   * Checks if the player throws a bottle when pressing "D".
-   * Adds the bottle to the throwable objects list if available.
-   * @returns {void}
-   */
+
   checkThrowObjects() {
     if (this.keyboard.D && this.character.amountOfBottles) {
-      let bottle;
-      if (!world.character.otherDirection) {
-        bottle = new ThrowableObject(
-          this.character.x + 80,
-          this.character.y + 100
-        );
+      let nowThrown = new Date().getTime();
+      if (!this.lastBottleThrowTime) {
+        this.lastBottleThrowTime = 0;
       }
-      if (world.character.otherDirection) {
-        bottle = new ThrowableObject(
-          this.character.x + 10,
-          this.character.y + 100
-        );
-      }
-      throwing.play();
-      this.throwableObjects.push(bottle);
-      this.character.bottleSubtracted();
-      this.statusBarBottle.setPercentage(this.character.amountOfBottles);
-      world.character.lastTimeWalking = new Date().getTime();
+      if (nowThrown - this.lastBottleThrowTime < 1000) return
+        let offsetX = world.character.otherDirection ? 10 : 80;
+        let offsetY = 100;
+        let bottle = new ThrowableObject(this.character.x + offsetX, this.character.y + offsetY);
+        throwing.play();
+        this.throwableObjects.push(bottle);
+        this.character.bottleSubtracted();
+        this.statusBarBottle.setPercentage(this.character.amountOfBottles);
+        this.lastBottleThrowTime = nowThrown;
     }
   }
 
