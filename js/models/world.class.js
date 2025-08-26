@@ -326,6 +326,23 @@ class World {
   }
 
   /**
+   * Stops background sounds/music.
+   * @returns {void}
+   */
+  stopSounds() {
+    pepeHit.pause();
+    pepeHit.currentTime = 0;
+    gameMusic.pause();
+    gameMusic.currentTime = 0;
+    endgame_level.pause();
+    endgame_level.currentTime = 0;
+    attackMode.pause();
+    endgame_level.currentTime = 0;
+    endboss_hit.pause();
+    endboss_hit.currentTime = 0;
+  }
+
+  /**
    * Plays the game-over sound only once.
    * @returns {void}
    */
@@ -351,16 +368,6 @@ class World {
     this.level.enemies.forEach((movableObject) => {
       movableObject.speed = 0;
     });
-  }
-
-  /**
-   * Stops background sounds/music.
-   * @returns {void}
-   */
-  stopSounds() {
-    pepeHit.pause();
-    gameMusic.pause();
-    endgame_level.pause();
   }
 
   /**
