@@ -21,6 +21,7 @@ function init() {
   startGameMusicFromBeginning();
   removeDisplayNone("mobileButtons");
   addDisplayNone("allInfoAboutCreatorMobile");
+  bindMobileButtons();
 }
 
 /**
