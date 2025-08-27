@@ -6,7 +6,6 @@ let intervallIds = [];
 let animationFrameId = null;
 
 window.addEventListener("load", checkMobileButtons);
-window.addEventListener("resize", checkMobileButtons);
 window.addEventListener("resize", toggleVideo);
 /**
  * Toggles the visibility of the "turnYourDevice" video element

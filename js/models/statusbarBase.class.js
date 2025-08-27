@@ -17,7 +17,6 @@ class StatusBarBase extends DrawableObject {
    */
   constructor(config) {
     super().loadImages(config.images);
-
     this.images = config.images;
     this.x = config.x || 30;
     this.y = config.y || 20;

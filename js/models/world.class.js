@@ -51,10 +51,6 @@ class World extends DrawableObject {
   ctx;
   keyboard;
   camera_x = 0;
-  // statusBar = new StatusBar();
-  // statusBarBottle = new StatusBarBottle();
-  // statusBarCoins = new StatusBarCoins();
-  // statusBarEndboss = new StatusBarEndboss();
   throwableObjects = [];
   statusBars = [
     new StatusBarBase({
@@ -198,7 +194,6 @@ class World extends DrawableObject {
       } else if (this.character.isColliding(enemy) && !enemy.isDead()) {
         pepeHit.play();
         this.character.hit();
-        // this.statusBar.setPercentage(this.character.energy);
         let healthBar = this.statusBars[0];
         healthBar.setValue(this.character.energy);
       }
@@ -206,55 +201,15 @@ class World extends DrawableObject {
   }
 
   /**
-   * Checks ELements in World which can be picked up
-   * runs every 30ms
+   * Checks for interactive elements the character can pick up or interact with.
+   * This includes bottles on the ground, coins in the map, and throwable objects.
+   * If there are throwable objects present, it also checks for collisions with enemies.
+   *
+   * @returns {void}
    */
   checkElementsToPickUp() {
-    /**
-     * Checks all bottles in the level for collisions with the character
-     * and removes collected bottles from the array.
-     *
-     * On collision:
-     * - plays the collection sound,
-     * - increases the character's bottle count,
-     * - updates the bottle status bar.
-     *
-     * @returns {Array<Object>} A new array containing only the bottles that have not been collected.
-     */
-    this.level.bottles = this.level.bottles.filter((bottle) => {
-      if (this.character.isColliding(bottle)) {
-        bottleCollect.play();
-        this.character.bottleAdded();
-        // this.statusBarBottle.setPercentage(this.character.amountOfBottles);
-        let bottleBar = this.statusBars[1];
-        bottleBar.setValue(this.character.amountOfBottles);
-        return false;
-      }
-      return true;
-    });
-
-    /**
-     * Checks all coins in the level for collisions with the character
-     * and removes collected coins from the array.
-     *
-     * On collision:
-     * - plays the coin collection sound,
-     * - increases the character's coin count,
-     * - updates the coin status bar.
-     *
-     * @returns {Array<Object>} A new array containing only the coins that have not been collected.
-     */
-    this.level.coins = this.level.coins.filter((coin) => {
-      if (this.character.isColliding(coin)) {
-        coinCollect.play();
-        this.character.coinsAdded();
-        // this.statusBarCoins.setPercentage(this.character.amountOfCoins);
-        let coinsBar = this.statusBars[2];
-        coinsBar.setValue(this.character.amountOfCoins);
-        return false;
-      }
-      return true;
-    });
+    this.getBottlesOnGround();
+    this.getCoinsInMap();
     if (world.throwableObjects != 0) {
       this.checkCollisionWithEnemy();
     }
@@ -305,7 +260,6 @@ class World extends DrawableObject {
   againstFinalBoss(bottle, enemy) {
     enemy.hit();
     this.removeItem(bottle, this.throwableObjects);
-    // this.statusBarEndboss.setPercentage(enemy.energy);
     let endbossBar = this.statusBars[3];
     endbossBar.setValue(enemy.energy);
   }
@@ -329,31 +283,9 @@ class World extends DrawableObject {
    */
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    // this.backGroundObjects();
-    this.ctx.translate(this.camera_x, 0);
-    this.addObjectsToMap(this.level.backgroundObject);
-    this.addObjectsToMap(this.level.clouds);
-    this.ctx.translate(-this.camera_x, 0);
-    // this.statusBarsInGame();
-    this.statusBars.forEach((statusbar) => this.addToMap(statusbar));
-    // this.addToMap(this.statusBar);
-    // this.ctx.translate(this.camera_x, 0);
-    // this.ctx.translate(-this.camera_x, 0);
-    // this.addToMap(this.statusBarBottle);
-    // this.ctx.translate(this.camera_x, 0);
-    // this.ctx.translate(-this.camera_x, 0);
-    // this.addToMap(this.statusBarCoins);
-    // this.ctx.translate(this.camera_x, 0);
-    // this.ctx.translate(-this.camera_x, 0);
-    // this.addToMap(this.statusBarEndboss);
-    this.ctx.translate(this.camera_x, 0);
-    // this.movableObjectsInGame();
-    this.addToMap(this.character);
-    this.addObjectsToMap(this.level.enemies);
-    this.addObjectsToMap(this.throwableObjects);
-    this.addObjectsToMap(this.level.bottles);
-    this.addObjectsToMap(this.level.coins);
-    this.ctx.translate(-this.camera_x, 0);
+    this.backGroundObjects();
+    this.statusBarsInGame();
+    this.movableObjectsInGame();
     this.checkGameStatus();
   }
 
@@ -371,35 +303,6 @@ class World extends DrawableObject {
         this.youWonGame();
       }
     });
-  }
-
-  /**
-   * Handles the actions when the player loses the game.
-   * Stops all sounds, plays the losing sound, triggers the game ending with
-   * a losing message, and hides the mobile buttons.
-   */
-  youLostGame() {
-    this.stopSounds();
-    this.youLoseSound();
-    this.gameEnding(this.level.youLost);
-    let mobileButtonsRef = document.getElementById("mobileButtons");
-    mobileButtonsRef.classList.add("d-none");
-  }
-
-  /**
-   * Handles the actions when the player wins the game.
-   * Stops all sounds, plays the success sound once, triggers the game ending
-   * with a winning message, and hides the mobile buttons.
-   */
-  youWonGame() {
-    this.stopSounds();
-    if (!successPlayed) {
-      success.play();
-      successPlayed = true;
-    }
-    this.gameEnding(this.level.youWon);
-    let mobileButtonsRef = document.getElementById("mobileButtons");
-    mobileButtonsRef.classList.add("d-none");
   }
 
   /**
