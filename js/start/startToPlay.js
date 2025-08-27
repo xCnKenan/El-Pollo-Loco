@@ -6,6 +6,7 @@ let intervallIds = [];
 let animationFrameId = null;
 
 window.addEventListener("load", checkMobileButtons);
+window.addEventListener("resize", checkMobileButtons);
 window.addEventListener("resize", toggleVideo);
 /**
  * Toggles the visibility of the "turnYourDevice" video element
@@ -45,7 +46,7 @@ function checkMobileButtons() {
     document.getElementById("mobileButtons").style.display = "flex";
     video.classList.remove("d-none");
     bindMobileButtons();
-  } else if (!isPortrait) {
+  } else if (!hasTouch && !isPortrait) {
     document.getElementById("mobileButtons").style.display = "none";
   }
 }
