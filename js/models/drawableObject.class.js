@@ -124,42 +124,42 @@ class DrawableObject {
 * Renders all background objects in the game.
 * Applies camera translation to correctly position the objects on the canvas.
 */
-  backGroundObjects() {
-    this.ctx.translate(this.camera_x, 0);
-    this.addObjectsToMap(this.level.backgroundObject);
-    this.addObjectsToMap(this.level.clouds);
-    this.ctx.translate(-this.camera_x, 0);
-  }
+  // backGroundObjects() {
+  //   this.ctx.translate(this.camera_x, 0);
+  //   this.addObjectsToMap(this.level.backgroundObject);
+  //   this.addObjectsToMap(this.level.clouds);
+  //   this.ctx.translate(-this.camera_x, 0);
+  // }
 
   /**
  * Renders all status bars in the game, such as health, bottles, coins, and endboss bar.
  * Applies camera translation where necessary to ensure correct positioning.
  */
-  statusBarsInGame() {
-    this.addToMap(this.statusBar);
-    this.ctx.translate(this.camera_x, 0);
-    this.ctx.translate(-this.camera_x, 0);
-    this.addToMap(this.statusBarBottle);
-    this.ctx.translate(this.camera_x, 0);
-    this.ctx.translate(-this.camera_x, 0);
-    this.addToMap(this.statusBarCoins);
-    this.ctx.translate(this.camera_x, 0);
-    this.ctx.translate(-this.camera_x, 0);
-    this.addToMap(this.statusBarEndboss);
-    this.ctx.translate(this.camera_x, 0);
-  }
+  // statusBarsInGame() {
+  //   this.addToMap(this.statusBar);
+  //   this.ctx.translate(this.camera_x, 0);
+  //   this.ctx.translate(-this.camera_x, 0);
+  //   this.addToMap(this.statusBarBottle);
+  //   this.ctx.translate(this.camera_x, 0);
+  //   this.ctx.translate(-this.camera_x, 0);
+  //   this.addToMap(this.statusBarCoins);
+  //   this.ctx.translate(this.camera_x, 0);
+  //   this.ctx.translate(-this.camera_x, 0);
+  //   this.addToMap(this.statusBarEndboss);
+  //   this.ctx.translate(this.camera_x, 0);
+  // }
 
   /**
  * Renders all movable objects in the game.
  * This includes the player character, enemies, throwable objects, bottles, and coins.
  * Reverses camera translation after drawing to maintain correct canvas state.
  */
-  movableObjectsInGame() {
-    this.addToMap(this.character);
-    this.addObjectsToMap(this.level.enemies);
-    this.addObjectsToMap(this.throwableObjects);
-    this.addObjectsToMap(this.level.bottles);
-    this.addObjectsToMap(this.level.coins);
-    this.ctx.translate(-this.camera_x, 0);
-  }
+  // movableObjectsInGame() {
+  //   this.addToMap(this.character);
+  //   this.addObjectsToMap(this.level.enemies);
+  //   this.addObjectsToMap(this.throwableObjects);
+  //   this.addObjectsToMap(this.level.bottles);
+  //   this.addObjectsToMap(this.level.coins);
+  //   this.ctx.translate(-this.camera_x, 0);
+  // }
 }

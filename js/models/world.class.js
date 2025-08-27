@@ -51,11 +51,73 @@ class World extends DrawableObject {
   ctx;
   keyboard;
   camera_x = 0;
-  statusBar = new StatusBar();
-  statusBarBottle = new StatusBarBottle();
-  statusBarCoins = new StatusBarCoins();
-  statusBarEndboss = new StatusBarEndboss();
+  // statusBar = new StatusBar();
+  // statusBarBottle = new StatusBarBottle();
+  // statusBarCoins = new StatusBarCoins();
+  // statusBarEndboss = new StatusBarEndboss();
   throwableObjects = [];
+  statusBars = [
+    new StatusBarBase({
+      images: [
+        "img/7_statusbars/1_statusbar/2_statusbar_health/blue/0.png",
+        "img/7_statusbars/1_statusbar/2_statusbar_health/blue/20.png",
+        "img/7_statusbars/1_statusbar/2_statusbar_health/blue/40.png",
+        "img/7_statusbars/1_statusbar/2_statusbar_health/blue/60.png",
+        "img/7_statusbars/1_statusbar/2_statusbar_health/blue/80.png",
+        "img/7_statusbars/1_statusbar/2_statusbar_health/blue/100.png",
+      ],
+      x: 30,
+      y: 60,
+      mode: "percentage",
+      maxValue: 100,
+      initial: 100,
+    }),
+    new StatusBarBase({
+      images: [
+        "img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/0.png",
+        "img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/20.png",
+        "img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/40.png",
+        "img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/60.png",
+        "img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/80.png",
+        "img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/100.png",
+      ],
+      x: 30,
+      y: 20,
+      mode: "counter",
+      maxValue: 5,
+      initial: 0,
+    }),
+    new StatusBarBase({
+      images: [
+        "img/7_statusbars/1_statusbar/1_statusbar_coin/blue/0.png",
+        "img/7_statusbars/1_statusbar/1_statusbar_coin/blue/20.png",
+        "img/7_statusbars/1_statusbar/1_statusbar_coin/blue/40.png",
+        "img/7_statusbars/1_statusbar/1_statusbar_coin/blue/60.png",
+        "img/7_statusbars/1_statusbar/1_statusbar_coin/blue/80.png",
+        "img/7_statusbars/1_statusbar/1_statusbar_coin/blue/100.png",
+      ],
+      x: 30,
+      y: 105,
+      mode: "counter",
+      maxValue: 5,
+      initial: 0,
+    }),
+    new StatusBarBase({
+      images: [
+        "img/7_statusbars/2_statusbar_endboss/orange/orange0.png",
+        "img/7_statusbars/2_statusbar_endboss/orange/orange20.png",
+        "img/7_statusbars/2_statusbar_endboss/orange/orange40.png",
+        "img/7_statusbars/2_statusbar_endboss/orange/orange60.png",
+        "img/7_statusbars/2_statusbar_endboss/orange/orange80.png",
+        "img/7_statusbars/2_statusbar_endboss/orange/orange100.png",
+      ],
+      x: 480,
+      y: 20,
+      mode: "percentage",
+      maxValue: 100,
+      initial: 100,
+    }),
+  ];
 
   /**
    * Creates the game world.
@@ -96,14 +158,18 @@ class World extends DrawableObject {
       if (!this.lastBottleThrowTime) {
         this.lastBottleThrowTime = 0;
       }
-      if (nowThrown - this.lastBottleThrowTime < 700) return
+      if (nowThrown - this.lastBottleThrowTime < 700) return;
       let offsetX = world.character.otherDirection ? 10 : 80;
       let offsetY = 100;
-      let bottle = new ThrowableObject(this.character.x + offsetX, this.character.y + offsetY);
+      let bottle = new ThrowableObject(
+        this.character.x + offsetX,
+        this.character.y + offsetY
+      );
       throwing.play();
       this.throwableObjects.push(bottle);
       this.character.bottleSubtracted();
-      this.statusBarBottle.setPercentage(this.character.amountOfBottles);
+      let bottleBar = this.statusBars[1];
+      bottleBar.setValue(this.character.amountOfBottles);
       this.lastBottleThrowTime = nowThrown;
     }
   }
@@ -132,7 +198,9 @@ class World extends DrawableObject {
       } else if (this.character.isColliding(enemy) && !enemy.isDead()) {
         pepeHit.play();
         this.character.hit();
-        this.statusBar.setPercentage(this.character.energy);
+        // this.statusBar.setPercentage(this.character.energy);
+        let healthBar = this.statusBars[0];
+        healthBar.setValue(this.character.energy);
       }
     });
   }
@@ -157,7 +225,9 @@ class World extends DrawableObject {
       if (this.character.isColliding(bottle)) {
         bottleCollect.play();
         this.character.bottleAdded();
-        this.statusBarBottle.setPercentage(this.character.amountOfBottles);
+        // this.statusBarBottle.setPercentage(this.character.amountOfBottles);
+        let bottleBar = this.statusBars[1];
+        bottleBar.setValue(this.character.amountOfBottles);
         return false;
       }
       return true;
@@ -178,7 +248,9 @@ class World extends DrawableObject {
       if (this.character.isColliding(coin)) {
         coinCollect.play();
         this.character.coinsAdded();
-        this.statusBarCoins.setPercentage(this.character.amountOfCoins);
+        // this.statusBarCoins.setPercentage(this.character.amountOfCoins);
+        let coinsBar = this.statusBars[2];
+        coinsBar.setValue(this.character.amountOfCoins);
         return false;
       }
       return true;
@@ -233,7 +305,9 @@ class World extends DrawableObject {
   againstFinalBoss(bottle, enemy) {
     enemy.hit();
     this.removeItem(bottle, this.throwableObjects);
-    this.statusBarEndboss.setPercentage(enemy.energy);
+    // this.statusBarEndboss.setPercentage(enemy.energy);
+    let endbossBar = this.statusBars[3];
+    endbossBar.setValue(enemy.energy);
   }
 
   /**
@@ -255,17 +329,39 @@ class World extends DrawableObject {
    */
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.backGroundObjects();
-    this.statusBarsInGame();
-    this.movableObjectsInGame();
+    // this.backGroundObjects();
+    this.ctx.translate(this.camera_x, 0);
+    this.addObjectsToMap(this.level.backgroundObject);
+    this.addObjectsToMap(this.level.clouds);
+    this.ctx.translate(-this.camera_x, 0);
+    // this.statusBarsInGame();
+    this.statusBars.forEach((statusbar) => this.addToMap(statusbar));
+    // this.addToMap(this.statusBar);
+    // this.ctx.translate(this.camera_x, 0);
+    // this.ctx.translate(-this.camera_x, 0);
+    // this.addToMap(this.statusBarBottle);
+    // this.ctx.translate(this.camera_x, 0);
+    // this.ctx.translate(-this.camera_x, 0);
+    // this.addToMap(this.statusBarCoins);
+    // this.ctx.translate(this.camera_x, 0);
+    // this.ctx.translate(-this.camera_x, 0);
+    // this.addToMap(this.statusBarEndboss);
+    this.ctx.translate(this.camera_x, 0);
+    // this.movableObjectsInGame();
+    this.addToMap(this.character);
+    this.addObjectsToMap(this.level.enemies);
+    this.addObjectsToMap(this.throwableObjects);
+    this.addObjectsToMap(this.level.bottles);
+    this.addObjectsToMap(this.level.coins);
+    this.ctx.translate(-this.camera_x, 0);
     this.checkGameStatus();
   }
 
   /**
- * Checks the current status of the game.
- * - If the player's character is dead, triggers the losing sequence.
- * - If any enemy that is an instance of Endboss is dead, triggers the winning sequence.
- */
+   * Checks the current status of the game.
+   * - If the player's character is dead, triggers the losing sequence.
+   * - If any enemy that is an instance of Endboss is dead, triggers the winning sequence.
+   */
   checkGameStatus() {
     if (this.character.isDead()) {
       this.youLostGame();
@@ -278,10 +374,10 @@ class World extends DrawableObject {
   }
 
   /**
- * Handles the actions when the player loses the game.
- * Stops all sounds, plays the losing sound, triggers the game ending with
- * a losing message, and hides the mobile buttons.
- */
+   * Handles the actions when the player loses the game.
+   * Stops all sounds, plays the losing sound, triggers the game ending with
+   * a losing message, and hides the mobile buttons.
+   */
   youLostGame() {
     this.stopSounds();
     this.youLoseSound();
@@ -291,10 +387,10 @@ class World extends DrawableObject {
   }
 
   /**
- * Handles the actions when the player wins the game.
- * Stops all sounds, plays the success sound once, triggers the game ending
- * with a winning message, and hides the mobile buttons.
- */
+   * Handles the actions when the player wins the game.
+   * Stops all sounds, plays the success sound once, triggers the game ending
+   * with a winning message, and hides the mobile buttons.
+   */
   youWonGame() {
     this.stopSounds();
     if (!successPlayed) {
